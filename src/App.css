@@ -1,0 +1,11 @@
+.allbtn {
+  width: 150px;
+  height: 30px;
+  margin: auto;
+  background-color: rgba(24, 68, 212, 0.87);
+  color: white;
+  border: none;
+}
+.allbtn:hover {
+  background-color: rgb(10, 60, 223);
+}
