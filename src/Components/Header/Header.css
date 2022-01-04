@@ -5,18 +5,20 @@
 .navitem {
   text-decoration: none;
   color: black;
+  font-weight: 700;
   padding: 5px 15px;
 }
 .navitem:hover {
   background-color: rgba(128, 128, 128, 0.199);
-  color: rgba(0, 0, 0, 0.664);
+  color: rgb(74, 168, 74);
 }
 .cart {
   text-decoration: none;
   color: black;
+  font-weight: 700;
 }
 .cart:hover {
-  color: black;
+  color: rgb(74, 168, 74);
 }
 .profile {
   height: 50px;
