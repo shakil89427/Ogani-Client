@@ -1,3 +1,9 @@
+.mainapp {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
 .allbtn {
   width: 150px;
   height: 30px;

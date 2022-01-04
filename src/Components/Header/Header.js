@@ -18,12 +18,7 @@ const Header = () => {
         <Navbar.Brand href="#">
           <img src={logo} alt="" />
         </Navbar.Brand>
-        <form className="mx-auto shadow rounded w-50 d-flex justify-content-between align-items-center">
-          <DropdownButton className="m-0 p-0" title="All">
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-          </DropdownButton>
+        <form className="bg-white mx-auto shadow rounded w-50 d-flex justify-content-between align-items-center">
           <input
             placeholder="What do you need"
             className="h-input"
@@ -69,9 +64,19 @@ const Header = () => {
               <Link className="navitem" to="/">
                 Dashboard
               </Link>
-              <button className="mt-2 allbtn">Logout</button>
             </Nav>
+            <div className="mt-3 d-flex align-items-center justify-content-center">
+              <i className="p-3 rounded-circle bg-secondary text-white  me-3 fas fa-phone-square-alt"></i>
+              <span>
+                <small className="fw-bolder">+65 11.188.888</small>
+                <br />
+                <small>support 24/7 time</small>
+              </span>
+            </div>
           </Offcanvas.Body>
+          <button className="w-100 allbtn">
+            Logout<i className="ms-2 fas fa-sign-out-alt"></i>
+          </button>
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
