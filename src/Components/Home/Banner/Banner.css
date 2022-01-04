@@ -1,0 +1,19 @@
+.h-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding-left: 5px;
+}
+.banner {
+  background-image: url("../../../img/hero/banner.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.fresh {
+  color: rgb(74, 168, 74);
+  letter-spacing: 3px;
+}
+.title {
+  font-weight: 700;
+}

@@ -8,10 +8,10 @@
   width: 150px;
   height: 30px;
   margin: auto;
-  background-color: rgba(24, 68, 212, 0.87);
+  background-color: rgb(74, 168, 74);
   color: white;
   border: none;
 }
 .allbtn:hover {
-  background-color: rgb(10, 60, 223);
+  background-color: rgb(35, 114, 35);
 }
