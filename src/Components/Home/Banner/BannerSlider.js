@@ -45,6 +45,8 @@ const BannerSlider = () => {
   };
   return (
     <div className="container my-3">
+      <h2 className="fw-bolder text-center">Available Catagories</h2>
+      <hr className="mx-auto bg-success" />
       <Slider {...settings} className="text-center">
         <div className="bannersliderdiv">
           <img className="w-100" src={img1} alt="" />

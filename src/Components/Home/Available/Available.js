@@ -27,7 +27,7 @@ const Available = () => {
   };
   return (
     <div className="text-center">
-      <h2 className="fw-bolder">Available Products</h2>
+      <h2 className="fw-bolder">Featured Products</h2>
       <hr className="mx-auto bg-success" />
       <p>
         <button
@@ -79,7 +79,7 @@ const Available = () => {
             <Col className="text-center" sm={10} md={6} lg={4}>
               <div className="available-single my-2 py-2">
                 <img
-                  className="img-fluid rounded-circle shadow p-3"
+                  className="w-50 rounded-circle shadow p-3"
                   src={require(`../../../img/available/${product.name}.jpg`)}
                   alt=""
                 />
@@ -89,12 +89,12 @@ const Available = () => {
                   {product.price}.00$
                   <i className="available-icon fas fa-cart-plus"></i>
                 </p>
+                <button className="allbtn my-2 rounded-pill">Details</button>
               </div>
             </Col>
           ))}
         </Row>
       </Container>
-      <button className="allbtn rounded mt-2">See More</button>
     </div>
   );
 };
