@@ -1,0 +1,152 @@
+[
+    {
+      "name": "Fruit_1",
+      "catagory": "fruits",
+      "price": 10
+    },
+    {
+      "name": "Dry_Fruit_1",
+      "catagory": "dryfruits",
+      "price": 10
+    },
+    {
+      "name": "Vegetable_1",
+      "catagory": "vegetables",
+      "price": 10
+    },
+    {
+      "name": "Drinks_1",
+      "catagory": "drinks",
+      "price": 10
+    },
+    {
+      "name": "Meat_1",
+      "catagory": "meats",
+      "price": 10
+    },
+    {
+      "name": "Fruit_2",
+      "catagory": "fruits",
+      "price": 10
+    },
+    {
+      "name": "Fruit_3",
+      "catagory": "fruits",
+      "price": 10
+    },
+    {
+      "name": "Fruit_4",
+      "catagory": "fruits",
+      "price": 10
+    },
+    {
+      "name": "Fruit_5",
+      "catagory": "fruits",
+      "price": 10
+    },
+    {
+      "name": "Fruit_6",
+      "catagory": "fruits",
+      "price": 10
+    },
+    {
+      "name": "Dry_Fruit_2",
+      "catagory": "dryfruits",
+      "price": 10
+    },
+    {
+      "name": "Dry_Fruit_3",
+      "catagory": "dryfruits",
+      "price": 10
+    },
+    {
+      "name": "Dry_Fruit_4",
+      "catagory": "dryfruits",
+      "price": 10
+    },
+    {
+      "name": "Dry_Fruit_5",
+      "catagory": "dryfruits",
+      "price": 10
+    },
+    {
+      "name": "Dry_Fruit_6",
+      "catagory": "dryfruits",
+      "price": 10
+    },
+    {
+      "name": "Vegetable_2",
+      "catagory": "vegetables",
+      "price": 10
+    },
+    {
+      "name": "Vegetable_3",
+      "catagory": "vegetables",
+      "price": 10
+    },
+    {
+      "name": "Vegetable_4",
+      "catagory": "vegetables",
+      "price": 10
+    },
+    {
+      "name": "Vegetable_5",
+      "catagory": "vegetables",
+      "price": 10
+    },
+    {
+      "name": "Vegetable_6",
+      "catagory": "vegetables",
+      "price": 10
+    },
+    {
+      "name": "Drinks_2",
+      "catagory": "drinks",
+      "price": 10
+    },
+    {
+      "name": "Drinks_3",
+      "catagory": "drinks",
+      "price": 10
+    },
+    {
+      "name": "Drinks_4",
+      "catagory": "drinks",
+      "price": 10
+    },
+    {
+      "name": "Drinks_5",
+      "catagory": "drinks",
+      "price": 10
+    },
+    {
+      "name": "Drinks_6",
+      "catagory": "drinks",
+      "price": 10
+    },
+    {
+      "name": "Meat_2",
+      "catagory": "meats",
+      "price": 10
+    },
+    {
+      "name": "Meat_3",
+      "catagory": "meats",
+      "price": 10
+    },
+    {
+      "name": "Meat_4",
+      "catagory": "meats",
+      "price": 10
+    },
+    {
+      "name": "Meat_5",
+      "catagory": "meats",
+      "price": 10
+    },
+    {
+      "name": "Meat_6",
+      "catagory": "meats",
+      "price": 10
+    }
+  ]
