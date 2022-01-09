@@ -5,21 +5,24 @@ import Main from "./Components/Home/Main";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Details from "./Components/Details/Details";
+import AuthProvider from "./Components/AuthProvider/AuthProvider";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="mainapp">
-        <div>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="details/:id" element={<Details />} />
-          </Routes>
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="mainapp">
+          <div>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="details/:id" element={<Details />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

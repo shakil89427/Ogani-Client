@@ -1,30 +1,27 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import useAuth from "../../AuthProvider/useAuth";
 import "./Featured.css";
 
 const Available = () => {
+  const { allProducts } = useAuth();
   const [products, setProducts] = useState([]);
-  const [catagory, setCatagory] = useState(products);
   const [border, setborder] = useState("All");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/allproducts").then((res) => {
-      setProducts(res.data);
-      setCatagory(res.data.slice(0, 8));
-    });
-  }, []);
+    setProducts(allProducts.slice(0, 8));
+  }, [allProducts]);
 
   const changeCatagory = (e) => {
     setborder(e.target.innerText);
     if (e.target.innerText === "All") {
-      return setCatagory(products.slice(0, 8));
+      return setProducts(allProducts.slice(0, 8));
     }
-    const filtered = products.filter(
+    const filtered = allProducts.filter(
       (product) => product.catagory === e.target.innerText
     );
-    setCatagory(filtered);
+    setProducts(filtered);
   };
   return (
     <div className="text-center">
@@ -70,7 +67,7 @@ const Available = () => {
       </p>
       <Container>
         <Row>
-          {catagory.map((product) => (
+          {products.map((product) => (
             <Col
               key={product._id}
               className="p-3 text-center available-main"
