@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import "./Banner.css";
+import "./AvailableCatagories.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import img1 from "../../../img/categories/cat-1.jpg";
@@ -9,7 +9,7 @@ import img3 from "../../../img/categories/cat-3.jpg";
 import img4 from "../../../img/categories/cat-4.jpg";
 import img5 from "../../../img/categories/cat-5.jpg";
 
-const BannerSlider = () => {
+const HomeSlider = () => {
   const settings = {
     infinite: true,
     speed: 500,
@@ -48,29 +48,29 @@ const BannerSlider = () => {
       <h2 className="fw-bolder text-center">Available Catagories</h2>
       <hr className="mx-auto bg-success" />
       <Slider {...settings} className="text-center">
-        <div className="bannersliderdiv">
+        <div className="availableCatagoriesdiv">
           <img className="w-100" src={img1} alt="" />
-          <h6 className="bannersliderbtn">Fruits</h6>
+          <h6>Fruits</h6>
         </div>
-        <div className="bannersliderdiv">
+        <div className="availableCatagoriesdiv">
           <img className="w-100" src={img2} alt="" />
-          <h6 className="bannersliderbtn">Dry Fruits</h6>
+          <h6>Dry Fruits</h6>
         </div>
-        <div className="bannersliderdiv">
+        <div className="availableCatagoriesdiv">
           <img className="w-100" src={img3} alt="" />
-          <h6 className="bannersliderbtn">Vegetables</h6>
+          <h6>Vegetables</h6>
         </div>
-        <div className="bannersliderdiv">
+        <div className="availableCatagoriesdiv">
           <img className="w-100" src={img4} alt="" />
-          <h6 className="bannersliderbtn">Drinks</h6>
+          <h6>Drinks</h6>
         </div>
-        <div className="bannersliderdiv">
+        <div className="availableCatagoriesdiv">
           <img className="w-100" src={img5} alt="" />
-          <h6 className="bannersliderbtn">Meat</h6>
+          <h6>Meat</h6>
         </div>
       </Slider>
     </div>
   );
 };
 
-export default BannerSlider;
+export default HomeSlider;

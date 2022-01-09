@@ -1,0 +1,62 @@
+.inactive {
+  border: none;
+  background-color: white;
+  margin: 0 1%;
+  padding: 0;
+}
+.active {
+  border: none;
+  border-bottom: 3px solid rgb(74, 168, 74);
+  background-color: white;
+  margin: 0 1%;
+  padding: 0;
+  font-weight: 500;
+}
+.available-single {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+}
+.available-img {
+  width: 100%;
+  height: 80%;
+  transition: all 0.5s linear;
+}
+.available-effect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 50%;
+  width: 100%;
+  transition: all 0.5s linear;
+  opacity: 0;
+  visibility: hidden;
+}
+.available-effect p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  background-color: white;
+  color: black;
+  margin: 0 2%;
+  border-radius: 50%;
+}
+.available-effect p:hover {
+  background-color: rgb(74, 168, 74);
+  color: white;
+}
+.available-main:hover .available-effect {
+  visibility: visible;
+  opacity: 1;
+}
+.available-main:hover .available-img {
+  opacity: 0.3;
+}
+.name {
+  margin: 1% 0;
+  letter-spacing: 2px;
+  font-weight: 700;
+}

@@ -1,0 +1,9 @@
+.search {
+  background-color: rgb(74, 168, 74);
+}
+.search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding-left: 5px;
+}

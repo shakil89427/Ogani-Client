@@ -1,13 +1,17 @@
 import React from "react";
-import Available from "./Available/Available";
+import Search from "../Search/Search";
 import Banner from "./Banner/Banner";
+import AvailableCatagories from "./AvailableCatagories/AvailableCatagories";
+import Featured from "./Featured/Featured";
 import Posters from "./Posters/Posters";
 
 const Main = () => {
   return (
     <div>
+      <Search />
       <Banner />
-      <Available />
+      <AvailableCatagories />
+      <Featured />
       <Posters />
     </div>
   );

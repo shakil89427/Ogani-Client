@@ -1,0 +1,17 @@
+.availableCatagoriesdiv {
+  position: relative;
+  padding: 0 5px;
+}
+.availableCatagoriesdiv h6 {
+  position: absolute;
+  top: 80%;
+  padding: 2%;
+  width: 80%;
+  border: none;
+  margin: 0 10%;
+  letter-spacing: 2px;
+  font-weight: 700;
+  background-color: white;
+  color: rgb(74, 168, 74);
+  border-radius: 5px;
+}
