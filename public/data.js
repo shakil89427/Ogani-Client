@@ -9,12 +9,12 @@ const data = [
     reviews: [],
   },
   {
-    name: "Seedless Raisins",
+    name: "Zahidi Dates",
     catagory: "Dry Fruits",
     price: 6,
-    img: "https://rukminim1.flixcart.com/image/416/416/kpodocw0/nut-dry-fruit/a/w/t/premium-seedless-pouch-madhuban-original-imag3v2cpzafmcpj.jpeg?q=70",
+    img: "https://rukminim1.flixcart.com/image/416/416/ksgehzk0/nut-dry-fruit/p/n/d/royal-zahidi-pouch-molsi-s-original-imag6ygc38wnebev.jpeg?q=70",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quisquam voluptatibus voluptatum itaque unde harum et pariatur quidem similique ipsa impedit sit quas consectetur, quibusdam id maxime omnis cum laudantium ipsum suscipit soluta praesentium debitis odio! Beatae odio doloribus autem!",
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam consequuntur est provident natus, rerum asperiores ratione odio voluptas esse, illo delectus quas? Blanditiis cum adipisci, veritatis nostrum odio quam labore nesciunt! Incidunt optio dignissimos nobis saepe unde quo quasi voluptatem!",
     reviews: [],
   },
   {
@@ -117,21 +117,21 @@ const data = [
     reviews: [],
   },
   {
-    name: "Zahidi Dates",
-    catagory: "Dry Fruits",
-    price: 6,
-    img: "https://rukminim1.flixcart.com/image/416/416/ksgehzk0/nut-dry-fruit/p/n/d/royal-zahidi-pouch-molsi-s-original-imag6ygc38wnebev.jpeg?q=70",
-    description:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam consequuntur est provident natus, rerum asperiores ratione odio voluptas esse, illo delectus quas? Blanditiis cum adipisci, veritatis nostrum odio quam labore nesciunt! Incidunt optio dignissimos nobis saepe unde quo quasi voluptatem!",
-    reviews: [],
-  },
-  {
     name: "Nutraj Raisins",
     catagory: "Dry Fruits",
     price: 5,
     img: "https://rukminim1.flixcart.com/image/416/416/jyq5oy80/nut-dry-fruit/9/q/7/1-special-round-raisin-1-kg-500-g-x-2-pouch-nutraj-original-imafafgygp7cn8nf.jpeg?q=70",
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam consequuntur est provident natus, rerum asperiores ratione odio voluptas esse, illo delectus quas? Blanditiis cum adipisci, veritatis nostrum odio quam labore nesciunt! Incidunt optio dignissimos nobis saepe unde quo quasi voluptatem!",
+    reviews: [],
+  },
+  {
+    name: "Seedless Raisins",
+    catagory: "Dry Fruits",
+    price: 6,
+    img: "https://rukminim1.flixcart.com/image/416/416/kpodocw0/nut-dry-fruit/a/w/t/premium-seedless-pouch-madhuban-original-imag3v2cpzafmcpj.jpeg?q=70",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quisquam voluptatibus voluptatum itaque unde harum et pariatur quidem similique ipsa impedit sit quas consectetur, quibusdam id maxime omnis cum laudantium ipsum suscipit soluta praesentium debitis odio! Beatae odio doloribus autem!",
     reviews: [],
   },
   {

@@ -37,10 +37,6 @@ const Details = () => {
   const changeId = (value) => {
     setCaptureId(value);
   };
-  const description =
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, officia? Neque corrupti quo ratione doloribus explicabo pariatur ipsam delectus fugit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, officia? Neque corrupti quo ratione doloribus explicabo pariatur ipsam delectus fugit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, officia? Neque corrupti quo ratione doloribus explicabo pariatur ipsam delectus fugit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, officia? Neque corrupti quo ratione doloribus explicabo pariatur ipsam delectus fugit.";
-  const reviews =
-    "ujkldhfuivsadehfuiualouwewkhflruwquiweluwfhwywajklwydfhewkjfhweuirfhwewkjfaehbsnsfsjkesashsmbLorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, officia? Neque corrupti quo ratione doloribus explicabo pariatur ipsam delectus fugit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, officia? Neque corrupti quo ratione doloribus explicabo parfkmjsnsfbasemnjsfbefef";
 
   return (
     <Container>
@@ -48,12 +44,8 @@ const Details = () => {
       {product.name && (
         <Row className="mt-5">
           <Col sm={12} md={6} lg={6}>
-            <div className="w-75 mx-auto">
-              <img
-                className="w-100"
-                src={require(`../../img/available/${product.name}.jpg`)}
-                alt=""
-              />
+            <div className="h-100 d-flex align-items-center justify-content-center">
+              <img className="detail-img" src={product.img} alt="" />
             </div>
           </Col>
           <Col sm={12} md={6} lg={6}>
@@ -67,13 +59,7 @@ const Details = () => {
                 <i className="fas fa-star"></i>
               </p>
               <p className="fw-bolder text-danger">${product.price}.00</p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-                inventore fuga reprehenderit ipsum sit! Consequatur,
-                accusantium, est deserunt quas et alias repudiandae eveniet
-                libero officia velit ipsam inventore saepe corrupti consectetur
-                reiciendis id natus quia quidem ipsum beatae recusandae.
-              </p>
+              <p>{product.description.slice(0, 200)}...</p>
               <span className="plus-minus mt-3">
                 <button>-</button>
                 <span>0</span>
@@ -88,7 +74,7 @@ const Details = () => {
                 <p className="fw-bolder">Share on</p>
               </div>
               <div className="w-75">
-                <p>{product.stock > 0 ? "In Stock" : "Out of Stock"}</p>
+                <p>In Stock</p>
                 <p>
                   01 day shipping.
                   <span className="text-danger fw-bolder">
@@ -122,9 +108,9 @@ const Details = () => {
           </button>
         </span>
       </p>
-      <p>Product {info}</p>
-      {info === "Description" && <p>{description}</p>}
-      {info === "Reviews" && <p>{reviews}</p>}
+      <p className="fw-bolder">Product {info}</p>
+      {info === "Description" && <p>{product.description}</p>}
+      {info === "Reviews" && <p>Review part here</p>}
       <h3 className="fw-bolder text-center mt-5">Related Products</h3>
       <Row className="my-3 text-center">
         {relatedProducts.map((related) => (
@@ -136,11 +122,7 @@ const Details = () => {
             lg={3}
           >
             <div className="p-single">
-              <img
-                className="p-img"
-                src={require(`../../img/available/${related.name}.jpg`)}
-                alt=""
-              />
+              <img className="p-img" src={related.img} alt="" />
               <span className="p-effect">
                 <p>
                   <i className="fas fa-heart"></i>
