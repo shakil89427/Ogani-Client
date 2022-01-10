@@ -19,3 +19,40 @@
   height: 100%;
   background-color: none;
 }
+.product-info {
+  position: relative;
+  text-align: center;
+  margin-top: 5%;
+}
+.product-info span {
+  background-color: white;
+}
+.product-info button {
+  border: none;
+  font-weight: 700;
+  color: rgb(153, 142, 142);
+  background-color: white;
+  margin: 0 2%;
+}
+.product-info::before {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 0.5px;
+  position: absolute;
+  background-color: black;
+  top: 50%;
+  left: 0;
+  z-index: -1;
+}
+.product-info::after {
+  content: "";
+  width: 50%;
+  display: block;
+  height: 0.5px;
+  position: absolute;
+  background-color: black;
+  top: 50%;
+  right: 0;
+  z-index: -1;
+}

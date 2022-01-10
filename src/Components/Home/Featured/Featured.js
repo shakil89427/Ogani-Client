@@ -70,18 +70,18 @@ const Available = () => {
           {products.map((product) => (
             <Col
               key={product._id}
-              className="p-3 text-center available-main"
+              className="p-3 text-center p-main"
               sm={6}
               md={4}
               lg={3}
             >
-              <div className="available-single">
+              <div className="p-single">
                 <img
-                  className="available-img"
+                  className="p-img"
                   src={require(`../../../img/available/${product.name}.jpg`)}
                   alt=""
                 />
-                <p className="available-effect">
+                <span className="p-effect">
                   <p>
                     <i className="fas fa-heart"></i>
                   </p>
@@ -93,7 +93,7 @@ const Available = () => {
                   <p>
                     <i className="fas fa-cart-plus"></i>
                   </p>
-                </p>
+                </span>
                 <p className="name">{product.name}</p>
                 <p className="name">{product.price}.00$</p>
               </div>
