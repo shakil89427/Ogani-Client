@@ -1,6 +1,7 @@
 const data = [
   {
     name: "Malta",
+    color: "yellow",
     catagory: "Fruits",
     price: 4,
     img: "https://chaldn.com/_mpimage/malta-special-offer-50-gm-2-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D85997&q=low&v=1&m=400&webp=1",
@@ -10,6 +11,7 @@ const data = [
   },
   {
     name: "Zahidi Dates",
+    color: "yellow",
     catagory: "Dry Fruits",
     price: 6,
     img: "https://rukminim1.flixcart.com/image/416/416/ksgehzk0/nut-dry-fruit/p/n/d/royal-zahidi-pouch-molsi-s-original-imag6ygc38wnebev.jpeg?q=70",
@@ -19,6 +21,7 @@ const data = [
   },
   {
     name: "Water Pumpkin",
+    color: "green",
     catagory: "Vegetables",
     price: 2,
     img: "https://chaldn.com/_mpimage/jali-kumra-water-pumpkin-1-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D69932&q=low&v=1&m=400&webp=1",
@@ -28,6 +31,7 @@ const data = [
   },
   {
     name: "Latina (Orange)",
+    color: "yellow",
     catagory: "Drinks",
     price: 5,
     img: "https://chaldn.com/_mpimage/latina-100-juice-orange-1-ltr?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D45878&q=low&v=1&m=400&webp=1",
@@ -37,6 +41,7 @@ const data = [
   },
   {
     name: "Beef Bone",
+    color: "red",
     catagory: "Meats",
     price: 9,
     img: "https://chaldn.com/_mpimage/bengal-meat-beef-bone-in-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D77384&q=low&v=1&m=400&webp=1",
@@ -46,6 +51,7 @@ const data = [
   },
   {
     name: "Banana Chompa",
+    color: "yellow",
     catagory: "Fruits",
     price: 2,
     img: "https://chaldn.com/_mpimage/banana-chompa-12-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D31723&q=low&v=1&m=400&webp=1",
@@ -55,6 +61,7 @@ const data = [
   },
   {
     name: "Black Grapes",
+    color: "black",
     catagory: "Fruits",
     price: 3,
     img: "https://chaldn.com/_mpimage/black-grapes-250-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D33446&q=low&v=1&m=400&webp=1",
@@ -64,6 +71,7 @@ const data = [
   },
   {
     name: "Guava Premium",
+    color: "green",
     catagory: "Fruits",
     price: 3,
     img: "https://chaldn.com/_mpimage/guava-premium-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D67818&q=low&v=1&m=400&webp=1",
@@ -73,6 +81,7 @@ const data = [
   },
   {
     name: "Red Grapes",
+    color: "red",
     catagory: "Fruits",
     price: 5,
     img: "https://chaldn.com/_mpimage/lal-angur-red-grapes-12-gm-250-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D26171&q=low&v=1&m=400&webp=1",
@@ -82,6 +91,7 @@ const data = [
   },
   {
     name: "Gala Apple",
+    color: "red",
     catagory: "Fruits",
     price: 6,
     img: "https://chaldn.com/_mpimage/gala-apple-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D18115&q=low&v=1&m=400&webp=1",
@@ -91,6 +101,7 @@ const data = [
   },
   {
     name: "Pomegranate",
+    color: "red",
     catagory: "Fruits",
     price: 4,
     img: "https://chaldn.com/_mpimage/dalim-pomegranate-2-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D28589&q=low&v=1&m=400&webp=1",
@@ -100,6 +111,7 @@ const data = [
   },
   {
     name: "Green Grapes",
+    color: "green",
     catagory: "Fruits",
     price: 6,
     img: "https://chaldn.com/_mpimage/sobuj-angur-green-grapes-12-gm-250-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D28591&q=low&v=1&m=400&webp=1",
@@ -109,6 +121,7 @@ const data = [
   },
   {
     name: "California Almonds",
+    color: "green",
     catagory: "Dry Fruits",
     price: 7,
     img: "https://rukminim1.flixcart.com/image/416/416/kngd0nk0/nut-dry-fruit/n/x/x/500-popular-california-pouch-naturoz-original-imag24gyqz999mn6.jpeg?q=70",
@@ -118,6 +131,7 @@ const data = [
   },
   {
     name: "Nutraj Raisins",
+    color: "blue",
     catagory: "Dry Fruits",
     price: 5,
     img: "https://rukminim1.flixcart.com/image/416/416/jyq5oy80/nut-dry-fruit/9/q/7/1-special-round-raisin-1-kg-500-g-x-2-pouch-nutraj-original-imafafgygp7cn8nf.jpeg?q=70",
@@ -127,6 +141,7 @@ const data = [
   },
   {
     name: "Seedless Raisins",
+    color: "yellow",
     catagory: "Dry Fruits",
     price: 6,
     img: "https://rukminim1.flixcart.com/image/416/416/kpodocw0/nut-dry-fruit/a/w/t/premium-seedless-pouch-madhuban-original-imag3v2cpzafmcpj.jpeg?q=70",
@@ -136,6 +151,7 @@ const data = [
   },
   {
     name: "Origo Fresh",
+    color: "red",
     catagory: "Dry Fruits",
     price: 6,
     img: "https://rukminim1.flixcart.com/image/416/416/jrz8u4w0/nut-dry-fruit/x/w/v/500-na-pouch-oriog-fresh-original-imafdnth9t56z2qp.jpeg?q=70",
@@ -145,6 +161,7 @@ const data = [
   },
   {
     name: "Farmley Popular",
+    color: "black",
     catagory: "Dry Fruits",
     price: 8,
     img: "https://rukminim1.flixcart.com/image/416/416/kw5ag7k0/nut-dry-fruit/5/h/k/500-popular-california-pouch-1-farmley-original-imag8vvryqzu6zfr.jpeg?q=70",
@@ -154,6 +171,7 @@ const data = [
   },
   {
     name: "Molsi's Cashews",
+    color: "green",
     catagory: "Dry Fruits",
     price: 4,
     img: "https://rukminim1.flixcart.com/image/416/416/krme93k0/nut-dry-fruit/x/2/q/75-na-pouch-molsi-s-original-imag5d47gfhrjxy8.jpeg?q=70",
@@ -163,6 +181,7 @@ const data = [
   },
   {
     name: "Happilo Premium",
+    color: "black",
     catagory: "Dry Fruits",
     price: 7,
     img: "https://rukminim1.flixcart.com/image/416/416/kwv0djk0/nut-dry-fruit/g/0/i/-original-imag9fus9vmcexum.jpeg?q=70",
@@ -172,6 +191,7 @@ const data = [
   },
   {
     name: "Green Capsicum",
+    color: "green",
     catagory: "Vegetables",
     price: 4,
     img: "https://chaldn.com/_mpimage/green-capsicum-15-gm-300-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D28574&q=low&v=1&m=400&webp=1",
@@ -181,6 +201,7 @@ const data = [
   },
   {
     name: "Red Capsicum",
+    color: "red",
     catagory: "Vegetables",
     price: 3,
     img: "https://chaldn.com/_mpimage/red-capsicum-12-gm-250-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D54850&q=low&v=1&m=400&webp=1",
@@ -190,6 +211,7 @@ const data = [
   },
   {
     name: "Small Potato",
+    color: "red",
     catagory: "Vegetables",
     price: 2,
     img: "https://chaldn.com/_mpimage/jaam-alu-small-potato-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D65817&q=low&v=1&m=400&webp=1",
@@ -199,6 +221,7 @@ const data = [
   },
   {
     name: "Yellow Capsicum",
+    color: "yellow",
     catagory: "Vegetables",
     price: 5,
     img: "https://chaldn.com/_mpimage/yellow-capsicum-15-gm-300-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D16552&q=low&v=1&m=400&webp=1",
@@ -208,6 +231,7 @@ const data = [
   },
   {
     name: "Aloe Vera",
+    color: "green",
     catagory: "Vegetables",
     price: 6,
     img: "https://chaldn.com/_mpimage/aloe-vera-1-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D35684&q=low&v=1&m=400&webp=1",
@@ -217,6 +241,7 @@ const data = [
   },
   {
     name: "Cabbage",
+    color: "green",
     catagory: "Vegetables",
     price: 4,
     img: "https://chaldn.com/_mpimage/badhakopi-cabbage-1-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D5740&q=low&v=1&m=400&webp=1",
@@ -226,6 +251,7 @@ const data = [
   },
   {
     name: "Sponge Gourd",
+    color: "green",
     catagory: "Vegetables",
     price: 2,
     img: "https://chaldn.com/_mpimage/dhundhul-sponge-gourd-20-gm-500-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D77228&q=low&v=1&m=400&webp=1",
@@ -235,6 +261,7 @@ const data = [
   },
   {
     name: "Nutrilife Juice (Mango)",
+    color: "yellow",
     catagory: "Drinks",
     price: 4,
     img: "https://chaldn.com/_mpimage/nutrilife-juice-mango-160-ml?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D87192&q=low&v=1&m=400&webp=1",
@@ -244,6 +271,7 @@ const data = [
   },
   {
     name: "Latina (Apple)",
+    color: "red",
     catagory: "Drinks",
     price: 7,
     img: "https://chaldn.com/_mpimage/latina-100-juice-apple-1-ltr?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D45877&q=low&v=1&m=400&webp=1",
@@ -253,6 +281,7 @@ const data = [
   },
   {
     name: "Fontana Mango Juice",
+    color: "red",
     catagory: "Drinks",
     price: 3,
     img: "https://chaldn.com/_mpimage/fontana-mango-juice-1-ltr?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D84348&q=low&v=1&m=400&webp=1",
@@ -262,6 +291,7 @@ const data = [
   },
   {
     name: "Fontana Orange Juice",
+    color: "yellow",
     catagory: "Drinks",
     price: 4,
     img: "https://chaldn.com/_mpimage/fontana-orange-juice-1-ltr?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D84340&q=low&v=1&m=400&webp=1",
@@ -271,6 +301,7 @@ const data = [
   },
   {
     name: "Cyprina Orange Juice",
+    color: "blue",
     catagory: "Drinks",
     price: 8,
     img: "https://chaldn.com/_mpimage/cyprina-orange-juice-1-ltr?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D45871&q=low&v=1&m=400&webp=1",
@@ -280,6 +311,7 @@ const data = [
   },
   {
     name: "Fontana Apple Juice",
+    color: "red",
     catagory: "Drinks",
     price: 6,
     img: "https://chaldn.com/_mpimage/fontana-apple-juice-1-ltr?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D84343&q=low&v=1&m=400&webp=1",
@@ -289,6 +321,7 @@ const data = [
   },
   {
     name: "Fontana Pineapple Juice",
+    color: "green",
     catagory: "Drinks",
     price: 5,
     img: "https://chaldn.com/_mpimage/fontana-pineapple-juice-1-ltr?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D84349&q=low&v=1&m=400&webp=1",
@@ -307,6 +340,7 @@ const data = [
   },
   {
     name: "Whole Chicken Curry",
+    color: "red",
     catagory: "Meats",
     price: 6,
     img: "https://chaldn.com/_mpimage/bengal-meat-whole-chicken-curry-cut-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D74653&q=low&v=1&m=400&webp=1",
@@ -316,6 +350,7 @@ const data = [
   },
   {
     name: "Chicken Wings",
+    color: "red",
     catagory: "Meats",
     price: 3,
     img: "https://chaldn.com/_mpimage/bengal-meat-chicken-wings-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D83205&q=low&v=1&m=400&webp=1",
@@ -325,6 +360,7 @@ const data = [
   },
   {
     name: "Beef Sirloin Steak",
+    color: "red",
     catagory: "Meats",
     price: 10,
     img: "https://chaldn.com/_mpimage/bengal-meat-beef-sirloin-steak-200-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D83201&q=low&v=1&m=400&webp=1",
@@ -334,6 +370,7 @@ const data = [
   },
   {
     name: "Chicken Pepperoni",
+    color: "red",
     catagory: "Meats",
     price: 8,
     img: "https://chaldn.com/_mpimage/bengal-meat-chicken-pepperoni-200-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D83811&q=low&v=1&m=400&webp=1",
@@ -343,6 +380,7 @@ const data = [
   },
   {
     name: "Chicken Thigh Keema",
+    color: "red",
     catagory: "Meats",
     price: 11,
     img: "https://chaldn.com/_mpimage/bengal-meat-chicken-thigh-keema-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D74662&q=low&v=1&m=400&webp=1",
@@ -352,6 +390,7 @@ const data = [
   },
   {
     name: "Beef Keema",
+    color: "red",
     catagory: "Meats",
     price: 8,
     img: "https://chaldn.com/_mpimage/bengal-meat-beef-keema-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D74668&q=low&v=1&m=400&webp=1",

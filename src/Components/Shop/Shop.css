@@ -9,11 +9,15 @@
 .filter-catagories button {
   border: none;
   margin: 0 2% 2% 0;
-  color: black;
+  padding: 0.5% 3%;
   border-radius: 5px;
 }
+.shopcatactive {
+  background-color: rgb(45, 184, 45);
+  color: white;
+}
 .filter-price input {
-  width: 100px;
+  width: 50px;
   border: 0.5px solid rgba(0, 0, 0, 0.349);
   outline: 0.5px solid rgba(0, 0, 0, 0.349);
   margin: 0 2% 2% 0;

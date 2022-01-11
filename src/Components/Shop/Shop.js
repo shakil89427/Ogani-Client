@@ -6,13 +6,33 @@ import Search from "../Search/Search";
 import { Col, Container, Row } from "react-bootstrap";
 
 const Shop = () => {
-  const { allProducts, searchValue } = useAuth();
+  const { allProducts, searchValue, setSearchValue } = useAuth();
   const [products, setProducts] = useState([]);
+  const [catagoryValue, setCatagoryValue] = useState("All");
+  const [minmax, setMinmax] = useState({});
+
+  const addColor = (e) => {
+    searchValue.color = e.target.className;
+    setSearchValue(searchValue);
+  };
+
+  const getPrice = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const newData = { ...minmax };
+    newData[name] = value;
+    setMinmax(newData);
+  };
+
+  const addPrice = (e) => {
+    e.preventDefault();
+    searchValue.price = minmax;
+    setSearchValue(searchValue);
+  };
 
   useEffect(() => {
     if (allProducts.length === 0) return;
     setProducts(allProducts);
-    console.log(allProducts);
   }, [allProducts]);
   return (
     <div>
@@ -26,29 +46,54 @@ const Shop = () => {
             </h5>
             <div className="filter-catagories border-bottom pb-2">
               <p className="fw-bold">Catagories</p>
-              <button>All</button>
-              <button>Fruits</button>
-              <button>Dry Fruits</button>
-              <button>Vegetables</button>
-              <button>Drinks</button>
-              <button>Meats</button>
+              <button className={catagoryValue === "All" && "shopcatactive"}>
+                All
+              </button>
+              <button className={catagoryValue === "Fruits" && "shopcatactive"}>
+                Fruits
+              </button>
+              <button
+                className={catagoryValue === "Dry Fruits" && "shopcatactive"}
+              >
+                Dry Fruits
+              </button>
+              <button
+                className={catagoryValue === "Vegetables" && "shopcatactive"}
+              >
+                Vegetables
+              </button>
+              <button className={catagoryValue === "Drinks" && "shopcatactive"}>
+                Drinks
+              </button>
+              <button className={catagoryValue === "Meats" && "shopcatactive"}>
+                Meats
+              </button>
             </div>
             <div className="filter-price border-bottom pb-2">
               <p className="fw-bold">Price</p>
-              <form>
-                <input placeholder="Min" type="number" />
-                <input placeholder="Max" type="number" />
-                <br />
-                <button>Go</button>
+              <form onSubmit={addPrice}>
+                <input
+                  onChange={getPrice}
+                  name="min"
+                  placeholder="Min"
+                  type="number"
+                />
+                <input
+                  onChange={getPrice}
+                  name="max"
+                  placeholder="Max"
+                  type="number"
+                />
+                <button type="submit">Go</button>
               </form>
             </div>
             <div className="filter-color border-bottom pb-2">
               <p className="fw-bold">Color</p>
-              <button className="red" />
-              <button className="yellow" />
-              <button className="blue" />
-              <button className="green" />
-              <button className="black" />
+              <button onClick={addColor} className="red" />
+              <button onClick={addColor} className="yellow" />
+              <button onClick={addColor} className="blue" />
+              <button onClick={addColor} className="green" />
+              <button onClick={addColor} className="black" />
             </div>
           </Col>
           <Col sm={12} md={9} lg={9}>

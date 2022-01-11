@@ -4,17 +4,18 @@ import useAuth from "../AuthProvider/useAuth";
 import "./Search.css";
 
 const Search = () => {
-  const { setSearchValue } = useAuth();
+  const { searchValue, setSearchValue } = useAuth();
   const [value, setValue] = useState("");
   const navigate = useNavigate();
 
   const changeValue = (e) => {
-    setValue(e.target.innerText);
+    setValue(e.target.value);
   };
 
   const search = (e) => {
     e.preventDefault();
-    setSearchValue({ keyword: value });
+    searchValue.keyword = value;
+    setSearchValue(searchValue);
     navigate("/shop");
   };
   return (

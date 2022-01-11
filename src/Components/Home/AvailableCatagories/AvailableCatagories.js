@@ -12,11 +12,12 @@ import useAuth from "../../AuthProvider/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const HomeSlider = () => {
-  const { setSearchValue } = useAuth();
+  const { searchValue, setSearchValue } = useAuth();
   const navigate = useNavigate();
 
   const search = (e) => {
-    setSearchValue({ catagories: e.target.innerText });
+    searchValue.catagory = e.target.innerText;
+    setSearchValue(searchValue);
     navigate("/shop");
   };
   const settings = {
