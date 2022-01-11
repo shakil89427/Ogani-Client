@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Search.css";
 
 const Search = () => {
+  const [value, setValue] = useState("");
+  const navigate = useNavigate();
+
+  const changeValue = (e) => {
+    setValue(e.target.value);
+  };
+
+  const search = (e) => {
+    e.preventDefault();
+    navigate("shop", { state: value });
+  };
   return (
     <div className="container search d-flex align-items-center">
-      <form className="rounded bg-white mx-auto w-50 my-2 border d-flex justify-content-between align-items-center">
+      <form
+        onSubmit={search}
+        className="rounded bg-white mx-auto w-50 my-2 border d-flex justify-content-between align-items-center"
+      >
         <input
+          required
+          onChange={changeValue}
           placeholder="What do you need"
           className="search-input"
           type="text"
         />
-        <button className="border-0 py-1">
+        <button type="submit" className="border-0 py-1">
           <i className="fas fa-search"></i>
         </button>
       </form>

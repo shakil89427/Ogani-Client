@@ -8,6 +8,7 @@ import img2 from "../../../img/categories/cat-2.jpg";
 import img3 from "../../../img/categories/cat-3.jpg";
 import img4 from "../../../img/categories/cat-4.jpg";
 import img5 from "../../../img/categories/cat-5.jpg";
+import { Link } from "react-router-dom";
 
 const HomeSlider = () => {
   const settings = {
@@ -50,23 +51,33 @@ const HomeSlider = () => {
       <Slider {...settings} className="text-center">
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img1} alt="" />
-          <h6>Fruits</h6>
+          <Link to="shop" state="Fruits">
+            <h6>Fruits</h6>
+          </Link>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img2} alt="" />
-          <h6>Dry Fruits</h6>
+          <Link to="shop" state="Dry Fruits">
+            <h6>Dry Fruits</h6>
+          </Link>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img3} alt="" />
-          <h6>Vegetables</h6>
+          <Link to="shop" state="Vegetables">
+            <h6>Vegetables</h6>
+          </Link>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img4} alt="" />
-          <h6>Drinks</h6>
+          <Link to="shop" state="Drinks">
+            <h6>Drinks</h6>
+          </Link>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img5} alt="" />
-          <h6>Meat</h6>
+          <Link to="shop" state="Meat">
+            <h6>Meat</h6>
+          </Link>
         </div>
       </Slider>
     </div>
