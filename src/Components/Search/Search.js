@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../AuthProvider/useAuth";
 import "./Search.css";
 
 const Search = () => {
+  const { setSearchValue } = useAuth();
   const [value, setValue] = useState("");
   const navigate = useNavigate();
 
   const changeValue = (e) => {
-    setValue(e.target.value);
+    setValue(e.target.innerText);
   };
 
   const search = (e) => {
     e.preventDefault();
-    navigate("shop", { state: value });
+    setSearchValue({ keyword: value });
+    navigate("/shop");
   };
   return (
-    <div className="container search d-flex align-items-center">
+    <div className="search d-flex align-items-center">
       <form
         onSubmit={search}
         className="rounded bg-white mx-auto w-50 my-2 border d-flex justify-content-between align-items-center"

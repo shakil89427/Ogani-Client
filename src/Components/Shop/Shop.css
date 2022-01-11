@@ -1,0 +1,50 @@
+.shop-h1 {
+  background-image: url("../../img//breadcrumb.jpg");
+  background-repeat: none;
+  background-size: cover;
+  text-align: center;
+  color: white;
+  padding: 2%;
+}
+.filter-catagories button {
+  border: none;
+  margin: 0 2% 2% 0;
+  color: black;
+  border-radius: 5px;
+}
+.filter-price input {
+  width: 100px;
+  border: 0.5px solid rgba(0, 0, 0, 0.349);
+  outline: 0.5px solid rgba(0, 0, 0, 0.349);
+  margin: 0 2% 2% 0;
+  border-radius: 5px;
+  padding: 0% 2%;
+}
+.filter-price button {
+  width: 60px;
+  border: none;
+  background-color: rgb(73, 189, 73);
+  color: white;
+  border-radius: 5px;
+}
+.filter-color button {
+  width: 50px;
+  height: 20px;
+  border: none;
+  margin: 0 2% 2% 0;
+}
+.red {
+  background-color: red;
+}
+.yellow {
+  background-color: yellow;
+}
+.blue {
+  background-color: blue;
+}
+.green {
+  background-color: green;
+}
+.black {
+  background-color: black;
+}

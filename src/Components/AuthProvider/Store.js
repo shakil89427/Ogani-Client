@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const Store = () => {
   const [loading, setLoading] = useState(true);
   const [allProducts, setAllProducts] = useState([]);
+  const [searchValue, setSearchValue] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -15,6 +16,8 @@ const Store = () => {
   return {
     loading,
     allProducts,
+    searchValue,
+    setSearchValue,
   };
 };
 

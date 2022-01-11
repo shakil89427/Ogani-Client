@@ -21,23 +21,23 @@ const Header = () => {
             <Link className="navitem" to="/shop">
               Shop
             </Link>
-            <Link className="navitem" to="blog">
+            <Link className="navitem" to="/blog">
               Blog
             </Link>
-            <Link className="navitem" to="contact">
+            <Link className="navitem" to="/contact">
               Contact
             </Link>
           </div>
-          <Link className="cart" to="wishlist">
+          <Link className="cart" to="/wishlist">
             <i className="me-1 fas fa-heart"></i>
             <sup>0</sup>
           </Link>
-          <Link className="mx-3 cart" to="cart">
+          <Link className="mx-3 cart" to="/cart">
             <i className="me-1 fas fa-cart-plus"></i>
             <sup>0</sup>
           </Link>
           <span className="d-none d-lg-inline">
-            <Link to="profile">
+            <Link to="/profile">
               <img
                 className="profile"
                 src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
@@ -65,7 +65,7 @@ const Header = () => {
           <Offcanvas.Body className="canvas-body p-0">
             <Nav className="justify-content-end flex-grow-1">
               <span className="text-center px-5">
-                <Link to="profile">
+                <Link to="/profile">
                   <img
                     className="profile"
                     src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
@@ -77,13 +77,13 @@ const Header = () => {
               <Link className="navitem" to="/">
                 Home
               </Link>
-              <Link className="navitem" to="shop">
+              <Link className="navitem" to="/shop">
                 Shop
               </Link>
-              <Link className="navitem" to="blog">
+              <Link className="navitem" to="/blog">
                 Blog
               </Link>
-              <Link className="navitem" to="contact">
+              <Link className="navitem" to="/contact">
                 Contact
               </Link>
             </Nav>

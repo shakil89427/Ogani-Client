@@ -8,9 +8,17 @@ import img2 from "../../../img/categories/cat-2.jpg";
 import img3 from "../../../img/categories/cat-3.jpg";
 import img4 from "../../../img/categories/cat-4.jpg";
 import img5 from "../../../img/categories/cat-5.jpg";
-import { Link } from "react-router-dom";
+import useAuth from "../../AuthProvider/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const HomeSlider = () => {
+  const { setSearchValue } = useAuth();
+  const navigate = useNavigate();
+
+  const search = (e) => {
+    setSearchValue({ catagories: e.target.innerText });
+    navigate("/shop");
+  };
   const settings = {
     infinite: true,
     speed: 500,
@@ -51,33 +59,23 @@ const HomeSlider = () => {
       <Slider {...settings} className="text-center">
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img1} alt="" />
-          <Link to="shop" state="Fruits">
-            <h6>Fruits</h6>
-          </Link>
+          <h6 onClick={search}>Fruits</h6>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img2} alt="" />
-          <Link to="shop" state="Dry Fruits">
-            <h6>Dry Fruits</h6>
-          </Link>
+          <h6 onClick={search}>Dry Fruits</h6>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img3} alt="" />
-          <Link to="shop" state="Vegetables">
-            <h6>Vegetables</h6>
-          </Link>
+          <h6 onClick={search}>Vegetables</h6>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img4} alt="" />
-          <Link to="shop" state="Drinks">
-            <h6>Drinks</h6>
-          </Link>
+          <h6 onClick={search}>Drinks</h6>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img5} alt="" />
-          <Link to="shop" state="Meat">
-            <h6>Meat</h6>
-          </Link>
+          <h6 onClick={search}>Meat</h6>
         </div>
       </Slider>
     </div>

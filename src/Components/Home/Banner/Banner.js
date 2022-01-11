@@ -11,7 +11,7 @@ const Banner = () => {
         <h1 className="title">100% Organic</h1>
         <small>Free Pickup and Delivery Available</small>
         <br />
-        <Link to="shop">
+        <Link to="/shop">
           <button className="allbtn mt-3">SHOP NOW</button>
         </Link>
       </div>
