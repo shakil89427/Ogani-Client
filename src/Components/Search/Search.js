@@ -30,7 +30,7 @@ const Search = () => {
           type="text"
         />
         <button type="submit" className="border-0 py-1">
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
         </button>
       </form>
       <div className="d-none w-25 d-lg-flex align-items-center justify-content-center">

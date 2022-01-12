@@ -121,7 +121,7 @@ const Shop = () => {
                   type="submit"
                   className={!searchValue?.keyword && "activekeyword"}
                 >
-                  <i class="fas fa-backspace"></i>
+                  <i className="fas fa-backspace"></i>
                 </button>
               </form>
             </div>
