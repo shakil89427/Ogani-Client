@@ -8,21 +8,16 @@ import { Col, Container, Row } from "react-bootstrap";
 const Shop = () => {
   const { allProducts, searchValue, setSearchValue } = useAuth();
   const [products, setProducts] = useState([]);
-  const [catagoryValue, setCatagoryValue] = useState("All");
-  const [priceValue, setPriceValue] = useState();
-  const [colorValue, setColorValue] = useState("rainbow");
 
   /* Set catagory to Store */
   const addCatagory = (e) => {
     if (e.target.innerText === "All") {
       const { catagory, ...rest } = searchValue;
-      setSearchValue(rest);
-      return setCatagoryValue("All");
+      return setSearchValue(rest);
     }
     const newData = { ...searchValue };
     newData.catagory = e.target.innerText;
     setSearchValue(newData);
-    setCatagoryValue(e.target.innerText);
   };
 
   /* Set min max value to store */
@@ -38,13 +33,11 @@ const Shop = () => {
   const addColor = (e) => {
     if (e.target.name === "rainbow") {
       const { color, ...rest } = searchValue;
-      setSearchValue(rest);
-      return setColorValue("rainbow");
+      return setSearchValue(rest);
     }
     const newData = { ...searchValue };
     newData.color = e.target.name;
     setSearchValue(newData);
-    setColorValue(e.target.name);
   };
 
   /* Keyword filter function */
@@ -128,37 +121,45 @@ const Shop = () => {
               <p className="fw-bold">Catagories</p>
               <button
                 onClick={addCatagory}
-                className={catagoryValue === "All" && "shopcatactive"}
+                className={!searchValue?.catagory && "shopcatactive"}
               >
                 All
               </button>
               <button
                 onClick={addCatagory}
-                className={catagoryValue === "Fruits" && "shopcatactive"}
+                className={
+                  searchValue?.catagory === "Fruits" && "shopcatactive"
+                }
               >
                 Fruits
               </button>
               <button
                 onClick={addCatagory}
-                className={catagoryValue === "Dry Fruits" && "shopcatactive"}
+                className={
+                  searchValue?.catagory === "Dry Fruits" && "shopcatactive"
+                }
               >
                 Dry Fruits
               </button>
               <button
                 onClick={addCatagory}
-                className={catagoryValue === "Vegetables" && "shopcatactive"}
+                className={
+                  searchValue?.catagory === "Vegetables" && "shopcatactive"
+                }
               >
                 Vegetables
               </button>
               <button
                 onClick={addCatagory}
-                className={catagoryValue === "Drinks" && "shopcatactive"}
+                className={
+                  searchValue?.catagory === "Drinks" && "shopcatactive"
+                }
               >
                 Drinks
               </button>
               <button
                 onClick={addCatagory}
-                className={catagoryValue === "Meats" && "shopcatactive"}
+                className={searchValue?.catagory === "Meats" && "shopcatactive"}
               >
                 Meats
               </button>
@@ -167,18 +168,28 @@ const Shop = () => {
               <p className="fw-bold">Price</p>
               <form onSubmit={resetPrice}>
                 <input
+                  className={searchValue?.min && "activeprice"}
                   onChange={addPrice}
                   name="min"
                   placeholder="Min"
                   type="number"
                 />
+                <span className="mx-1">To</span>
                 <input
+                  className={searchValue?.max && "activeprice"}
                   onChange={addPrice}
                   name="max"
                   placeholder="Max"
                   type="number"
                 />
-                <button type="submit">Reset</button>
+                <button
+                  className={
+                    !searchValue?.min && !searchValue?.max ? "activeprice" : ""
+                  }
+                  type="submit"
+                >
+                  All
+                </button>
               </form>
             </div>
             <div className="filter-color border-bottom pb-2">
@@ -187,38 +198,48 @@ const Shop = () => {
                 name="rainbow"
                 onClick={addColor}
                 className={
-                  colorValue === "rainbow" ? "rainbow active-color" : "rainbow"
+                  !searchValue?.color ? "rainbow active-color" : "rainbow"
                 }
               />
               <button
                 name="red"
                 onClick={addColor}
-                className={colorValue === "red" ? "red active-color" : "red"}
+                className={
+                  searchValue?.color === "red" ? "red active-color" : "red"
+                }
               />
               <button
                 name="yellow"
                 onClick={addColor}
                 className={
-                  colorValue === "yellow" ? "yellow active-color" : "yellow"
+                  searchValue?.color === "yellow"
+                    ? "yellow active-color"
+                    : "yellow"
                 }
               />
               <button
                 name="blue"
                 onClick={addColor}
-                className={colorValue === "blue" ? "blue active-color" : "blue"}
+                className={
+                  searchValue?.color === "blue" ? "blue active-color" : "blue"
+                }
               />
               <button
                 name="green"
                 onClick={addColor}
                 className={
-                  colorValue === "green" ? "green active-color" : "green"
+                  searchValue?.color === "green"
+                    ? "green active-color"
+                    : "green"
                 }
               />
               <button
                 name="black"
                 onClick={addColor}
                 className={
-                  colorValue === "black" ? "black active-color" : "black"
+                  searchValue?.color === "black"
+                    ? "black active-color"
+                    : "black"
                 }
               />
             </div>
