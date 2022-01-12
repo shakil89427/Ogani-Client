@@ -8,20 +8,21 @@
 }
 .filter-keyword form {
   width: 100%;
-  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .filter-keyword input {
   width: 80%;
-  border: none;
+  border: 1px solid black;
+  border-right: none;
   outline: none;
   padding-left: 2%;
 }
 .filter-keyword button {
   width: 20%;
-  border: none;
+  border: 1px solid black;
+  border-left: none;
 }
 .activekeyword {
   background-color: rgb(45, 184, 45);
