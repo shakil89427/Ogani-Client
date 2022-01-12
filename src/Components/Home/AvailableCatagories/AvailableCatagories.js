@@ -16,8 +16,7 @@ const HomeSlider = () => {
   const navigate = useNavigate();
 
   const search = (e) => {
-    searchValue.catagory = e.target.innerText;
-    setSearchValue(searchValue);
+    setSearchValue({ catagory: e.target.innerText });
     navigate("/shop");
   };
   const settings = {

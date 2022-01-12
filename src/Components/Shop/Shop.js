@@ -9,31 +9,95 @@ const Shop = () => {
   const { allProducts, searchValue, setSearchValue } = useAuth();
   const [products, setProducts] = useState([]);
   const [catagoryValue, setCatagoryValue] = useState("All");
-  const [minmax, setMinmax] = useState({});
 
-  const addColor = (e) => {
-    searchValue.color = e.target.className;
-    setSearchValue(searchValue);
+  /* Set catagory to Store */
+  const addCatagory = (e) => {
+    if (e.target.innerText === "All") {
+      const { catagory, ...rest } = searchValue;
+      setSearchValue(rest);
+      return setCatagoryValue("All");
+    }
+    const newData = { ...searchValue };
+    newData.catagory = e.target.innerText;
+    setSearchValue(newData);
+    setCatagoryValue(e.target.innerText);
   };
 
-  const getPrice = (e) => {
+  /* Get Min Max Value From Input */
+  const addPrice = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    const newData = { ...minmax };
+    const newData = { ...searchValue };
     newData[name] = value;
-    setMinmax(newData);
+    setSearchValue(newData);
   };
 
-  const addPrice = (e) => {
-    e.preventDefault();
-    searchValue.price = minmax;
-    setSearchValue(searchValue);
+  /* Set color to Store */
+  const addColor = (e) => {
+    const newData = { ...searchValue };
+    newData.color = e.target.className;
+    setSearchValue(newData);
   };
 
+  /* Keyword filter function */
+  const keywordFilter = (value) => {
+    if (searchValue.keyword) {
+      const result = value.filter((single) =>
+        single.name.toLowerCase().includes(searchValue.keyword.toLowerCase())
+      );
+      return catagoryFilter(result);
+    }
+    catagoryFilter(value);
+  };
+
+  /* Catagory filter function */
+  const catagoryFilter = (value) => {
+    console.log(searchValue);
+    if (searchValue.catagory) {
+      const result = value.filter(
+        (single) => single.catagory === searchValue.catagory
+      );
+      return min(result);
+    }
+    min(value);
+  };
+
+  const min = (value) => {
+    if (searchValue.min) {
+      const result = value.filter((single) => single.price >= searchValue.min);
+      return max(result);
+    }
+    max(value);
+  };
+
+  const max = (value) => {
+    if (searchValue.max) {
+      const result = value.filter((single) => single.price <= searchValue.min);
+      return colorFilter(result);
+    }
+    colorFilter(value);
+  };
+
+  /* Color filter function */
+  const colorFilter = (value) => {
+    if (searchValue.color) {
+      const result = value.filter(
+        (single) => single.color === searchValue.color
+      );
+      return setProducts(result);
+    }
+    setProducts(value);
+  };
+
+  /* Load initial Products */
   useEffect(() => {
     if (allProducts.length === 0) return;
+    if (searchValue) {
+      return keywordFilter(allProducts);
+    }
     setProducts(allProducts);
-  }, [allProducts]);
+  }, [allProducts, searchValue]);
+
   return (
     <div>
       <Search />
@@ -46,26 +110,40 @@ const Shop = () => {
             </h5>
             <div className="filter-catagories border-bottom pb-2">
               <p className="fw-bold">Catagories</p>
-              <button className={catagoryValue === "All" && "shopcatactive"}>
+              <button
+                onClick={addCatagory}
+                className={catagoryValue === "All" && "shopcatactive"}
+              >
                 All
               </button>
-              <button className={catagoryValue === "Fruits" && "shopcatactive"}>
+              <button
+                onClick={addCatagory}
+                className={catagoryValue === "Fruits" && "shopcatactive"}
+              >
                 Fruits
               </button>
               <button
+                onClick={addCatagory}
                 className={catagoryValue === "Dry Fruits" && "shopcatactive"}
               >
                 Dry Fruits
               </button>
               <button
+                onClick={addCatagory}
                 className={catagoryValue === "Vegetables" && "shopcatactive"}
               >
                 Vegetables
               </button>
-              <button className={catagoryValue === "Drinks" && "shopcatactive"}>
+              <button
+                onClick={addCatagory}
+                className={catagoryValue === "Drinks" && "shopcatactive"}
+              >
                 Drinks
               </button>
-              <button className={catagoryValue === "Meats" && "shopcatactive"}>
+              <button
+                onClick={addCatagory}
+                className={catagoryValue === "Meats" && "shopcatactive"}
+              >
                 Meats
               </button>
             </div>
@@ -73,13 +151,13 @@ const Shop = () => {
               <p className="fw-bold">Price</p>
               <form onSubmit={addPrice}>
                 <input
-                  onChange={getPrice}
+                  onChange={addPrice}
                   name="min"
                   placeholder="Min"
                   type="number"
                 />
                 <input
-                  onChange={getPrice}
+                  onChange={addPrice}
                   name="max"
                   placeholder="Max"
                   type="number"

@@ -84,9 +84,9 @@ const Details = () => {
                   </p>
                   <p>
                     <i className="me-1 fab fa-facebook"></i>
-                    <i className="me-1 fab fa-facebook"></i>
-                    <i className="me-1 fab fa-facebook"></i>
-                    <i className="me-1 fab fa-facebook"></i>
+                    <i className="me-1 fab fa-twitter"></i>
+                    <i className="me-1 fab fa-instagram"></i>
+                    <i className="me-1 fab fa-google-plus-square"></i>
                   </p>
                 </div>
               </div>
