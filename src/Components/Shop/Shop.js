@@ -2,13 +2,26 @@ import React, { useEffect, useState } from "react";
 import "./Shop.css";
 import useAuth from "../AuthProvider/useAuth";
 import { Link } from "react-router-dom";
-import Search from "../Search/Search";
 import { Col, Container, Row } from "react-bootstrap";
 
 const Shop = () => {
   const { allProducts, searchValue, setSearchValue } = useAuth();
   const [products, setProducts] = useState([]);
 
+  /* Set keyword to store */
+  const addkeyword = (e) => {
+    const newData = { ...searchValue };
+    newData.keyword = e.target.value;
+    setSearchValue(newData);
+  };
+
+  /* Remove keyword from store */
+  const removekeyword = (e) => {
+    e.preventDefault();
+    const { keyword, ...rest } = searchValue;
+    setSearchValue(rest);
+    e.target.reset();
+  };
   /* Set catagory to Store */
   const addCatagory = (e) => {
     if (e.target.innerText === "All") {
@@ -109,7 +122,6 @@ const Shop = () => {
 
   return (
     <div>
-      <Search />
       <h1 className="shop-h1">Shop</h1>
       <Container>
         <Row>
@@ -117,6 +129,24 @@ const Shop = () => {
             <h5 className="fw-bold text-center border-2 border-bottom">
               Filter
             </h5>
+            <div className="filter-keyword border-bottom pb-3">
+              <p className="fw-bold">Keyword</p>
+              <form onSubmit={removekeyword}>
+                <input
+                  onChange={addkeyword}
+                  value={searchValue?.keyword && searchValue?.keyword}
+                  className={searchValue?.keyword && "activekeyword"}
+                  placeholder="What do you need?"
+                  type="text"
+                />
+                <button
+                  type="submit"
+                  className={!searchValue?.keyword && "activekeyword"}
+                >
+                  <i class="fas fa-backspace"></i>
+                </button>
+              </form>
+            </div>
             <div className="filter-catagories border-bottom pb-2">
               <p className="fw-bold">Catagories</p>
               <button
@@ -244,7 +274,22 @@ const Shop = () => {
               />
             </div>
           </Col>
-          <Col sm={12} md={9} lg={9}>
+          <Col
+            className="d-flex align-items-center justify-content-center"
+            sm={12}
+            md={9}
+            lg={9}
+          >
+            {products.length === 0 && (
+              <span>
+                <h3 className="text-center mt-3">Sorry No product Found</h3>
+                <p className="text-center">Try changing the filter options</p>
+                <p className="text-center">OR</p>
+                <p className="text-center">
+                  <button className="allbtn">Back To Home</button>
+                </p>
+              </span>
+            )}
             <Row>
               {products.map((product) => (
                 <Col

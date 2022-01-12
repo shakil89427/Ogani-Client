@@ -1,45 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../AuthProvider/useAuth";
 import "./Search.css";
 
 const Search = () => {
   const { searchValue, setSearchValue } = useAuth();
+  const [value, setValue] = useState();
   const navigate = useNavigate();
 
-  const search = () => {
-    navigate("/shop");
+  const getValue = (e) => {
+    setValue(e.target.value);
   };
 
-  const changeValue = (e) => {
+  const submit = (e) => {
     const newData = { ...searchValue };
-    newData.keyword = e.target.value;
+    newData.keyword = value;
     setSearchValue(newData);
+    navigate("./shop");
   };
 
-  const remove = (e) => {
-    e.preventDefault();
-    e.target.reset();
-    const { keyword, ...rest } = searchValue;
-    setSearchValue(rest);
-  };
   return (
     <div className="search d-flex align-items-center">
       <form
-        onSubmit={remove}
+        onSubmit={submit}
         className="rounded bg-white mx-auto w-50 my-2 border d-flex justify-content-between align-items-center"
       >
         <input
-          required
-          onChange={changeValue}
+          onChange={getValue}
           placeholder="What do you need"
           className="search-input"
           type="text"
         />
-        <button type="submit" className="border-0 py-1 me-2">
-          <i class="fas fa-backspace"></i>
-        </button>
-        <button onClick={search} className="border-0 py-1">
+        <button type="submit" className="border-0 py-1">
           <i class="fas fa-search"></i>
         </button>
       </form>
