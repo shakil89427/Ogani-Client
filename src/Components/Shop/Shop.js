@@ -9,6 +9,8 @@ const Shop = () => {
   const { allProducts, searchValue, setSearchValue } = useAuth();
   const [products, setProducts] = useState([]);
   const [catagoryValue, setCatagoryValue] = useState("All");
+  const [priceValue, setPriceValue] = useState();
+  const [colorValue, setColorValue] = useState("rainbow");
 
   /* Set catagory to Store */
   const addCatagory = (e) => {
@@ -23,7 +25,7 @@ const Shop = () => {
     setCatagoryValue(e.target.innerText);
   };
 
-  /* Get Min Max Value From Input */
+  /* Set min max value to store */
   const addPrice = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -34,9 +36,15 @@ const Shop = () => {
 
   /* Set color to Store */
   const addColor = (e) => {
+    if (e.target.name === "rainbow") {
+      const { color, ...rest } = searchValue;
+      setSearchValue(rest);
+      return setColorValue("rainbow");
+    }
     const newData = { ...searchValue };
-    newData.color = e.target.className;
+    newData.color = e.target.name;
     setSearchValue(newData);
+    setColorValue(e.target.name);
   };
 
   /* Keyword filter function */
@@ -52,7 +60,6 @@ const Shop = () => {
 
   /* Catagory filter function */
   const catagoryFilter = (value) => {
-    console.log(searchValue);
     if (searchValue.catagory) {
       const result = value.filter(
         (single) => single.catagory === searchValue.catagory
@@ -62,6 +69,7 @@ const Shop = () => {
     min(value);
   };
 
+  /* min price filter function */
   const min = (value) => {
     if (searchValue.min) {
       const result = value.filter((single) => single.price >= searchValue.min);
@@ -70,9 +78,10 @@ const Shop = () => {
     max(value);
   };
 
+  /* max price filter function */
   const max = (value) => {
     if (searchValue.max) {
-      const result = value.filter((single) => single.price <= searchValue.min);
+      const result = value.filter((single) => single.price <= searchValue.max);
       return colorFilter(result);
     }
     colorFilter(value);
@@ -97,6 +106,13 @@ const Shop = () => {
     }
     setProducts(allProducts);
   }, [allProducts, searchValue]);
+
+  const resetPrice = (e) => {
+    e.preventDefault();
+    e.target.reset();
+    const { min, max, ...rest } = searchValue;
+    setSearchValue(rest);
+  };
 
   return (
     <div>
@@ -149,7 +165,7 @@ const Shop = () => {
             </div>
             <div className="filter-price border-bottom pb-2">
               <p className="fw-bold">Price</p>
-              <form onSubmit={addPrice}>
+              <form onSubmit={resetPrice}>
                 <input
                   onChange={addPrice}
                   name="min"
@@ -162,16 +178,49 @@ const Shop = () => {
                   placeholder="Max"
                   type="number"
                 />
-                <button type="submit">Go</button>
+                <button type="submit">Reset</button>
               </form>
             </div>
             <div className="filter-color border-bottom pb-2">
               <p className="fw-bold">Color</p>
-              <button onClick={addColor} className="red" />
-              <button onClick={addColor} className="yellow" />
-              <button onClick={addColor} className="blue" />
-              <button onClick={addColor} className="green" />
-              <button onClick={addColor} className="black" />
+              <button
+                name="rainbow"
+                onClick={addColor}
+                className={
+                  colorValue === "rainbow" ? "rainbow active-color" : "rainbow"
+                }
+              />
+              <button
+                name="red"
+                onClick={addColor}
+                className={colorValue === "red" ? "red active-color" : "red"}
+              />
+              <button
+                name="yellow"
+                onClick={addColor}
+                className={
+                  colorValue === "yellow" ? "yellow active-color" : "yellow"
+                }
+              />
+              <button
+                name="blue"
+                onClick={addColor}
+                className={colorValue === "blue" ? "blue active-color" : "blue"}
+              />
+              <button
+                name="green"
+                onClick={addColor}
+                className={
+                  colorValue === "green" ? "green active-color" : "green"
+                }
+              />
+              <button
+                name="black"
+                onClick={addColor}
+                className={
+                  colorValue === "black" ? "black active-color" : "black"
+                }
+              />
             </div>
           </Col>
           <Col sm={12} md={9} lg={9}>

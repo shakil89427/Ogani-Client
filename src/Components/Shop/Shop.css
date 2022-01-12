@@ -27,15 +27,16 @@
 .filter-price button {
   width: 60px;
   border: none;
-  background-color: rgb(73, 189, 73);
-  color: white;
   border-radius: 5px;
 }
 .filter-color button {
-  width: 50px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border: none;
   margin: 0 2% 2% 0;
+}
+.rainbow {
+  background-image: linear-gradient(to right, red, yellow, blue, green, black);
 }
 .red {
   background-color: red;
@@ -51,4 +52,7 @@
 }
 .black {
   background-color: black;
+}
+.active-color {
+  border-radius: 50%;
 }
