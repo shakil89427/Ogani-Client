@@ -1,0 +1,21 @@
+.blog-row img {
+  width: 100%;
+  height: 250px;
+}
+.blog-row h5 {
+  letter-spacing: 1px;
+}
+.blog-row button {
+  display: block;
+  margin: auto;
+  padding: 1% 2%;
+  border: 1px solid rgb(51, 179, 51);
+  background-color: white;
+  color: rgb(51, 179, 51);
+  border-radius: 20px;
+  font-weight: 600;
+}
+.blog-row button:hover {
+  background-color: rgb(51, 179, 51);
+  color: white;
+}

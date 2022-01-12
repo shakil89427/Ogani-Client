@@ -99,7 +99,7 @@ const Shop = () => {
   }, [allProducts, searchValue]);
 
   return (
-    <div>
+    <div className="mb-5">
       <h1 className="shop-h1">Shop</h1>
       <Container>
         <Row>

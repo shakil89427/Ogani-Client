@@ -48,7 +48,6 @@
 .filter-price button {
   width: 60px;
   border: none;
-  border-radius: 5px;
   margin-left: 2%;
 }
 .filter-color button {
@@ -56,6 +55,7 @@
   height: 25px;
   border: none;
   margin: 0 2% 2% 0;
+  transition: all 0.2s linear;
 }
 .rainbow {
   background-image: linear-gradient(to right, red, yellow, blue, green, black);
