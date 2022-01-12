@@ -15,7 +15,7 @@ const Blog = () => {
       <Container>
         <Row className="blog-row">
           <Col className="mb-3" sm={12} md={6} lg={4}>
-            <div className="shadow p-2">
+            <div className="p-2">
               <img src={img1} alt="" />
               <p className="text-secondary">
                 <i className="me-1 far fa-calendar"></i>May 4,2020
@@ -33,7 +33,7 @@ const Blog = () => {
             </div>
           </Col>
           <Col className="mb-3" sm={12} md={6} lg={4}>
-            <div className="shadow p-2">
+            <div className="p-2">
               <img src={img2} alt="" />
               <p className="text-secondary">
                 <i className="me-1 far fa-calendar"></i>May 4,2020
@@ -51,7 +51,7 @@ const Blog = () => {
             </div>
           </Col>
           <Col className="mb-3" sm={12} md={6} lg={4}>
-            <div className="shadow p-2">
+            <div className="p-2">
               <img src={img3} alt="" />
               <p className="text-secondary">
                 <i className="me-1 far fa-calendar"></i>May 4,2020
@@ -69,7 +69,7 @@ const Blog = () => {
             </div>
           </Col>
           <Col className="mb-3" sm={12} md={6} lg={4}>
-            <div className="shadow p-2">
+            <div className="p-2">
               <img src={img4} alt="" />
               <p className="text-secondary">
                 <i className="me-1 far fa-calendar"></i>May 4,2020
@@ -87,7 +87,7 @@ const Blog = () => {
             </div>
           </Col>
           <Col className="mb-3" sm={12} md={6} lg={4}>
-            <div className="shadow p-2">
+            <div className="p-2">
               <img src={img5} alt="" />
               <p className="text-secondary">
                 <i className="me-1 far fa-calendar"></i>May 4,2020
@@ -105,7 +105,7 @@ const Blog = () => {
             </div>
           </Col>
           <Col className="mb-3" sm={12} md={6} lg={4}>
-            <div className="shadow p-2">
+            <div className="p-2">
               <img src={img6} alt="" />
               <p className="text-secondary">
                 <i className="me-1 far fa-calendar"></i>May 4,2020
