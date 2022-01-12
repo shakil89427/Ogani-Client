@@ -12,7 +12,7 @@ import useAuth from "../../AuthProvider/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const HomeSlider = () => {
-  const { searchValue, setSearchValue } = useAuth();
+  const { setSearchValue } = useAuth();
   const navigate = useNavigate();
 
   const search = (e) => {
@@ -75,7 +75,7 @@ const HomeSlider = () => {
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img5} alt="" />
-          <h6 onClick={search}>Meat</h6>
+          <h6 onClick={search}>Meats</h6>
         </div>
       </Slider>
     </div>

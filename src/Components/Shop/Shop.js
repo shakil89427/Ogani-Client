@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./Shop.css";
 import useAuth from "../AuthProvider/useAuth";
 import { Link } from "react-router-dom";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 
 const Shop = () => {
   const { allProducts, searchValue, setSearchValue } = useAuth();
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   /* Set keyword to store */
   const addkeyword = (e) => {
@@ -60,64 +61,41 @@ const Shop = () => {
     setSearchValue(newData);
   };
 
-  /* Keyword filter function */
-  const keywordFilter = (value) => {
+  /* Filter function */
+  const filter = (value) => {
+    let initial = value;
+    /* Keyword filter */
     if (searchValue.keyword) {
-      const result = value.filter((single) =>
+      initial = initial.filter((single) =>
         single.name.toLowerCase().includes(searchValue.keyword.toLowerCase())
       );
-      return catagoryFilter(result);
     }
-    catagoryFilter(value);
-  };
-
-  /* Catagory filter function */
-  const catagoryFilter = (value) => {
+    /* Catagory filter */
     if (searchValue.catagory) {
-      const result = value.filter(
+      initial = initial.filter(
         (single) => single.catagory === searchValue.catagory
       );
-      return min(result);
     }
-    min(value);
-  };
-
-  /* min price filter function */
-  const min = (value) => {
+    /* Price min filter */
     if (searchValue.min) {
-      const result = value.filter((single) => single.price >= searchValue.min);
-      return max(result);
+      initial = initial.filter((single) => single.price >= searchValue.min);
     }
-    max(value);
-  };
-
-  /* max price filter function */
-  const max = (value) => {
+    /* Price max filter */
     if (searchValue.max) {
-      const result = value.filter((single) => single.price <= searchValue.max);
-      return colorFilter(result);
+      initial = initial.filter((single) => single.price <= searchValue.max);
     }
-    colorFilter(value);
-  };
-
-  /* Color filter function */
-  const colorFilter = (value) => {
+    /* Color filter */
     if (searchValue.color) {
-      const result = value.filter(
-        (single) => single.color === searchValue.color
-      );
-      return setProducts(result);
+      initial = initial.filter((single) => single.color === searchValue.color);
     }
-    setProducts(value);
+    setProducts(initial);
+    setLoading(false);
   };
 
   /* Load initial Products */
   useEffect(() => {
     if (allProducts.length === 0) return;
-    if (searchValue) {
-      return keywordFilter(allProducts);
-    }
-    setProducts(allProducts);
+    filter(allProducts);
   }, [allProducts, searchValue]);
 
   return (
@@ -134,7 +112,7 @@ const Shop = () => {
               <form onSubmit={removekeyword}>
                 <input
                   onChange={addkeyword}
-                  value={searchValue?.keyword && searchValue?.keyword}
+                  value={searchValue?.keyword ? searchValue?.keyword : ""}
                   className={searchValue?.keyword && "activekeyword"}
                   placeholder="What do you need?"
                   type="text"
@@ -201,7 +179,7 @@ const Shop = () => {
                   className={searchValue?.min && "activeprice"}
                   onChange={addPrice}
                   name="min"
-                  value={searchValue?.min && searchValue?.min}
+                  value={searchValue?.min ? searchValue?.min : ""}
                   placeholder="Min"
                   type="number"
                 />
@@ -210,7 +188,7 @@ const Shop = () => {
                   className={searchValue?.max && "activeprice"}
                   onChange={addPrice}
                   name="max"
-                  value={searchValue?.max && searchValue?.max}
+                  value={searchValue?.max ? searchValue?.max : ""}
                   placeholder="Max"
                   type="number"
                 />
@@ -276,22 +254,20 @@ const Shop = () => {
               />
             </div>
           </Col>
-          <Col
-            className="d-flex align-items-center justify-content-center"
-            sm={12}
-            md={9}
-            lg={9}
-          >
-            {products.length === 0 && (
+          <Col sm={12} md={9} lg={9}>
+            {!loading && products.length === 0 && (
               <span>
                 <h3 className="text-center mt-3">Sorry No product Found</h3>
                 <p className="text-center">Try changing the filter options</p>
                 <p className="text-center">OR</p>
                 <p className="text-center">
-                  <button className="allbtn">Back To Home</button>
+                  <Link to="/">
+                    <button className="allbtn">Back To Home</button>
+                  </Link>
                 </p>
               </span>
             )}
+            {loading && <Spinner animation="border" variant="success" />}
             <Row>
               {products.map((product) => (
                 <Col

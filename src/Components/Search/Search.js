@@ -4,7 +4,7 @@ import useAuth from "../AuthProvider/useAuth";
 import "./Search.css";
 
 const Search = () => {
-  const { searchValue, setSearchValue } = useAuth();
+  const { setSearchValue } = useAuth();
   const [value, setValue] = useState();
   const navigate = useNavigate();
 
@@ -13,10 +13,8 @@ const Search = () => {
   };
 
   const submit = (e) => {
-    const newData = { ...searchValue };
-    newData.keyword = value;
-    setSearchValue(newData);
-    navigate("./shop");
+    setSearchValue({ keyword: value });
+    navigate("/shop");
   };
 
   return (
