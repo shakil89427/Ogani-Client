@@ -12,6 +12,7 @@ import Contact from "./Components/Contact/Contact";
 import Cart from "./Components/Cart/Cart";
 import Wishlist from "./Components/Wishlist/Wishlist";
 import Profile from "./Components/Profile/Profile";
+import NotFound from "./Components/NotFound/NotFound";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="cart" element={<Cart />} />
               <Route path="wishlist" element={<Wishlist />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
           <Footer />
