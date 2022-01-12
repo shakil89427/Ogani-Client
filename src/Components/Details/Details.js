@@ -28,7 +28,7 @@ const Details = () => {
         )
         .slice(0, 4)
     );
-  }, [product]);
+  }, [product, allProducts]);
 
   const changeinfo = (e) => {
     setInfo(e.target.innerText);
