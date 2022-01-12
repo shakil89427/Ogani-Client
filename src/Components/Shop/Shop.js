@@ -41,6 +41,13 @@ const Shop = () => {
     newData[name] = value;
     setSearchValue(newData);
   };
+  /* Remove Min Max from store */
+  const resetPrice = (e) => {
+    e.preventDefault();
+    const { min, max, ...rest } = searchValue;
+    setSearchValue(rest);
+    e.target.reset();
+  };
 
   /* Set color to Store */
   const addColor = (e) => {
@@ -112,13 +119,6 @@ const Shop = () => {
     }
     setProducts(allProducts);
   }, [allProducts, searchValue]);
-
-  const resetPrice = (e) => {
-    e.preventDefault();
-    e.target.reset();
-    const { min, max, ...rest } = searchValue;
-    setSearchValue(rest);
-  };
 
   return (
     <div>
@@ -201,6 +201,7 @@ const Shop = () => {
                   className={searchValue?.min && "activeprice"}
                   onChange={addPrice}
                   name="min"
+                  value={searchValue?.min && searchValue?.min}
                   placeholder="Min"
                   type="number"
                 />
@@ -209,6 +210,7 @@ const Shop = () => {
                   className={searchValue?.max && "activeprice"}
                   onChange={addPrice}
                   name="max"
+                  value={searchValue?.max && searchValue?.max}
                   placeholder="Max"
                   type="number"
                 />
