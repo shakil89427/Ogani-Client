@@ -21,6 +21,7 @@ const Store = () => {
   const setToLocal = (value) => {
     localStorage.setItem("cart", JSON.stringify(value));
     setCartItems(value);
+    setLoading(false);
   };
 
   /* Add single quantity */

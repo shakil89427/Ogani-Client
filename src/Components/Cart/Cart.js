@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useAuth from "../AuthProvider/useAuth";
 import { Col, Container, Row } from "react-bootstrap";
 import "./Cart.css";
 
 const Cart = () => {
+  const { loading, allProducts, cartItems } = useAuth();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    if (allProducts.lenght === 0) return;
+    if (loading) return;
+    const temp = [];
+    for (const product of cartItems.products) {
+      const result = allProducts.find(
+        (single) => single._id === product.productId
+      );
+      product.img = result.img;
+      product.name = result.name;
+      temp.push(product);
+    }
+    setProducts(temp);
+  }, [allProducts, cartItems]);
   return (
     <div>
       <h1 className="text-center fw-bold cart-h1">Shopping Cart</h1>
