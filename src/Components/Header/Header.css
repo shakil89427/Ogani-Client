@@ -9,8 +9,9 @@
   padding: 5px 15px;
 }
 .navitem:hover {
-  background-color: rgba(128, 128, 128, 0.199);
-  color: rgb(74, 168, 74);
+  background-color: rgb(74, 168, 74);
+  color: white;
+  border-radius: 15px;
 }
 .cart {
   text-decoration: none;
