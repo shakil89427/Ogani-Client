@@ -7,15 +7,7 @@ const Store = () => {
   const [searchValue, setSearchValue] = useState({});
   const [cartItems, setCartItems] = useState({});
 
-  const user = { name: "Shakil" };
-  /* Load all Products */
-  useEffect(() => {
-    setLoading(true);
-    axios.get("http://localhost:5000/allproducts").then((res) => {
-      setAllProducts(res.data);
-      setLoading(false);
-    });
-  }, []);
+  // const user = { name: "Shakil" };
 
   /* Set CartItems to local Storage */
   const setToLocal = (value) => {
@@ -51,13 +43,18 @@ const Store = () => {
     setToLocal(cartItems);
   };
 
-  /* Load Data from localstorage and set to cartItems*/
+  /* Load all Products and cart */
   useEffect(() => {
+    setLoading(true);
     const result = JSON.parse(localStorage.getItem("cart"));
-    if (!result) {
-      return setToLocal({ user: {}, products: [] });
-    }
-    setCartItems(result);
+    axios.get("http://localhost:5000/allproducts").then((res) => {
+      setAllProducts(res.data);
+      if (!result) {
+        return setToLocal({ user: {}, products: [] });
+      }
+      setCartItems(result);
+      setLoading(false);
+    });
   }, []);
 
   // useEffect(() => {

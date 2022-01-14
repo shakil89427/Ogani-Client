@@ -8,19 +8,19 @@ const Cart = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    if (allProducts.lenght === 0) return;
-    if (loading) return;
-    const temp = [];
-    for (const product of cartItems.products) {
-      const result = allProducts.find(
-        (single) => single._id === product.productId
-      );
-      product.img = result.img;
-      product.name = result.name;
-      temp.push(product);
+    if (cartItems.user) {
+      const temp = [];
+      for (const product of cartItems.products) {
+        const result = allProducts.find(
+          (single) => single._id === product.productId
+        );
+        product.img = result.img;
+        product.name = result.name;
+        temp.push(product);
+      }
+      setProducts(temp);
     }
-    setProducts(temp);
-  }, [allProducts, cartItems]);
+  }, [cartItems]);
   return (
     <div>
       <h1 className="text-center fw-bold cart-h1">Shopping Cart</h1>
@@ -37,6 +37,23 @@ const Cart = () => {
             </div>
           </Col>
         </Row>
+
+        {products.map((each) => (
+          <Row className="border-bottom py-2">
+            <Col xs={4} sm={4} md={6} lg={6}>
+              <div className="d-flex flex-column flex-md-row align-items-center">
+                <img className="cart-img" src={each.img} alt="" />
+                <h5>{each.name}</h5>
+              </div>
+            </Col>
+            <Col xs={8} sm={8} md={6} lg={6}>
+              <div className="d-flex align-items-center justify-content-between">
+                <h5>{each.price}</h5>
+              </div>
+            </Col>
+          </Row>
+        ))}
+
         <div className="mt-3 d-flex align-items-center justify-content-between">
           <button className="allbtn space">CONTINUE SHOPPING</button>
           <button className="allbtn space"> UPADATE CART</button>
