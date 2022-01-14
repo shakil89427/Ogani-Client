@@ -39,15 +39,15 @@ const Cart = () => {
               <h5 className="fw-bolder">Cart Total</h5>
               <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
                 <h6 className="fw-bloder">Subtotal</h6>
-                <h6 className="fw-bloder">$500</h6>
+                <h6 className="fw-bloder text-danger">$500</h6>
               </div>
               <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
                 <h6 className="fw-bloder">Tax</h6>
-                <h6 className="fw-bloder">$100</h6>
+                <h6 className="fw-bloder text-danger">$100</h6>
               </div>
               <div className="d-flex align-items-center justify-content-between py-3">
                 <h6 className="fw-bloder">Total</h6>
-                <h6 className="fw-bloder">$600</h6>
+                <h6 className="fw-bloder text-danger">$600</h6>
               </div>
               <button className="allbtn w-100 space">
                 PROCEED TO CHECKOUT

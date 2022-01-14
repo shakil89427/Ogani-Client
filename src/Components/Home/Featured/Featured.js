@@ -5,7 +5,7 @@ import useAuth from "../../AuthProvider/useAuth";
 import "./Featured.css";
 
 const Available = () => {
-  const { allProducts } = useAuth();
+  const { allProducts, addSingleQuantity } = useAuth();
   const [products, setProducts] = useState([]);
   const [border, setborder] = useState("All");
 
@@ -86,7 +86,7 @@ const Available = () => {
                       <i className="fas fa-info"></i>
                     </p>
                   </Link>
-                  <p>
+                  <p onClick={() => addSingleQuantity(product._id)}>
                     <i className="fas fa-cart-plus"></i>
                   </p>
                 </span>

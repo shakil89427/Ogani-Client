@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 
 const Details = () => {
-  const { allProducts } = useAuth();
+  const { allProducts, addSingleQuantity } = useAuth();
   const { id } = useParams();
   const [captureId, setCaptureId] = useState(id);
   const [product, setProduct] = useState({});
@@ -133,7 +133,7 @@ const Details = () => {
                       <i className="fas fa-info"></i>
                     </p>
                   </a>
-                  <p>
+                  <p onClick={() => addSingleQuantity(related._id)}>
                     <i className="fas fa-cart-plus"></i>
                   </p>
                 </span>
