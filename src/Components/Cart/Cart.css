@@ -1,0 +1,25 @@
+.cart-h1 {
+  background-image: url("../../img/breadcrumb.jpg");
+  background-repeat: none;
+  background-size: cover;
+  text-align: center;
+  color: white;
+  padding: 2%;
+}
+.coupon input {
+  width: 65%;
+  margin-bottom: 2%;
+  outline: none;
+  padding-left: 1%;
+}
+.coupon input:focus {
+  border: 2px solid rgb(42, 190, 42);
+}
+.cart-total {
+  background-color: rgba(216, 213, 213, 0.247);
+  padding: 5%;
+}
+.space {
+  letter-spacing: 1px;
+  font-weight: 600;
+}

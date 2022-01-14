@@ -72,7 +72,7 @@ const Contact = () => {
                 required
                 placeholder="Write your message"
                 className="message-input"
-                rows="10"
+                rows="7"
               />
             </Col>
           </Row>
