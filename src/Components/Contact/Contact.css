@@ -1,0 +1,20 @@
+.contact-h1 {
+  background-image: url("../../img/breadcrumb.jpg");
+  background-repeat: none;
+  background-size: cover;
+  text-align: center;
+  color: white;
+  padding: 2%;
+}
+.contact-i {
+  color: rgb(53, 185, 53);
+}
+.message-input {
+  width: 100%;
+  margin-top: 2%;
+  padding: 1%;
+  outline: none;
+}
+.message-input:focus {
+  border: 2px solid rgb(53, 185, 53);
+}
