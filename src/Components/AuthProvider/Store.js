@@ -6,13 +6,25 @@ const Store = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [searchValue, setSearchValue] = useState({});
   const [cartItems, setCartItems] = useState({});
+  const [user, setUser] = useState({ _id: "bvghjkgyuifuytgyuiohbyu" });
 
-  // const user = { name: "Shakil" };
+  /* Save cart info to Database */
+  const saveCartToDb = (value) => {
+    if (!value._id) return;
+    axios.post("http://localhost:5000/savecart", value);
+  };
 
   /* Set CartItems to local Storage */
   const setToLocal = (value) => {
-    localStorage.setItem("cart", JSON.stringify(value));
-    setCartItems(value);
+    if (!user?._id) {
+      localStorage.setItem("cart", JSON.stringify(value));
+      return setCartItems(value);
+    }
+    if (user?._id) {
+      localStorage.setItem(`${user._id}`, JSON.stringify(value));
+      setCartItems(value);
+      // saveCartToDb(value);
+    }
   };
 
   /* Add single quantity */
@@ -42,29 +54,34 @@ const Store = () => {
     setToLocal(cartItems);
   };
 
-  /* Load all Products and cart */
+  /* Load all Products*/
   useEffect(() => {
     setLoading(true);
-    const result = JSON.parse(localStorage.getItem("cart"));
     axios.get("http://localhost:5000/allproducts").then((res) => {
       setAllProducts(res.data);
-      if (!result) {
-        return setToLocal({ user: {}, products: [] });
-      }
-      setCartItems(result);
       setLoading(false);
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (!user.name) return;
-  //   if (user.name === cartItems?.user?.name) return;
-  //   if (!cartItems?.user?.name) {
-  //     console.log(cartItems);
-  //     // cartItems.user = user;
-  //     // setCartItems(cartItems);
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    const result = JSON.parse(localStorage.getItem("cart"));
+    let result2 = {};
+    if (user?._id) {
+      result2 = JSON.parse(localStorage.getItem(`${user._id}`));
+    }
+    if (!user?._id && !result) {
+      return setToLocal({ id: false, products: [] });
+    }
+    if (!user?.id && result) {
+      setCartItems(result);
+    }
+    if (user?._id && !result2) {
+      result.id = user._id;
+      setToLocal(result);
+      return localStorage.removeItem("cart");
+    }
+    setCartItems(result2);
+  }, [user]);
 
   return {
     loading,
