@@ -91,7 +91,7 @@ const Available = () => {
                   </p>
                 </span>
                 <p className="name">{product.name}</p>
-                <p className="name">{product.price}.00$</p>
+                <p className="name">{parseFloat(product.price).toFixed(2)}$</p>
               </div>
             </Col>
           ))}

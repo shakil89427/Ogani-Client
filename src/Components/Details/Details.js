@@ -59,7 +59,9 @@ const Details = () => {
                   <i className="fas fa-star"></i>
                   <i className="fas fa-star"></i>
                 </p>
-                <p className="fw-bolder text-danger">${product.price}.00</p>
+                <p className="fw-bolder text-danger">
+                  {parseFloat(product.price).toFixed(2)}$
+                </p>
                 <p>{product.description.slice(0, 200)}...</p>
                 <span className="plus-minus mt-3">
                   <button>-</button>
@@ -138,7 +140,7 @@ const Details = () => {
                   </p>
                 </span>
                 <p className="name">{related.name}</p>
-                <p className="name">{related.price}.00$</p>
+                <p className="name">{parseFloat(related.price).toFixed(2)}$</p>
               </div>
             </Col>
           ))}

@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const { allProducts, cartItems, setToLocal } = useAuth();
   const [products, setProducts] = useState([]);
-  const [price, setPrice] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);
+  const [total, setTotal] = useState(0);
 
   /* Load Cart items */
   useEffect(() => {
@@ -63,9 +64,15 @@ const Cart = () => {
       temp = temp + product.price * product.quantity;
     }
     const tempTax = temp * 0.2;
-    setPrice(parseFloat(temp).toFixed(2));
-    setTax(parseFloat(tempTax).toFixed(2));
+    setSubtotal(temp);
+    setTax(tempTax);
+    setTotal(temp + tempTax);
   }, [products]);
+
+  const applyCoupon = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
       <h1 className="text-center fw-bold cart-h1">Shopping Cart</h1>
@@ -108,7 +115,7 @@ const Cart = () => {
               md={6}
               lg={6}
             >
-              <h6 className="ms-1">{each.price}.00$</h6>
+              <h6 className="ms-1">{parseFloat(each.price).toFixed(2)}$</h6>
               <span className="plus-minus">
                 <button onClick={() => changeQuantity(each.productId, false)}>
                   -
@@ -118,7 +125,8 @@ const Cart = () => {
                   +
                 </button>
               </span>
-              <h6>{each.price * each.quantity}.00$</h6>
+
+              <h6>{parseFloat(each.price * each.quantity).toFixed(2)}$</h6>
             </Col>
           </Row>
         ))}
@@ -139,23 +147,38 @@ const Cart = () => {
             lg={6}
           >
             <h5 className="fw-bolder">Discount Codes</h5>
-            <input type="text" />
-            <button className="allbtn space">APPLY COUPON</button>
+            <form className="text-center" onSubmit={applyCoupon}>
+              <input
+                className="w-100"
+                required
+                placeholder="Enter here"
+                type="text"
+              />
+              <button type="submit" className="allbtn space">
+                APPLY COUPON
+              </button>
+            </form>
           </Col>
           <Col sm={12} md={6} lg={6}>
             <div className="cart-total">
               <h5 className="fw-bolder">Cart Total</h5>
               <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
                 <h6 className="fw-bloder">Subtotal</h6>
-                <h6 className="fw-bloder text-danger">{price}$</h6>
+                <h6 className="fw-bloder text-danger">
+                  {parseFloat(subtotal).toFixed(2)}$
+                </h6>
               </div>
               <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
                 <h6 className="fw-bloder">Tax</h6>
-                <h6 className="fw-bloder text-danger">{tax}$</h6>
+                <h6 className="fw-bloder text-danger">
+                  {parseFloat(tax).toFixed(2)}$
+                </h6>
               </div>
               <div className="d-flex align-items-center justify-content-between py-3">
                 <h6 className="fw-bloder">Total</h6>
-                <h6 className="fw-bloder text-danger">0</h6>
+                <h6 className="fw-bloder text-danger">
+                  {parseFloat(total).toFixed(2)}
+                </h6>
               </div>
               <button className="allbtn w-100 space">
                 PROCEED TO CHECKOUT
