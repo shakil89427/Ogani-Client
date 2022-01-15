@@ -13,7 +13,7 @@ const Cart = () => {
 
   /* Load Cart items */
   useEffect(() => {
-    if (cartItems?.id) {
+    if (cartItems?._id) {
       const temp = [];
       for (const product of cartItems.products) {
         const result = allProducts.find(

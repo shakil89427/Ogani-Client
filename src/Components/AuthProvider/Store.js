@@ -10,7 +10,6 @@ const Store = () => {
 
   /* Save cart info to Database */
   const saveCartToDb = (value) => {
-    if (!value._id) return;
     axios.post("http://localhost:5000/savecart", value);
   };
 
@@ -23,7 +22,7 @@ const Store = () => {
     if (user?._id) {
       localStorage.setItem(`${user._id}`, JSON.stringify(value));
       setCartItems(value);
-      // saveCartToDb(value);
+      saveCartToDb(value);
     }
   };
 
@@ -65,22 +64,31 @@ const Store = () => {
 
   useEffect(() => {
     const result = JSON.parse(localStorage.getItem("cart"));
-    let result2 = {};
+    const result2 = JSON.parse(localStorage.getItem(`${user?._id}`));
+    if (result2) {
+      return setCartItems(result2);
+    }
     if (user?._id) {
-      result2 = JSON.parse(localStorage.getItem(`${user._id}`));
+      axios.get(`http://localhost:5000/getcart/${user._id}`).then((res) => {
+        if (res.data) {
+          return setCartItems(res.data);
+        }
+        if (!res.data && result) {
+          result._id = user._id;
+          setToLocal(result);
+          return localStorage.removeItem("cart");
+        }
+        if (!res.data && !result) {
+          return setToLocal({ _id: user._id, products: [] });
+        }
+      });
     }
     if (!user?._id && !result) {
-      return setToLocal({ id: false, products: [] });
+      return setToLocal({ _id: false, products: [] });
     }
     if (!user?.id && result) {
       setCartItems(result);
     }
-    if (user?._id && !result2) {
-      result.id = user._id;
-      setToLocal(result);
-      return localStorage.removeItem("cart");
-    }
-    setCartItems(result2);
   }, [user]);
 
   return {
