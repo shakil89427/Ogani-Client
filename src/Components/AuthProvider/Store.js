@@ -1,33 +1,33 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import useLoadProducts from "./useLoadProducts";
 
 const Store = () => {
-  const { allProducts } = useLoadProducts();
-  const [loading, setLoading] = useState(true);
+  const [allProducts, setAllProducts] = useState([]);
   const [searchValue, setSearchValue] = useState({});
   const [cartItems, setCartItems] = useState({});
   const [user, setUser] = useState({ _id: "bvghjkgyuifuytgyuiohbyu" });
 
-  /* Save cart info to Database */
-  const saveCartToDb = (value) => {
-    axios.post("http://localhost:5000/savecart", value);
-  };
+  /* Load All Products */
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/allproducts")
+      .then((res) => setAllProducts(res.data));
+  }, []);
 
-  /* Set CartItems to local Storage */
+  /* Set CartItems to local Storage and Database */
   const setToLocal = (value) => {
     if (!user?._id) {
       localStorage.setItem("cart", JSON.stringify(value));
-      return setCartItems(value);
+      setCartItems(value);
     }
     if (user?._id) {
-      localStorage.setItem(`${user._id}`, JSON.stringify(value));
       setCartItems(value);
-      saveCartToDb(value);
+      localStorage.setItem(`${user._id}`, JSON.stringify(value));
+      axios.post("http://localhost:5000/savecart", value);
     }
   };
 
-  /* Add single quantity */
+  /* Add single product quantity */
   const addSingleQuantity = (id, value) => {
     const price = allProducts.find((single) => single._id === id);
     const matched = cartItems.products.find(
@@ -85,7 +85,6 @@ const Store = () => {
   }, [user]);
 
   return {
-    loading,
     allProducts,
     searchValue,
     setSearchValue,
