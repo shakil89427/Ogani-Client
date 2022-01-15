@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import useLoadProducts from "./useLoadProducts";
 
 const Store = () => {
+  const { allProducts } = useLoadProducts();
   const [loading, setLoading] = useState(true);
-  const [allProducts, setAllProducts] = useState([]);
   const [searchValue, setSearchValue] = useState({});
   const [cartItems, setCartItems] = useState({});
   const [user, setUser] = useState({ _id: "bvghjkgyuifuytgyuiohbyu" });
@@ -53,15 +54,7 @@ const Store = () => {
     setToLocal(cartItems);
   };
 
-  /* Load all Products*/
-  useEffect(() => {
-    setLoading(true);
-    axios.get("http://localhost:5000/allproducts").then((res) => {
-      setAllProducts(res.data);
-      setLoading(false);
-    });
-  }, []);
-
+  /* Load Cart from server or localstorage */
   useEffect(() => {
     const result = JSON.parse(localStorage.getItem("cart"));
     const result2 = JSON.parse(localStorage.getItem(`${user?._id}`));
