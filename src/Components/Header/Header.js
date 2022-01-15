@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
+import useAuth from "../AuthProvider/useAuth";
 
 const Header = () => {
+  const { cartItems } = useAuth();
+  const [items, setItems] = useState(0);
+
+  useEffect(() => {
+    setItems(cartItems?.products?.length);
+  }, [cartItems]);
   return (
     <div className="main-nav">
       <Navbar className="container" expand={false}>
@@ -34,7 +41,7 @@ const Header = () => {
           </Link>
           <Link className="mx-3 cart" to="/cart">
             <i className="me-1 fas fa-cart-plus"></i>
-            <sup>0</sup>
+            <sup>{items}</sup>
           </Link>
           <span className="d-none d-lg-inline">
             <Link to="/profile">

@@ -177,7 +177,7 @@ const Cart = () => {
               <div className="d-flex align-items-center justify-content-between py-3">
                 <h6 className="fw-bloder">Total</h6>
                 <h6 className="fw-bloder text-danger">
-                  {parseFloat(total).toFixed(2)}
+                  {parseFloat(total).toFixed(2)}$
                 </h6>
               </div>
               <button className="allbtn w-100 space">
