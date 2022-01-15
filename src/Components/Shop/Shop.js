@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 
 const Shop = () => {
-  const { allProducts, searchValue, setSearchValue } = useAuth();
+  const { allProducts, searchValue, setSearchValue, addSingleQuantity } =
+    useAuth();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -288,7 +289,7 @@ const Shop = () => {
                           <i className="fas fa-info"></i>
                         </p>
                       </Link>
-                      <p>
+                      <p onClick={() => addSingleQuantity(product._id, false)}>
                         <i className="fas fa-cart-plus"></i>
                       </p>
                     </span>

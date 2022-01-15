@@ -86,7 +86,7 @@ const Available = () => {
                       <i className="fas fa-info"></i>
                     </p>
                   </Link>
-                  <p onClick={() => addSingleQuantity(product._id)}>
+                  <p onClick={() => addSingleQuantity(product._id, false)}>
                     <i className="fas fa-cart-plus"></i>
                   </p>
                 </span>

@@ -12,10 +12,12 @@ const Details = () => {
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [info, setInfo] = useState("Description");
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     if (allProducts.length === 0) return;
     setProduct(allProducts.find((founded) => founded._id === captureId));
+    setQuantity(1);
   }, [allProducts, captureId]);
 
   useEffect(() => {
@@ -36,6 +38,16 @@ const Details = () => {
 
   const changeId = (value) => {
     setCaptureId(value);
+  };
+
+  const changeQuantity = (value) => {
+    if (value) {
+      setQuantity(quantity + 1);
+    }
+    if (quantity === 1) return;
+    if (!value) {
+      setQuantity(quantity - 1);
+    }
   };
 
   return (
@@ -64,11 +76,16 @@ const Details = () => {
                 </p>
                 <p>{product.description.slice(0, 200)}...</p>
                 <span className="plus-minus mt-3">
-                  <button>-</button>
-                  <span>0</span>
-                  <button>+</button>
+                  <button onClick={() => changeQuantity(false)}>-</button>
+                  <span>{quantity}</span>
+                  <button onClick={() => changeQuantity(true)}>+</button>
                 </span>
-                <button className="allbtn">ADD TO CART</button>
+                <button
+                  onClick={() => addSingleQuantity(product._id, quantity)}
+                  className="allbtn"
+                >
+                  ADD TO CART
+                </button>
               </div>
               <div className="d-flex align-items-center mt-4">
                 <div className="w-25">
@@ -135,7 +152,7 @@ const Details = () => {
                       <i className="fas fa-info"></i>
                     </p>
                   </a>
-                  <p onClick={() => addSingleQuantity(related._id)}>
+                  <p onClick={() => addSingleQuantity(related._id, false)}>
                     <i className="fas fa-cart-plus"></i>
                   </p>
                 </span>
