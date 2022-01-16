@@ -17,11 +17,12 @@
   width: 100%;
   margin: 2% 0;
   padding: 5px;
+  border: 2px solid rgba(218, 215, 215, 0.884);
   outline: none;
 }
 .billing-form input:focus {
   border: 2px solid rgb(35, 187, 35);
 }
 .orders {
-  background-color: rgba(214, 211, 211, 0.274);
+  background-color: rgba(228, 226, 226, 0.295);
 }
