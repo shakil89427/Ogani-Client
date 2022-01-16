@@ -180,7 +180,13 @@ const Checkout = () => {
                 <h5 className="fw-bold">Total</h5>
                 <h5 className="fw-bold">$500</h5>
               </div>
-              <button className="mt-5 w-100 allbtn space">PLACE ORDER</button>
+              <input
+                className="me-2 mt-3"
+                type="checkbox"
+                name="paymentMethod"
+              />
+              <label htmlFor="paymentMethod">Card Payment</label>
+              <button className="mt-3 w-100 allbtn space">PLACE ORDER</button>
             </div>
           </Col>
         </Row>
