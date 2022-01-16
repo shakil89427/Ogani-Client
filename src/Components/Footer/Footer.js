@@ -40,7 +40,7 @@ const Footer = () => {
             <small>
               Get E-mail updates about our latest shop and special offers.
             </small>
-            <form className="my-3 bg-white d-flex justify-content-between shadow">
+            <form className="my-3 bg-white d-flex justify-content-between">
               <input className="f-input" type="text" />
               <button className="allbtn">SUBSCRIBE</button>
             </form>
