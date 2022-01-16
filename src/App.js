@@ -2,6 +2,8 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./Components/Home/Main";
+import Login from "./Components/LoginSignup/Login";
+import Signup from "./Components/LoginSignup/Signup";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Details from "./Components/Details/Details";
@@ -24,6 +26,8 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Main />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="details/:id" element={<Details />} />
               <Route path="shop" element={<Shop />} />
               <Route path="blog" element={<Blog />} />

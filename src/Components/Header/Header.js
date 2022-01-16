@@ -44,7 +44,7 @@ const Header = () => {
             <sup>{items}</sup>
           </Link>
           <span className="d-none d-lg-inline">
-            <Link to="/profile">
+            {/* <Link to="/profile">
               <img
                 className="profile"
                 src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
@@ -53,7 +53,12 @@ const Header = () => {
             </Link>
             <button className="border-0 text-secondary ms-1">
               <i className="fas fa-sign-out-alt"></i>
-            </button>
+            </button> */}
+            <Link to="/login">
+              <button className="border-0 bg-secondary rounded text-white pb-1">
+                Login
+              </button>
+            </Link>
           </span>
         </div>
         <Navbar.Toggle
