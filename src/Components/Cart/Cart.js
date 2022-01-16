@@ -189,9 +189,11 @@ const Cart = () => {
                     {parseFloat(total).toFixed(2)}$
                   </h6>
                 </div>
-                <button className="allbtn w-100 space">
-                  PROCEED TO CHECKOUT
-                </button>
+                <Link to="/checkout">
+                  <button className="allbtn w-100 space">
+                    PROCEED TO CHECKOUT
+                  </button>
+                </Link>
               </div>
             </Col>
           </Row>

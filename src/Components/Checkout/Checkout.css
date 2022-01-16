@@ -1,0 +1,27 @@
+.checkout-h1 {
+  background-image: url("../../img/breadcrumb.jpg");
+  background-repeat: none;
+  background-size: cover;
+  text-align: center;
+  color: white;
+  padding: 2%;
+}
+.billing-form p {
+  margin: 0;
+}
+.billing-form sup {
+  color: red;
+  font-weight: 900;
+}
+.billing-form input {
+  width: 100%;
+  margin: 2% 0;
+  padding: 5px;
+  outline: none;
+}
+.billing-form input:focus {
+  border: 2px solid rgb(35, 187, 35);
+}
+.orders {
+  background-color: rgba(214, 211, 211, 0.274);
+}
