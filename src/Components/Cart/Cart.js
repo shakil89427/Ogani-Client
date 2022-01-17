@@ -3,9 +3,11 @@ import useAuth from "../AuthProvider/useAuth";
 import { Col, Container, Row } from "react-bootstrap";
 import "./Cart.css";
 import { Link } from "react-router-dom";
+import useSetToLocal from "../Hooks/useSetToLocal";
 
 const Cart = () => {
-  const { allProducts, cartItems, setToLocal } = useAuth();
+  const { allProducts, cartItems, user, setCartItems } = useAuth();
+  const { setToLocal } = useSetToLocal();
   const [products, setProducts] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);
@@ -53,7 +55,7 @@ const Cart = () => {
 
   /* Finalize the cart */
   const update = () => {
-    setToLocal({ _id: cartItems._id, products });
+    setToLocal(user, setCartItems, { _id: cartItems._id, products });
   };
 
   /* Calculation */

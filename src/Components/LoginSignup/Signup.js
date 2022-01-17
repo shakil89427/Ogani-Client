@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { Link, Navigate } from "react-router-dom";
 import useAuth from "../AuthProvider/useAuth";
+import useSignup from "../Hooks/useSignup";
 import "./LoginSignup.css";
 
 const Signup = () => {
   const [data, setData] = useState(null);
-  const { signup, loading, setLoading, user } = useAuth();
+  const { loading, setLoading, user } = useAuth();
+  const { signup } = useSignup();
 
   const getData = (e) => {
     const name = e.target.name;

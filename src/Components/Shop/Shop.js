@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Shop.css";
 import useAuth from "../AuthProvider/useAuth";
+import useAddToCart from "../Hooks/useAddToCart";
 import { Link } from "react-router-dom";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 
 const Shop = () => {
-  const { allProducts, searchValue, setSearchValue, addSingleQuantity } =
-    useAuth();
+  const { allProducts, searchValue, setSearchValue } = useAuth();
+  const { addSingleQuantity } = useAddToCart();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import useAuth from "../AuthProvider/useAuth";
+import useLogin from "../Hooks/useLogin";
 import "./LoginSignup.css";
 
 const Login = () => {
-  const { user, login, loading, setLoading } = useAuth();
+  const { user, loading, setLoading } = useAuth();
+  const { login } = useLogin();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const getlocation = useLocation();

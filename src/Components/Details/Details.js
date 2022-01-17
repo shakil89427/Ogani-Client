@@ -4,9 +4,11 @@ import Search from "../Search/Search";
 import useAuth from "../AuthProvider/useAuth";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
+import useAddToCart from "../Hooks/useAddToCart";
 
 const Details = () => {
-  const { allProducts, addSingleQuantity } = useAuth();
+  const { allProducts } = useAuth();
+  const { addSingleQuantity } = useAddToCart();
   const { id } = useParams();
   const [captureId, setCaptureId] = useState(id);
   const [product, setProduct] = useState({});

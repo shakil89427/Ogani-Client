@@ -12,7 +12,6 @@ const useLoadCart = () => {
           return localStorage.removeItem("cart");
         }
         if (!res.data && result) {
-          console.log(1);
           result._id = user._id;
           setToLocal(user, setCartItems, result);
           return localStorage.removeItem("cart");
