@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useAuth from "../../AuthProvider/useAuth";
 import "./Featured.css";
@@ -66,6 +66,9 @@ const Available = () => {
         </button>
       </p>
       <Container>
+        {products.length === 0 && (
+          <Spinner className="spin" animation="border" variant="success" />
+        )}
         <Row>
           {products.map((product) => (
             <Col

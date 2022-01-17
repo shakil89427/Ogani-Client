@@ -268,7 +268,11 @@ const Shop = () => {
                 </p>
               </span>
             )}
-            {loading && <Spinner animation="border" variant="success" />}
+            {loading && (
+              <div className="my-5 d-flex align-items-center justify-content-center">
+                <Spinner animation="border" variant="success" />
+              </div>
+            )}
             <Row>
               {products.map((product) => (
                 <Col
