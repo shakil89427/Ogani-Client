@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
+import { Link, Navigate } from "react-router-dom";
 import useAuth from "../AuthProvider/useAuth";
 import "./LoginSignup.css";
 
 const Signup = () => {
   const [data, setData] = useState(null);
-  const { signup, loading, setLoading } = useAuth();
+  const { signup, loading, setLoading, user } = useAuth();
 
   const getData = (e) => {
     const name = e.target.name;
@@ -27,19 +28,27 @@ const Signup = () => {
   };
   return (
     <div className="login-signup-main">
+      {user?._id && <Navigate to="/" />}
       <div className="signup-main shadow">
-        <h2 className="login-h2">Signup</h2>
+        {!loading && <h2 className="login-h2">Signup</h2>}
+        {loading && (
+          <h2 className="login-h2">
+            <Spinner className="spin" animation="border" variant="success" />
+          </h2>
+        )}
         <div className="p-3">
           <form onSubmit={signupuser}>
             <input
               onChange={getData}
               name="firstname"
               required
+              disabled={loading}
               placeholder="First Name"
               type="text"
             />
             <input
               onChange={getData}
+              disabled={loading}
               name="lastname"
               required
               placeholder="Last Name"
@@ -47,6 +56,7 @@ const Signup = () => {
             />
             <input
               onChange={getData}
+              disabled={loading}
               name="email"
               required
               placeholder="Email"
@@ -54,6 +64,7 @@ const Signup = () => {
             />
             <input
               onChange={getData}
+              disabled={loading}
               name="password"
               required
               placeholder="Password"
@@ -61,13 +72,18 @@ const Signup = () => {
             />
             <input
               onChange={getData}
+              disabled={loading}
               name="password2"
               required
               className="w-100"
               placeholder="Password Again"
               type="password"
             />
-            <button type="submit" className="login-signup-btn">
+            <button
+              disabled={loading}
+              type="submit"
+              className="login-signup-btn"
+            >
               Signup
             </button>
           </form>
