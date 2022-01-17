@@ -9,15 +9,10 @@ const Store = () => {
   const [searchValue, setSearchValue] = useState({});
   const [cartItems, setCartItems] = useState({});
   const [user, setUser] = useState({});
-  const accesstoken = localStorage.getItem("accessToken");
-  const { loadCart } = useLoadCart();
   const { userCheck } = useUserCheck();
-  const result = JSON.parse(localStorage.getItem("cart"));
-
-  /* Check Cart */
-  useEffect(() => {
-    loadCart(user, setCartItems, result);
-  }, [user]);
+  const { loadCart } = useLoadCart();
+  const accesstoken = localStorage.getItem("accessToken");
+  const cart = JSON.parse(localStorage.getItem("cart"));
 
   /* Load All Products */
   useEffect(() => {
@@ -31,16 +26,21 @@ const Store = () => {
     userCheck(accesstoken, setUser, setLoading);
   }, [accesstoken]);
 
+  /* Check Cart Activity */
+  useEffect(() => {
+    loadCart(user, setCartItems, cart);
+  }, [user]);
+
   return {
-    user,
-    setUser,
-    allProducts,
+    loading,
+    setLoading,
     searchValue,
     setSearchValue,
     cartItems,
     setCartItems,
-    loading,
-    setLoading,
+    user,
+    setUser,
+    allProducts,
   };
 };
 

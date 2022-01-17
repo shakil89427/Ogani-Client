@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import useSetToLocal from "../Hooks/useSetToLocal";
 
 const Cart = () => {
-  const { allProducts, cartItems, user, setCartItems } = useAuth();
+  const { allProducts, cartItems, setCartItems, user } = useAuth();
   const { setToLocal } = useSetToLocal();
   const [products, setProducts] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
