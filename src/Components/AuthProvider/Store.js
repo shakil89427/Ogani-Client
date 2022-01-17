@@ -14,7 +14,7 @@ const Store = () => {
   const result = JSON.parse(localStorage.getItem("cart"));
 
   useEffect(() => {
-    loadCart(result);
+    loadCart(user, setCartItems, result);
   }, [user]);
 
   /* Load All Products */

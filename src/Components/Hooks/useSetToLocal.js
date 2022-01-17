@@ -1,9 +1,7 @@
 import axios from "axios";
-import useAuth from "../AuthProvider/useAuth";
 
 const useSetToLocal = () => {
-  const { user, setCartItems } = useAuth();
-  const setToLocal = (value) => {
+  const setToLocal = (user, setCartItems, value) => {
     if (!user?._id) {
       setCartItems(value);
       localStorage.setItem("cart", JSON.stringify(value));
