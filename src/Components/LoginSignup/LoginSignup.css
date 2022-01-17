@@ -1,0 +1,91 @@
+.login-signup-main {
+  display: grid;
+  place-content: center;
+  min-height: 600px;
+  background-image: url("../../img/login.jpg");
+  background-position: center;
+  background-repeat: none;
+  background-size: cover;
+}
+.login-h2 {
+  text-align: center;
+  padding: 5% 0;
+  background-color: rgba(236, 233, 233, 0.548);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  color: rgb(57, 209, 57);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.login-main {
+  background-color: white;
+  width: 350px;
+  border-radius: 10px;
+  background-color: rgba(244, 248, 245, 0.13);
+}
+.input-div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 3% 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.603);
+}
+.input-div i {
+  position: absolute;
+  width: 20px;
+  left: 0;
+  color: rgba(255, 255, 255, 0.61);
+}
+.login-main input {
+  border: none;
+  outline: none;
+  width: 100%;
+  margin-left: 20px;
+  background: none;
+  color: rgba(255, 255, 255, 0.61);
+}
+.resetpass a {
+  text-decoration: none;
+  color: grey;
+  float: right;
+}
+.resetpass a:hover {
+  text-decoration: underline;
+  color: rgb(50, 197, 50);
+}
+.login-signup-btn {
+  border: none;
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+  font-weight: 600;
+  border-radius: 20px;
+  background-image: linear-gradient(
+    to right,
+    rgb(19, 182, 19),
+    rgb(42, 202, 42),
+    rgb(19, 182, 19)
+  );
+  color: white;
+}
+.alternate-sign button {
+  border: none;
+  width: 70%;
+  height: 30px;
+  border-radius: 20px;
+  background-image: linear-gradient(
+    to right,
+    rgb(19, 182, 19),
+    rgb(42, 202, 42),
+    rgb(19, 182, 19)
+  );
+  color: white;
+}
+.newmember {
+  text-decoration: none;
+  color: rgb(97, 94, 94);
+  margin-left: 2px;
+}
+.newmember:hover {
+  color: rgb(38, 202, 38);
+}
