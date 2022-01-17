@@ -54,10 +54,8 @@ const Header = () => {
             <button className="border-0 text-secondary ms-1">
               <i className="fas fa-sign-out-alt"></i>
             </button> */}
-            <Link to="/login">
-              <button className="border-0 bg-secondary rounded text-white pb-1">
-                Login
-              </button>
+            <Link className="user" to="/login">
+              <i class="fas fa-user"></i>
             </Link>
           </span>
         </div>
@@ -76,7 +74,7 @@ const Header = () => {
           </Offcanvas.Header>
           <Offcanvas.Body className="canvas-body p-0">
             <Nav className="justify-content-end flex-grow-1">
-              <span className="text-center px-5">
+              {/* <span className="text-center px-5">
                 <Link to="/profile">
                   <img
                     className="profile"
@@ -85,7 +83,12 @@ const Header = () => {
                   />
                 </Link>
                 <p>Md Shaki Ahmed</p>
-              </span>
+              </span> */}
+              <p className="text-center mt-3">
+                <Link className="user" to="/login">
+                  <i class="fas fa-user"></i>
+                </Link>
+              </p>
               <Link className="navitem" to="/">
                 Home
               </Link>

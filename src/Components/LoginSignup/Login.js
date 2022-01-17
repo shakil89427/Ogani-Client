@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./LoginSignup.css";
 
 const Login = () => {
+  const [email, setEmail] = useState(null);
+  const [disable, setDisable] = useState(false);
   const login = (e) => {
     e.preventDefault();
+  };
+
+  const getEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const reset = () => {
+    if (!email) {
+      return alert("email not found");
+    }
+    setDisable(true);
   };
   return (
     <div className="login-signup-main">
@@ -14,20 +27,33 @@ const Login = () => {
           <form onSubmit={login}>
             <div className="input-div">
               <i class="fas fa-user"></i>
-              <input required placeholder="Enter your Email" type="email" />
+              <input
+                disabled={disable}
+                onChange={getEmail}
+                required
+                placeholder="Enter your Email"
+                type="email"
+              />
             </div>
             <div className="input-div">
               <i class="fas fa-lock"></i>
               <input
+                disabled={disable}
                 required
                 placeholder="Enter your Password"
                 type="password"
               />
             </div>
             <div className="resetpass">
-              <a href="#">Forgot Password</a>
+              <button onClick={reset} type="button">
+                Forgot Password
+              </button>
             </div>
-            <button type="submit" className="login-signup-btn">
+            <button
+              disabled={disable}
+              type="submit"
+              className="login-signup-btn"
+            >
               Login
             </button>
           </form>
@@ -40,7 +66,7 @@ const Login = () => {
             </button>
             <p className="mt-5 text-white">
               New Member?
-              <Link className="newmember" to="signup">
+              <Link className="newmember" to="/signup">
                 Signup
               </Link>
             </p>

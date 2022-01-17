@@ -17,7 +17,8 @@
   font-weight: 700;
   letter-spacing: 2px;
 }
-.login-main {
+.login-main,
+.signup-main {
   width: 350px;
   border-radius: 10px;
   background-color: rgba(244, 248, 245, 0.13);
@@ -43,12 +44,13 @@
   background-color: rgba(255, 255, 255, 0);
   color: rgba(255, 255, 255, 0.61);
 }
-.resetpass a {
-  text-decoration: none;
+.resetpass button {
   color: grey;
   float: right;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
 }
-.resetpass a:hover {
+.resetpass button:hover {
   text-decoration: underline;
   color: rgb(50, 197, 50);
 }
@@ -87,4 +89,13 @@
 }
 .newmember:hover {
   color: rgb(38, 202, 38);
+}
+.signup-main input {
+  width: 100%;
+  margin-bottom: 7px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.781);
+  background-color: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0.644);
 }
