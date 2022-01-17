@@ -15,6 +15,7 @@ const useLogin = () => {
         }
       })
       .catch((error) => {
+        console.log(error);
         alert("Authentication Error");
         setLoading(false);
       });

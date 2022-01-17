@@ -14,6 +14,7 @@ const Store = () => {
   const { userCheck } = useUserCheck();
   const result = JSON.parse(localStorage.getItem("cart"));
 
+  /* Check Cart */
   useEffect(() => {
     loadCart(user, setCartItems, result);
   }, [user]);
@@ -25,12 +26,6 @@ const Store = () => {
       .then((res) => setAllProducts(res.data));
   }, []);
 
-  /* Logout Method */
-  const logout = () => {
-    setUser({});
-    localStorage.removeItem("accessToken");
-  };
-
   /* Check Token Activity */
   useEffect(() => {
     userCheck(accesstoken, setUser, setLoading);
@@ -38,12 +33,12 @@ const Store = () => {
 
   return {
     user,
+    setUser,
     allProducts,
     searchValue,
     setSearchValue,
     cartItems,
     setCartItems,
-    logout,
     loading,
     setLoading,
   };

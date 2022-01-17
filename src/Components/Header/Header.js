@@ -3,9 +3,11 @@ import { Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import useAuth from "../AuthProvider/useAuth";
+import useLogout from "../Hooks/useLogout";
 
 const Header = () => {
-  const { user, logout, cartItems } = useAuth();
+  const { user, cartItems } = useAuth();
+  const { logout } = useLogout();
 
   return (
     <div className="main-nav">
