@@ -113,7 +113,6 @@ const Store = () => {
 
   /* Login Method */
   const login = (data) => {
-    setLoading(true);
     axios
       .post("http://localhost:5000/login", data)
       .then((res) => {

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../AuthProvider/useAuth";
 import "./LoginSignup.css";
 
 const Login = () => {
+  const { login, loading, setLoading } = useAuth();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [disable, setDisable] = useState(false);
-  const login = (e) => {
+  const loginUser = (e) => {
     e.preventDefault();
-    const data = { email, password };
-    console.log(data);
+    setLoading(true);
+    login({ email, password });
   };
 
   const getEmail = (e) => {
@@ -30,7 +32,7 @@ const Login = () => {
       <div className="login-main shadow">
         <h2 className="login-h2">Login</h2>
         <div className="p-3">
-          <form onSubmit={login}>
+          <form onSubmit={loginUser}>
             <div className="input-div">
               <i class="fas fa-user"></i>
               <input
