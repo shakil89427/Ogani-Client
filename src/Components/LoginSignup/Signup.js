@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./LoginSignup.css";
 
 const Signup = () => {
+  const [data, setData] = useState(null);
+
+  const getData = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const newData = { ...data };
+    newData[name] = value;
+    setData(newData);
+  };
   const signup = (e) => {
     e.preventDefault();
+    if (data.password !== data.password2) {
+      return alert("password didnt matched");
+    }
+    if (data.password.length < 6) {
+      return alert("password must be 6 character");
+    }
   };
   return (
     <div className="login-signup-main">
@@ -12,11 +27,37 @@ const Signup = () => {
         <h2 className="login-h2">Signup</h2>
         <div className="p-3">
           <form onSubmit={signup}>
-            <input required placeholder="First Name" type="text" />
-            <input required placeholder="Last Name" type="text" />
-            <input required placeholder="Email" type="email" />
-            <input required placeholder="Password" type="password" />
             <input
+              onChange={getData}
+              name="firstname"
+              required
+              placeholder="First Name"
+              type="text"
+            />
+            <input
+              onChange={getData}
+              name="lastname"
+              required
+              placeholder="Last Name"
+              type="text"
+            />
+            <input
+              onChange={getData}
+              name="email"
+              required
+              placeholder="Email"
+              type="email"
+            />
+            <input
+              onChange={getData}
+              name="password"
+              required
+              placeholder="Password"
+              type="password"
+            />
+            <input
+              onChange={getData}
+              name="password2"
               required
               className="w-100"
               placeholder="Password Again"

@@ -4,13 +4,19 @@ import "./LoginSignup.css";
 
 const Login = () => {
   const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
   const [disable, setDisable] = useState(false);
   const login = (e) => {
     e.preventDefault();
+    const data = { email, password };
+    console.log(data);
   };
 
   const getEmail = (e) => {
     setEmail(e.target.value);
+  };
+  const getPassword = (e) => {
+    setPassword(e.target.value);
   };
 
   const reset = () => {
@@ -38,6 +44,7 @@ const Login = () => {
             <div className="input-div">
               <i class="fas fa-lock"></i>
               <input
+                onChange={getPassword}
                 disabled={disable}
                 required
                 placeholder="Enter your Password"
