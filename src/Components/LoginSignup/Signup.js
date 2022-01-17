@@ -72,14 +72,12 @@ const Signup = () => {
             </button>
           </form>
 
-          <div className="my-2 text-center alternate-sign">
-            <p className="mt-5 text-white">
-              One of Us?
-              <Link className="newmember" to="/login">
-                Login
-              </Link>
-            </p>
-          </div>
+          <p className="mt-5 text-center text-white">
+            Already Registered?
+            <Link to={!loading ? "/login" : "#"}>
+              <button className="new">Login</button>
+            </Link>
+          </p>
         </div>
       </div>
     </div>

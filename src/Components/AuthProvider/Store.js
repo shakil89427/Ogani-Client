@@ -85,7 +85,7 @@ const Store = () => {
     if (!user?.id && result) {
       setCartItems(result);
     }
-  }, [user]);
+  }, [user?._id]);
 
   /* Decode User Token */
   const decodeUser = (token) => {
@@ -149,6 +149,7 @@ const Store = () => {
   }, [accesstoken]);
 
   return {
+    user,
     allProducts,
     searchValue,
     setSearchValue,

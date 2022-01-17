@@ -6,7 +6,7 @@ import logo from "../../img/logo.png";
 import useAuth from "../AuthProvider/useAuth";
 
 const Header = () => {
-  const { cartItems } = useAuth();
+  const { user, logout, cartItems } = useAuth();
   const [items, setItems] = useState(0);
 
   useEffect(() => {
@@ -44,19 +44,29 @@ const Header = () => {
             <sup>{items}</sup>
           </Link>
           <span className="d-none d-lg-inline">
-            {/* <Link to="/profile">
-              <img
-                className="profile"
-                src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
-                alt=""
-              />
-            </Link>
-            <button className="border-0 text-secondary ms-1">
-              <i className="fas fa-sign-out-alt"></i>
-            </button> */}
-            <Link className="user" to="/login">
-              <i class="fas fa-user"></i>
-            </Link>
+            {user._id && (
+              <span>
+                <Link to="/profile">
+                  <img
+                    className="profile"
+                    src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
+                    alt=""
+                  />
+                </Link>
+                <button
+                  onClick={logout}
+                  className="border-0 text-secondary ms-1"
+                >
+                  <i className="fas fa-sign-out-alt"></i>
+                </button>
+              </span>
+            )}
+
+            {!user._id && (
+              <Link className="user" to="/login">
+                <i class="fas fa-user"></i>
+              </Link>
+            )}
           </span>
         </div>
         <Navbar.Toggle
@@ -74,21 +84,25 @@ const Header = () => {
           </Offcanvas.Header>
           <Offcanvas.Body className="canvas-body p-0">
             <Nav className="justify-content-end flex-grow-1">
-              {/* <span className="text-center px-5">
-                <Link to="/profile">
-                  <img
-                    className="profile"
-                    src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
-                    alt=""
-                  />
-                </Link>
-                <p>Md Shaki Ahmed</p>
-              </span> */}
-              <p className="text-center mt-3">
-                <Link className="user" to="/login">
-                  <i class="fas fa-user"></i>
-                </Link>
-              </p>
+              {user._id && (
+                <span className="text-center px-5">
+                  <Link to="/profile">
+                    <img
+                      className="profile"
+                      src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
+                      alt=""
+                    />
+                  </Link>
+                  <p>{user.firstname}</p>
+                </span>
+              )}
+              {!user._id && (
+                <p className="text-center mt-3">
+                  <Link className="user" to="/login">
+                    <i class="fas fa-user"></i>
+                  </Link>
+                </p>
+              )}
               <Link className="navitem" to="/">
                 Home
               </Link>
@@ -111,7 +125,7 @@ const Header = () => {
               </span>
             </div>
           </Offcanvas.Body>
-          <button className="w-100 allbtn">
+          <button onClick={logout} className="w-100 allbtn">
             Logout<i className="ms-2 fas fa-sign-out-alt"></i>
           </button>
         </Navbar.Offcanvas>

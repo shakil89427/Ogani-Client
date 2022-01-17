@@ -16,6 +16,7 @@ import Wishlist from "./Components/Wishlist/Wishlist";
 import Profile from "./Components/Profile/Profile";
 import NotFound from "./Components/NotFound/NotFound";
 import Checkout from "./Components/Checkout/Checkout";
+import PrivateRoute from "./Components/AuthProvider/PrivateRoute";
 
 function App() {
   return (
@@ -34,8 +35,22 @@ function App() {
               <Route path="contact" element={<Contact />} />
               <Route path="cart" element={<Cart />} />
               <Route path="wishlist" element={<Wishlist />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="checkout" element={<Checkout />} />
+              <Route
+                path="profile"
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="checkout"
+                element={
+                  <PrivateRoute>
+                    <Checkout />
+                  </PrivateRoute>
+                }
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
