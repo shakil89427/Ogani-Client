@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { isExpired, decodeToken } from "react-jwt";
 
 const Store = () => {
+  const [loading, setLoading] = useState(true);
   const [allProducts, setAllProducts] = useState([]);
   const [searchValue, setSearchValue] = useState({});
   const [cartItems, setCartItems] = useState({});
-  const [user, setUser] = useState({ _id: "bvghjkgyuifuytgyuiohbyu" });
+  const [user, setUser] = useState({});
+  const accesstoken = localStorage.getItem("accessToken");
 
   /* Load All Products */
   useEffect(() => {
@@ -84,6 +87,68 @@ const Store = () => {
     }
   }, [user]);
 
+  /* Decode User Token */
+  const decodeUser = (token) => {
+    const decoded = decodeToken(token);
+    setUser(decoded);
+    setLoading(false);
+    console.log(decoded);
+  };
+
+  /* Signup Method */
+  const signup = (data) => {
+    axios
+      .post("http://localhost:5000/signup", data)
+      .then((res) => {
+        if (res.data) {
+          localStorage.setItem("accessToken", res.data);
+          decodeUser(res.data);
+        }
+      })
+      .catch((error) => {
+        alert("Email Already Exist");
+        setLoading(false);
+      });
+  };
+
+  /* Login Method */
+  const login = (data) => {
+    setLoading(true);
+    axios
+      .post("http://localhost:5000/login", data)
+      .then((res) => {
+        if (res.data) {
+          localStorage.setItem("accessToken", res.data);
+          decodeUser(res.data);
+        }
+      })
+      .catch((error) => {
+        alert("Authentication Error");
+        setLoading(false);
+      });
+  };
+
+  /* Logout Method */
+  const logout = () => {
+    setUser({});
+    localStorage.removeItem("accessToken");
+  };
+
+  /* Check Token Activity */
+  useEffect(() => {
+    const expiredtoken = isExpired(accesstoken);
+    if (!accesstoken) {
+      setUser({});
+      return setLoading(false);
+    }
+    if (expiredtoken) {
+      setUser({});
+      localStorage.removeItem("accessToken");
+      return setLoading(false);
+    }
+    decodeUser(accesstoken);
+  }, [accesstoken]);
+
   return {
     allProducts,
     searchValue,
@@ -91,6 +156,11 @@ const Store = () => {
     cartItems,
     addSingleQuantity,
     setToLocal,
+    signup,
+    login,
+    logout,
+    loading,
+    setLoading,
   };
 };
 
