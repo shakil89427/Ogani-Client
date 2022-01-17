@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useAuth from "../../AuthProvider/useAuth";
+import useAddToCart from "../../Hooks/useAddToCart";
 import "./Featured.css";
 
 const Available = () => {
-  const { allProducts, addSingleQuantity } = useAuth();
+  const { allProducts } = useAuth();
   const [products, setProducts] = useState([]);
   const [border, setborder] = useState("All");
+  const { addSingleQuantity } = useAddToCart();
 
   useEffect(() => {
     setProducts(allProducts.slice(0, 8));
