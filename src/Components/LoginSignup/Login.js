@@ -45,7 +45,7 @@ const Login = () => {
           <div className="p-3">
             <form onSubmit={loginUser}>
               <div className="input-div">
-                <i class="fas fa-user"></i>
+                <i className="fas fa-user"></i>
                 <input
                   disabled={loading}
                   onChange={getEmail}
@@ -55,7 +55,7 @@ const Login = () => {
                 />
               </div>
               <div className="input-div">
-                <i class="fas fa-lock"></i>
+                <i className="fas fa-lock"></i>
                 <input
                   onChange={getPassword}
                   disabled={loading}
@@ -82,7 +82,7 @@ const Login = () => {
             </p>
             <div className="my-2 text-center alternate-sign">
               <button disabled={loading}>
-                <i class="me-2 fab fa-google"></i>Login With Google
+                <i className="me-2 fab fa-google"></i>Login With Google
               </button>
             </div>
             <p className="mt-5 text-center text-white">

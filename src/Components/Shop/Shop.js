@@ -114,13 +114,13 @@ const Shop = () => {
                 <input
                   onChange={addkeyword}
                   value={searchValue?.keyword ? searchValue?.keyword : ""}
-                  className={searchValue?.keyword && "activekeyword"}
+                  className={searchValue?.keyword ? "activekeyword" : "false"}
                   placeholder="What do you need?"
                   type="text"
                 />
                 <button
                   type="submit"
-                  className={!searchValue?.keyword && "activekeyword"}
+                  className={!searchValue?.keyword ? "activekeyword" : "false"}
                 >
                   <i className="fas fa-backspace"></i>
                 </button>
@@ -130,14 +130,14 @@ const Shop = () => {
               <p className="fw-bold">Catagories</p>
               <button
                 onClick={addCatagory}
-                className={!searchValue?.catagory && "shopcatactive"}
+                className={!searchValue?.catagory ? "shopcatactive" : "false"}
               >
                 All
               </button>
               <button
                 onClick={addCatagory}
                 className={
-                  searchValue?.catagory === "Fruits" && "shopcatactive"
+                  searchValue?.catagory === "Fruits" ? "shopcatactive" : "false"
                 }
               >
                 Fruits
@@ -145,7 +145,9 @@ const Shop = () => {
               <button
                 onClick={addCatagory}
                 className={
-                  searchValue?.catagory === "Dry Fruits" && "shopcatactive"
+                  searchValue?.catagory === "Dry Fruits"
+                    ? "shopcatactive"
+                    : "false"
                 }
               >
                 Dry Fruits
@@ -153,7 +155,9 @@ const Shop = () => {
               <button
                 onClick={addCatagory}
                 className={
-                  searchValue?.catagory === "Vegetables" && "shopcatactive"
+                  searchValue?.catagory === "Vegetables"
+                    ? "shopcatactive"
+                    : "false"
                 }
               >
                 Vegetables
@@ -161,14 +165,16 @@ const Shop = () => {
               <button
                 onClick={addCatagory}
                 className={
-                  searchValue?.catagory === "Drinks" && "shopcatactive"
+                  searchValue?.catagory === "Drinks" ? "shopcatactive" : "false"
                 }
               >
                 Drinks
               </button>
               <button
                 onClick={addCatagory}
-                className={searchValue?.catagory === "Meats" && "shopcatactive"}
+                className={
+                  searchValue?.catagory === "Meats" ? "shopcatactive" : "false"
+                }
               >
                 Meats
               </button>
@@ -186,7 +192,7 @@ const Shop = () => {
                 />
                 <span className="mx-1">To</span>
                 <input
-                  className={searchValue?.max && "activeprice"}
+                  className={searchValue?.max ? "activeprice" : "false"}
                   onChange={addPrice}
                   name="max"
                   value={searchValue?.max ? searchValue?.max : ""}

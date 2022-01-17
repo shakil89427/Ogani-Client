@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -7,19 +6,13 @@ import useAuth from "../AuthProvider/useAuth";
 
 const Header = () => {
   const { user, logout, cartItems } = useAuth();
-  const [items, setItems] = useState(0);
 
-  useEffect(() => {
-    setItems(cartItems?.products?.length);
-  }, [cartItems]);
   return (
     <div className="main-nav">
       <Navbar className="container" expand={false}>
-        <Navbar.Brand href="#">
-          <Link to="/">
-            <img src={logo} alt="" />
-          </Link>
-        </Navbar.Brand>
+        <Link to="/">
+          <img src={logo} alt="" />
+        </Link>
         <div className="ms-auto">
           <div className="me-5 d-none d-lg-inline">
             <Link className="navitem" to="/">
@@ -41,7 +34,7 @@ const Header = () => {
           </Link>
           <Link className="mx-3 cart" to="/cart">
             <i className="me-1 fas fa-cart-plus"></i>
-            <sup>{items}</sup>
+            <sup>{cartItems?.products?.length}</sup>
           </Link>
           <span className="d-none d-lg-inline">
             {user._id && (
@@ -64,7 +57,7 @@ const Header = () => {
 
             {!user._id && (
               <Link className="user" to="/login">
-                <i class="fas fa-user"></i>
+                <i className="fas fa-user"></i>
               </Link>
             )}
           </span>
@@ -99,7 +92,7 @@ const Header = () => {
               {!user._id && (
                 <p className="text-center mt-3">
                   <Link className="user" to="/login">
-                    <i class="fas fa-user"></i>
+                    <i className="fas fa-user"></i>
                   </Link>
                 </p>
               )}

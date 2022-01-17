@@ -11,7 +11,7 @@ const Contact = () => {
           <Col sm={12} md={6} lg={3}>
             <div className="d-flex flex-column align-items-center justify-content-center">
               <h3 className="mb-3">
-                <i class="contact-i fas fa-phone-alt"></i>
+                <i className="contact-i fas fa-phone-alt"></i>
               </h3>
               <h4 className="fw-bolder">Phone</h4>
               <p className="text-secondary">+01-3-8888-6868</p>
@@ -20,7 +20,7 @@ const Contact = () => {
           <Col sm={12} md={6} lg={3}>
             <div className="d-flex flex-column align-items-center justify-content-center">
               <h3 className="mb-3">
-                <i class="contact-i fas fa-map-marker-alt"></i>
+                <i className="contact-i fas fa-map-marker-alt"></i>
               </h3>
               <h4 className="fw-bolder">Address</h4>
               <p className="text-secondary">60-49 Road 11378 New York</p>
@@ -29,7 +29,7 @@ const Contact = () => {
           <Col sm={12} md={6} lg={3}>
             <div className="d-flex flex-column align-items-center justify-content-center">
               <h3 className="mb-3">
-                <i class="contact-i far fa-clock"></i>
+                <i className="contact-i far fa-clock"></i>
               </h3>
               <h4 className="fw-bolder">Open time</h4>
               <p className="text-secondary">10:00 am to 23:00 pm</p>
@@ -38,7 +38,7 @@ const Contact = () => {
           <Col sm={12} md={6} lg={3}>
             <div className="d-flex flex-column align-items-center justify-content-center">
               <h3 className="mb-3">
-                <i class="contact-i far fa-envelope"></i>
+                <i className="contact-i far fa-envelope"></i>
               </h3>
               <h4 className="fw-bolder">Email</h4>
               <p className="text-secondary">shakilahmed89427@gmail.com</p>
