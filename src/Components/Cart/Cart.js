@@ -13,7 +13,7 @@ const Cart = () => {
 
   /* Load Cart items */
   useEffect(() => {
-    if (cartItems?._id && allProducts.length > 0) {
+    if (cartItems?.products && allProducts.length > 0) {
       const temp = [];
       for (const product of cartItems.products) {
         const result = allProducts.find(
@@ -53,8 +53,7 @@ const Cart = () => {
 
   /* Finalize the cart */
   const update = () => {
-    cartItems.products = products;
-    setToLocal(cartItems);
+    setToLocal({ _id: cartItems._id, products });
   };
 
   /* Calculation */
