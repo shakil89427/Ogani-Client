@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import useLoadCart from "../Hooks/useLoadCart";
+import useLoadAllProducts from "../Hooks/useLoadAllProducts";
 import useUserCheck from "../Hooks/useUserCheck";
+import useLoadCart from "../Hooks/useLoadCart";
 import useLoadCartProducts from "../Hooks/useLoadCartProducts";
 
 const Store = () => {
@@ -14,6 +14,7 @@ const Store = () => {
   const [cartLoading, setCartLoading] = useState();
   const [filterBy, setFilterBy] = useState({ page: 0 });
   const [count, setCount] = useState(0);
+  const { loadAllProducts } = useLoadAllProducts();
   const { userCheck } = useUserCheck();
   const { loadCart } = useLoadCart();
   const { loadCartProducts } = useLoadCartProducts();
@@ -22,12 +23,7 @@ const Store = () => {
 
   /* Load All Products */
   useEffect(() => {
-    setAllProductsLoading(true);
-    axios.post("http://localhost:5000/allproducts", filterBy).then((res) => {
-      setCount(Math.ceil(res.data.count / 8));
-      setAllProducts(res.data.result);
-      setAllProductsLoading(false);
-    });
+    loadAllProducts(filterBy, setCount, setAllProducts, setAllProductsLoading);
   }, [filterBy]);
 
   /* Check Token Activity */
@@ -42,7 +38,7 @@ const Store = () => {
 
   /* load Cart products */
   useEffect(() => {
-    if (cartItems.products.length === 0) return;
+    if (cartItems?.products?.length === 0 || !cartItems?.products) return;
     loadCartProducts(cartItems.products, setCartProducts, setCartLoading);
   }, [cartItems]);
 
@@ -59,6 +55,7 @@ const Store = () => {
     filterBy,
     setFilterBy,
     count,
+    cartProducts,
   };
 };
 
