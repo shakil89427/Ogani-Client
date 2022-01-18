@@ -12,20 +12,11 @@ import useAuth from "../../AuthProvider/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const HomeSlider = () => {
-  const { filterBy, setFilterBy } = useAuth();
+  const { setFilterBy } = useAuth();
   const navigate = useNavigate();
 
   const getCatagory = (e) => {
-    if (e.target.innerText === "All") {
-      const { catagory, ...rest } = filterBy;
-      rest.page = 0;
-      setFilterBy(rest);
-      return navigate("/shop");
-    }
-    const newData = { ...filterBy };
-    newData.catagory = e.target.innerText;
-    newData.page = 0;
-    setFilterBy(newData);
+    setFilterBy({ page: 0, catagory: e.target.innerText });
     navigate("/shop");
   };
   const settings = {

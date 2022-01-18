@@ -4,15 +4,15 @@ import useAuth from "../AuthProvider/useAuth";
 import "./Search.css";
 
 const Search = () => {
-  const { filterBy, setFilterBy } = useAuth();
+  const { setFilterBy } = useAuth();
   const navigate = useNavigate();
 
   const submit = (e) => {
     e.preventDefault();
-    const newData = { ...filterBy };
-    newData.page = 0;
-    newData.name = { $regex: e.target[0].value, $options: "i" };
-    setFilterBy(newData);
+    setFilterBy({
+      page: 0,
+      name: { $regex: e.target[0].value, $options: "i" },
+    });
     e.target.reset();
     navigate("/shop");
   };

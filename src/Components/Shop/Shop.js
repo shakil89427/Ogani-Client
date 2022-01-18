@@ -34,6 +34,7 @@ const Shop = () => {
   /* Get min max Price */
   const getPrice = (e) => {
     e.preventDefault();
+    if (!parseInt(e.target[0].value) && !parseInt(e.target[1].value)) return;
     const newData = { ...filterBy };
     newData.page = 0;
     newData.price = {};
