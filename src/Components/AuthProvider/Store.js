@@ -38,7 +38,6 @@ const Store = () => {
 
   /* load Cart products */
   useEffect(() => {
-    console.log(cartItems.products);
     if (!cartItems?.products) return;
     if (cartItems?.products?.length === 0) return;
     loadCartProducts(cartItems.products, setCartProducts, setCartLoading);
@@ -58,6 +57,7 @@ const Store = () => {
     setFilterBy,
     count,
     cartProducts,
+    setCartProducts,
   };
 };
 

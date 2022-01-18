@@ -6,37 +6,27 @@ import { Link } from "react-router-dom";
 import useSetToLocal from "../Hooks/useSetToLocal";
 
 const Cart = () => {
-  const { allProducts, cartItems, setCartItems, user } = useAuth();
+  const {
+    cartProducts,
+    setCartProducts,
+    cartItems,
+    setCartItems,
+    user,
+    cartLoading,
+  } = useAuth();
   const { setToLocal } = useSetToLocal();
-  const [products, setProducts] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
 
-  /* Load Cart items */
-  useEffect(() => {
-    if (cartItems?.products && allProducts.length > 0) {
-      const temp = [];
-      for (const product of cartItems.products) {
-        const result = allProducts.find(
-          (single) => single._id === product.productId
-        );
-        product.img = result.img;
-        product.name = result.name;
-        temp.push(product);
-      }
-      setProducts(temp);
-    }
-  }, [allProducts, cartItems]);
-
   /* Change product quantity */
   const changeQuantity = (id, exist) => {
     let temp = [];
-    for (const product of products) {
-      if (product.productId === id && exist) {
+    for (const product of cartProducts) {
+      if (product._id === id && exist) {
         product.quantity = product.quantity + 1;
         temp.push(product);
-      } else if (product.productId === id && !exist) {
+      } else if (product._id === id && !exist) {
         if (product.quantity === 1) return;
         product.quantity = product.quantity - 1;
         temp.push(product);
@@ -44,31 +34,37 @@ const Cart = () => {
         temp.push(product);
       }
     }
-    setProducts(temp);
+    setCartProducts(temp);
   };
 
   /* Remove product from cart */
   const removefromCart = (id) => {
-    const result = products.filter((single) => single.productId !== id);
-    setProducts(result);
+    const result = cartProducts.filter((single) => single._id !== id);
+    setCartProducts(result);
   };
 
   /* Finalize the cart */
   const update = () => {
-    setToLocal(user, setCartItems, { _id: cartItems._id, products });
+    const temp = [];
+    for (const every of cartProducts) {
+      const { _id, quantity } = every;
+      const newData = { _id, quantity };
+      temp.push(newData);
+    }
+    setToLocal(user, setCartItems, { _id: cartItems._id, products: temp });
   };
 
   /* Calculation */
   useEffect(() => {
     let temp = 0;
-    for (const product of products) {
+    for (const product of cartProducts) {
       temp = temp + product.price * product.quantity;
     }
     const tempTax = temp * 0.2;
     setSubtotal(temp);
     setTax(tempTax);
     setTotal(temp + tempTax);
-  }, [products]);
+  }, [cartProducts]);
 
   const applyCoupon = (e) => {
     e.preventDefault();
@@ -104,12 +100,12 @@ const Cart = () => {
             </Col>
           </Row>
 
-          {products.map((each) => (
-            <Row key={each.productId} className="border-bottom py-2">
+          {cartProducts.map((each) => (
+            <Row key={each._id} className="border-bottom py-2">
               <Col xs={4} sm={4} md={6} lg={6}>
                 <div className="d-flex flex-column flex-md-row align-items-center">
                   <button
-                    onClick={() => removefromCart(each.productId)}
+                    onClick={() => removefromCart(each._id)}
                     className="border-0 me-2 mb-2"
                   >
                     X
@@ -127,11 +123,11 @@ const Cart = () => {
               >
                 <h6 className="ms-1">{parseFloat(each.price).toFixed(2)}$</h6>
                 <span className="plus-minus">
-                  <button onClick={() => changeQuantity(each.productId, false)}>
+                  <button onClick={() => changeQuantity(each._id, false)}>
                     -
                   </button>
                   <span>{each.quantity}</span>
-                  <button onClick={() => changeQuantity(each.productId, true)}>
+                  <button onClick={() => changeQuantity(each._id, true)}>
                     +
                   </button>
                 </span>
