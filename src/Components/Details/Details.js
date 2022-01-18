@@ -152,9 +152,6 @@ const Details = () => {
                 <div className="p-single">
                   <img className="p-img" src={related.img} alt="" />
                   <span className="p-effect">
-                    <p>
-                      <i className="fas fa-heart"></i>
-                    </p>
                     <a href="#top">
                       <p onClick={() => changeId(related._id)}>
                         <i className="fas fa-info"></i>

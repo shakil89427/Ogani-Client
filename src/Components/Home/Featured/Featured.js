@@ -83,9 +83,6 @@ const Available = () => {
               <div className="p-single">
                 <img className="p-img" src={product.img} alt="" />
                 <span className="p-effect">
-                  <p>
-                    <i className="fas fa-heart"></i>
-                  </p>
                   <Link to={`/details/${product._id}`}>
                     <p>
                       <i className="fas fa-info"></i>

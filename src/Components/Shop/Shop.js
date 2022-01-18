@@ -1,104 +1,73 @@
 import React, { useEffect, useState } from "react";
 import "./Shop.css";
-import useAuth from "../AuthProvider/useAuth";
 import useAddToCart from "../Hooks/useAddToCart";
-import { Link } from "react-router-dom";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 
 const Shop = () => {
-  const { allProducts, searchValue, setSearchValue } = useAuth();
   const { addSingleQuantity } = useAddToCart();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [filterBy, setFilterBy] = useState({});
+  const [allProducts, setAllProducts] = useState([]);
 
-  /* Set keyword to store */
-  const addkeyword = (e) => {
-    const newData = { ...searchValue };
-    newData.keyword = e.target.value;
-    setSearchValue(newData);
-  };
-
-  /* Remove keyword from store */
-  const removekeyword = (e) => {
+  /* Get keyword from input */
+  const getKeyword = (e) => {
     e.preventDefault();
-    const { keyword, ...rest } = searchValue;
-    setSearchValue(rest);
-    e.target.reset();
+    const newData = { ...filterBy };
+    newData.name = `/${e.target[0].value}/`;
+    setFilterBy(newData);
   };
-  /* Set catagory to Store */
-  const addCatagory = (e) => {
+
+  /* Remove keyword from field */
+  const removeKeyword = () => {
+    const { name, ...rest } = filterBy;
+    setFilterBy(rest);
+  };
+
+  /* Get catagory */
+  const getCatagory = (e) => {
     if (e.target.innerText === "All") {
-      const { catagory, ...rest } = searchValue;
-      return setSearchValue(rest);
+      const { catagory, ...rest } = filterBy;
+      return setFilterBy(rest);
     }
-    const newData = { ...searchValue };
+    const newData = { ...filterBy };
     newData.catagory = e.target.innerText;
-    setSearchValue(newData);
+    setFilterBy(newData);
   };
 
-  /* Set min max value to store */
-  const addPrice = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    const newData = { ...searchValue };
-    newData[name] = value;
-    setSearchValue(newData);
-  };
-  /* Remove Min Max from store */
-  const resetPrice = (e) => {
+  /* Get min max Price */
+  const getPrice = (e) => {
     e.preventDefault();
-    const { min, max, ...rest } = searchValue;
-    setSearchValue(rest);
-    e.target.reset();
+    const newData = { ...filterBy };
+    newData.price = {};
+    if (e.target[0].value) {
+      newData.price.$gt = parseInt(e.target[0].value);
+    }
+    if (e.target[1].value) {
+      newData.price.$lt = parseInt(e.target[1].value);
+    }
+    setFilterBy(newData);
   };
 
-  /* Set color to Store */
-  const addColor = (e) => {
+  /* Reset min max Price */
+  const resetPrice = () => {
+    const { price, ...rest } = filterBy;
+    setFilterBy(rest);
+  };
+
+  /* Get color */
+  const getColor = (e) => {
     if (e.target.name === "rainbow") {
-      const { color, ...rest } = searchValue;
-      return setSearchValue(rest);
+      const { color, ...rest } = filterBy;
+      return setFilterBy(rest);
     }
-    const newData = { ...searchValue };
+    const newData = { ...filterBy };
     newData.color = e.target.name;
-    setSearchValue(newData);
+    setFilterBy(newData);
   };
 
-  /* Filter function */
-  const filter = (value) => {
-    let initial = value;
-    /* Keyword filter */
-    if (searchValue.keyword) {
-      initial = initial.filter((single) =>
-        single.name.toLowerCase().includes(searchValue.keyword.toLowerCase())
-      );
-    }
-    /* Catagory filter */
-    if (searchValue.catagory) {
-      initial = initial.filter(
-        (single) => single.catagory === searchValue.catagory
-      );
-    }
-    /* Price min filter */
-    if (searchValue.min) {
-      initial = initial.filter((single) => single.price >= searchValue.min);
-    }
-    /* Price max filter */
-    if (searchValue.max) {
-      initial = initial.filter((single) => single.price <= searchValue.max);
-    }
-    /* Color filter */
-    if (searchValue.color) {
-      initial = initial.filter((single) => single.color === searchValue.color);
-    }
-    setProducts(initial);
-    setLoading(false);
-  };
-
-  /* Load initial Products */
+  /* Load Products */
   useEffect(() => {
-    if (allProducts.length === 0) return;
-    filter(allProducts);
-  }, [allProducts, searchValue]);
+    console.log(filterBy);
+  }, [filterBy]);
 
   return (
     <div className="mb-5">
@@ -111,158 +80,48 @@ const Shop = () => {
             </h5>
             <div className="filter-keyword border-bottom pb-3">
               <p className="fw-bold">Keyword</p>
-              <form onSubmit={removekeyword}>
-                <input
-                  onChange={addkeyword}
-                  value={searchValue?.keyword ? searchValue?.keyword : ""}
-                  className={searchValue?.keyword ? "activekeyword" : "false"}
-                  placeholder="What do you need?"
-                  type="text"
-                />
-                <button
-                  type="submit"
-                  className={!searchValue?.keyword ? "activekeyword" : "false"}
-                >
+              <form onSubmit={getKeyword}>
+                <input placeholder="What do you need?" type="text" />
+                <button type="submit">
+                  <i className="fas fa-search"></i>
+                </button>
+                <button onClick={removeKeyword} type="reset">
                   <i className="fas fa-backspace"></i>
                 </button>
               </form>
             </div>
             <div className="filter-catagories border-bottom pb-2">
               <p className="fw-bold">Catagories</p>
-              <button
-                onClick={addCatagory}
-                className={!searchValue?.catagory ? "shopcatactive" : "false"}
-              >
-                All
-              </button>
-              <button
-                onClick={addCatagory}
-                className={
-                  searchValue?.catagory === "Fruits" ? "shopcatactive" : "false"
-                }
-              >
-                Fruits
-              </button>
-              <button
-                onClick={addCatagory}
-                className={
-                  searchValue?.catagory === "Dry Fruits"
-                    ? "shopcatactive"
-                    : "false"
-                }
-              >
-                Dry Fruits
-              </button>
-              <button
-                onClick={addCatagory}
-                className={
-                  searchValue?.catagory === "Vegetables"
-                    ? "shopcatactive"
-                    : "false"
-                }
-              >
-                Vegetables
-              </button>
-              <button
-                onClick={addCatagory}
-                className={
-                  searchValue?.catagory === "Drinks" ? "shopcatactive" : "false"
-                }
-              >
-                Drinks
-              </button>
-              <button
-                onClick={addCatagory}
-                className={
-                  searchValue?.catagory === "Meats" ? "shopcatactive" : "false"
-                }
-              >
-                Meats
-              </button>
+              <button onClick={getCatagory}>All</button>
+              <button onClick={getCatagory}>Fruits</button>
+              <button onClick={getCatagory}>Dry Fruits</button>
+              <button onClick={getCatagory}>Vegetables</button>
+              <button onClick={getCatagory}>Drinks</button>
+              <button onClick={getCatagory}>Meats</button>
             </div>
             <div className="filter-price border-bottom pb-2">
               <p className="fw-bold">Price</p>
-              <form onSubmit={resetPrice}>
-                <input
-                  className={searchValue?.min && "activeprice"}
-                  onChange={addPrice}
-                  name="min"
-                  value={searchValue?.min ? searchValue?.min : ""}
-                  placeholder="Min"
-                  type="number"
-                />
+              <form onSubmit={getPrice}>
+                <input placeholder="Min" type="number" />
                 <span className="mx-1">To</span>
-                <input
-                  className={searchValue?.max ? "activeprice" : "false"}
-                  onChange={addPrice}
-                  name="max"
-                  value={searchValue?.max ? searchValue?.max : ""}
-                  placeholder="Max"
-                  type="number"
-                />
-                <button
-                  className={
-                    !searchValue?.min && !searchValue?.max ? "activeprice" : ""
-                  }
-                  type="submit"
-                >
-                  All
+                <input placeholder="Max" type="number" />
+                <button type="submit">Apply</button>
+                <button onClick={resetPrice} type="reset">
+                  Reset
                 </button>
               </form>
             </div>
             <div className="filter-color border-bottom pb-2">
               <p className="fw-bold">Color</p>
-              <button
-                name="rainbow"
-                onClick={addColor}
-                className={
-                  !searchValue?.color ? "rainbow active-color" : "rainbow"
-                }
-              />
-              <button
-                name="red"
-                onClick={addColor}
-                className={
-                  searchValue?.color === "red" ? "red active-color" : "red"
-                }
-              />
-              <button
-                name="yellow"
-                onClick={addColor}
-                className={
-                  searchValue?.color === "yellow"
-                    ? "yellow active-color"
-                    : "yellow"
-                }
-              />
-              <button
-                name="blue"
-                onClick={addColor}
-                className={
-                  searchValue?.color === "blue" ? "blue active-color" : "blue"
-                }
-              />
-              <button
-                name="green"
-                onClick={addColor}
-                className={
-                  searchValue?.color === "green"
-                    ? "green active-color"
-                    : "green"
-                }
-              />
-              <button
-                name="black"
-                onClick={addColor}
-                className={
-                  searchValue?.color === "black"
-                    ? "black active-color"
-                    : "black"
-                }
-              />
+              <button onClick={getColor} name="rainbow" />
+              <button onClick={getColor} name="red" />
+              <button onClick={getColor} name="yellow" />
+              <button onClick={getColor} name="blue" />
+              <button onClick={getColor} name="green" />
+              <button onClick={getColor} name="black" />
             </div>
           </Col>
-          <Col sm={12} md={9} lg={9}>
+          {/* <Col sm={12} md={9} lg={9}>
             {!loading && products.length === 0 && (
               <span>
                 <h3 className="text-center mt-3">Sorry No product Found</h3>
@@ -312,7 +171,7 @@ const Shop = () => {
                 </Col>
               ))}
             </Row>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </div>

@@ -12,7 +12,6 @@ import Shop from "./Components/Shop/Shop";
 import Blog from "./Components/Blog/Blog";
 import Contact from "./Components/Contact/Contact";
 import Cart from "./Components/Cart/Cart";
-import Wishlist from "./Components/Wishlist/Wishlist";
 import Profile from "./Components/Profile/Profile";
 import NotFound from "./Components/NotFound/NotFound";
 import Checkout from "./Components/Checkout/Checkout";
@@ -34,7 +33,6 @@ function App() {
               <Route path="blog" element={<Blog />} />
               <Route path="contact" element={<Contact />} />
               <Route path="cart" element={<Cart />} />
-              <Route path="wishlist" element={<Wishlist />} />
               <Route
                 path="profile"
                 element={

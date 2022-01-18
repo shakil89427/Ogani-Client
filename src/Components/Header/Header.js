@@ -30,10 +30,6 @@ const Header = () => {
               Contact
             </Link>
           </div>
-          <Link className="cart" to="/wishlist">
-            <i className="me-1 fas fa-heart"></i>
-            <sup>0</sup>
-          </Link>
           <Link className="mx-3 cart" to="/cart">
             <i className="me-1 fas fa-cart-plus"></i>
             <sup>{cartItems?.products?.length}</sup>
