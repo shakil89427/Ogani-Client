@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useLoadCart from "../Hooks/useLoadCart";
 import useUserCheck from "../Hooks/useUserCheck";
+import useLoadCartProducts from "../Hooks/useLoadCartProducts";
 
 const Store = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -9,11 +10,13 @@ const Store = () => {
   const [user, setUser] = useState({});
   const [userLoading, setUserLoading] = useState(true);
   const [cartItems, setCartItems] = useState({});
+  const [cartProducts, setCartProducts] = useState([]);
   const [cartLoading, setCartLoading] = useState();
   const [filterBy, setFilterBy] = useState({ page: 0 });
   const [count, setCount] = useState(0);
   const { userCheck } = useUserCheck();
   const { loadCart } = useLoadCart();
+  const { loadCartProducts } = useLoadCartProducts();
   const accesstoken = localStorage.getItem("accessToken");
   const cart = JSON.parse(localStorage.getItem("cart"));
 
@@ -36,6 +39,12 @@ const Store = () => {
   useEffect(() => {
     loadCart(user, setCartItems, cart, setCartLoading);
   }, [user]);
+
+  /* load Cart products */
+  useEffect(() => {
+    if (cartItems.products.length === 0) return;
+    loadCartProducts(cartItems.products, setCartProducts, setCartLoading);
+  }, [cartItems]);
 
   return {
     allProducts,

@@ -12,11 +12,20 @@ import useAuth from "../../AuthProvider/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const HomeSlider = () => {
-  const { setSearchValue } = useAuth();
+  const { filterBy, setFilterBy } = useAuth();
   const navigate = useNavigate();
 
-  const search = (e) => {
-    setSearchValue({ catagory: e.target.innerText });
+  const getCatagory = (e) => {
+    if (e.target.innerText === "All") {
+      const { catagory, ...rest } = filterBy;
+      rest.page = 0;
+      setFilterBy(rest);
+      return navigate("/shop");
+    }
+    const newData = { ...filterBy };
+    newData.catagory = e.target.innerText;
+    newData.page = 0;
+    setFilterBy(newData);
     navigate("/shop");
   };
   const settings = {
@@ -59,23 +68,23 @@ const HomeSlider = () => {
       <Slider {...settings} className="text-center">
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img1} alt="" />
-          <h6 onClick={search}>Fruits</h6>
+          <h6 onClick={getCatagory}>Fruits</h6>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img2} alt="" />
-          <h6 onClick={search}>Dry Fruits</h6>
+          <h6 onClick={getCatagory}>Dry Fruits</h6>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img3} alt="" />
-          <h6 onClick={search}>Vegetables</h6>
+          <h6 onClick={getCatagory}>Vegetables</h6>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img4} alt="" />
-          <h6 onClick={search}>Drinks</h6>
+          <h6 onClick={getCatagory}>Drinks</h6>
         </div>
         <div className="availableCatagoriesdiv">
           <img className="w-100" src={img5} alt="" />
-          <h6 onClick={search}>Meats</h6>
+          <h6 onClick={getCatagory}>Meats</h6>
         </div>
       </Slider>
     </div>

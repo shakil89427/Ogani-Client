@@ -6,9 +6,9 @@ import useSignup from "../Hooks/useSignup";
 import "./LoginSignup.css";
 
 const Signup = () => {
-  const [data, setData] = useState(null);
-  const { loading, setLoading, user } = useAuth();
+  const { userLoading, user } = useAuth();
   const { signup } = useSignup();
+  const [data, setData] = useState(null);
 
   const getData = (e) => {
     const name = e.target.name;
@@ -25,17 +25,16 @@ const Signup = () => {
     if (data.password.length < 6) {
       return alert("password must be 6 character");
     }
-    setLoading(true);
     signup(data);
   };
   return (
     <div className="login-signup-main">
       {user?._id && <Navigate to="/" />}
       <div className="signup-main shadow">
-        {!loading && <h2 className="login-h2">Signup</h2>}
-        {loading && (
+        {!userLoading && <h2 className="login-h2">Signup</h2>}
+        {userLoading && (
           <h2 className="login-h2">
-            <Spinner className="spin" animation="border" variant="success" />
+            <Spinner animation="border" variant="success" />
           </h2>
         )}
         <div className="p-3">
@@ -44,13 +43,13 @@ const Signup = () => {
               onChange={getData}
               name="firstname"
               required
-              disabled={loading}
+              disabled={userLoading}
               placeholder="First Name"
               type="text"
             />
             <input
               onChange={getData}
-              disabled={loading}
+              disabled={userLoading}
               name="lastname"
               required
               placeholder="Last Name"
@@ -58,7 +57,7 @@ const Signup = () => {
             />
             <input
               onChange={getData}
-              disabled={loading}
+              disabled={userLoading}
               name="email"
               required
               placeholder="Email"
@@ -66,7 +65,7 @@ const Signup = () => {
             />
             <input
               onChange={getData}
-              disabled={loading}
+              disabled={userLoading}
               name="password"
               required
               placeholder="Password"
@@ -74,7 +73,7 @@ const Signup = () => {
             />
             <input
               onChange={getData}
-              disabled={loading}
+              disabled={userLoading}
               name="password2"
               required
               className="w-100"
@@ -82,7 +81,7 @@ const Signup = () => {
               type="password"
             />
             <button
-              disabled={loading}
+              disabled={userLoading}
               type="submit"
               className="login-signup-btn"
             >
@@ -92,7 +91,7 @@ const Signup = () => {
 
           <p className="mt-5 text-center text-white">
             Already Registered?
-            <Link to={!loading ? "/login" : "#"}>
+            <Link to={!userLoading ? "/login" : "#"}>
               <button className="new">Login</button>
             </Link>
           </p>

@@ -2,16 +2,15 @@ import useAuth from "../AuthProvider/useAuth";
 import useSetToLocal from "./useSetToLocal";
 
 const useAddToCart = () => {
-  const { user, allProducts, cartItems, setCartItems } = useAuth();
+  const { user, cartItems, setCartItems } = useAuth();
   const { setToLocal } = useSetToLocal();
 
   const addSingleQuantity = (id, value) => {
-    const price = allProducts.find((single) => single._id === id);
     const matched = cartItems.products.find(
       (single) => single.productId === id
     );
     if (!matched) {
-      const product = { quantity: 1, productId: id, price: price.price };
+      const product = { quantity: 1, productId: id };
       if (value) {
         product.quantity = value;
       }

@@ -6,7 +6,7 @@ import useLogin from "../Hooks/useLogin";
 import "./LoginSignup.css";
 
 const Login = () => {
-  const { user, loading, setLoading } = useAuth();
+  const { user, userLoading } = useAuth();
   const { login } = useLogin();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -15,7 +15,6 @@ const Login = () => {
 
   const loginUser = (e) => {
     e.preventDefault();
-    setLoading(true);
     login({ email, password });
   };
 
@@ -38,10 +37,10 @@ const Login = () => {
       {user._id && !path && <Navigate to="/" />}
       <div className="login-signup-main">
         <div className="login-main shadow">
-          {!loading && <h2 className="login-h2">Login</h2>}
-          {loading && (
+          {!userLoading && <h2 className="login-h2">Login</h2>}
+          {userLoading && (
             <h2 className="login-h2">
-              <Spinner className="spin" animation="border" variant="success" />
+              <Spinner animation="border" variant="success" />
             </h2>
           )}
           <div className="p-3">
@@ -49,7 +48,7 @@ const Login = () => {
               <div className="input-div">
                 <i className="fas fa-user"></i>
                 <input
-                  disabled={loading}
+                  disabled={userLoading}
                   onChange={getEmail}
                   required
                   placeholder="Enter your Email"
@@ -60,7 +59,7 @@ const Login = () => {
                 <i className="fas fa-lock"></i>
                 <input
                   onChange={getPassword}
-                  disabled={loading}
+                  disabled={userLoading}
                   required
                   placeholder="Enter your Password"
                   type="password"
@@ -72,7 +71,7 @@ const Login = () => {
                 </button>
               </div>
               <button
-                disabled={loading}
+                disabled={userLoading}
                 type="submit"
                 className="login-signup-btn"
               >
@@ -83,13 +82,13 @@ const Login = () => {
               -----------OR-----------
             </p>
             <div className="my-2 text-center alternate-sign">
-              <button disabled={loading}>
+              <button disabled={userLoading}>
                 <i className="me-2 fab fa-google"></i>Login With Google
               </button>
             </div>
             <p className="mt-5 text-center text-white">
               New Member?
-              <Link to={!loading ? "/signup" : "#"}>
+              <Link to={!userLoading ? "/signup" : "#"}>
                 <button className="new">Signup</button>
               </Link>
             </p>

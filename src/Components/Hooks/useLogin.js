@@ -6,6 +6,7 @@ const useLogin = () => {
   const { setUser, setUserLoading } = useAuth();
   const { decodeUser } = useDecodeUser();
   const login = (data) => {
+    setUserLoading(true);
     axios
       .post("http://localhost:5000/login", data)
       .then((res) => {
