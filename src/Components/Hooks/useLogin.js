@@ -3,7 +3,7 @@ import useAuth from "../AuthProvider/useAuth";
 import useDecodeUser from "./useDecodeUser";
 
 const useLogin = () => {
-  const { setUser, setLoading } = useAuth();
+  const { setUser, setUserLoading } = useAuth();
   const { decodeUser } = useDecodeUser();
   const login = (data) => {
     axios
@@ -11,13 +11,13 @@ const useLogin = () => {
       .then((res) => {
         if (res.data) {
           localStorage.setItem("accessToken", res.data);
-          decodeUser(res.data, setUser, setLoading);
+          decodeUser(res.data, setUser, setUserLoading);
         }
       })
       .catch((error) => {
         console.log(error);
         alert("Authentication Error");
-        setLoading(false);
+        setUserLoading(false);
       });
   };
   return { login };

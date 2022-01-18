@@ -13,6 +13,7 @@ const Search = () => {
     newData.page = 0;
     newData.name = { $regex: e.target[0].value, $options: "i" };
     setFilterBy(newData);
+    e.target.reset();
     navigate("/shop");
   };
 

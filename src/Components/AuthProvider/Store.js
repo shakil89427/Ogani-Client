@@ -4,12 +4,14 @@ import useLoadCart from "../Hooks/useLoadCart";
 import useUserCheck from "../Hooks/useUserCheck";
 
 const Store = () => {
-  const [loading, setLoading] = useState(true);
   const [allProducts, setAllProducts] = useState([]);
-  const [searchValue, setSearchValue] = useState({});
-  const [filterBy, setFilterBy] = useState({ page: 0 });
-  const [cartItems, setCartItems] = useState({});
+  const [allProductsLoading, setAllProductsLoading] = useState(true);
   const [user, setUser] = useState({});
+  const [userLoading, setUserLoading] = useState(true);
+  const [cartItems, setCartItems] = useState({});
+  const [cartLoading, setCartLoading] = useState();
+  const [filterBy, setFilterBy] = useState({ page: 0 });
+  const [count, setCount] = useState(0);
   const { userCheck } = useUserCheck();
   const { loadCart } = useLoadCart();
   const accesstoken = localStorage.getItem("accessToken");
@@ -17,33 +19,37 @@ const Store = () => {
 
   /* Load All Products */
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/allproducts")
-      .then((res) => setAllProducts(res.data));
-  }, []);
+    setAllProductsLoading(true);
+    axios.post("http://localhost:5000/allproducts", filterBy).then((res) => {
+      setCount(Math.ceil(res.data.count / 8));
+      setAllProducts(res.data.result);
+      setAllProductsLoading(false);
+    });
+  }, [filterBy]);
 
   /* Check Token Activity */
   useEffect(() => {
-    userCheck(accesstoken, setUser, setLoading);
+    userCheck(accesstoken, setUser, setUserLoading);
   }, [accesstoken]);
 
   /* Check Cart Activity */
   useEffect(() => {
-    loadCart(user, setCartItems, cart);
+    loadCart(user, setCartItems, cart, setCartLoading);
   }, [user]);
 
   return {
-    loading,
-    setLoading,
-    searchValue,
-    setSearchValue,
-    cartItems,
-    setCartItems,
-    filterBy,
-    setFilterBy,
+    allProducts,
+    allProductsLoading,
     user,
     setUser,
-    allProducts,
+    userLoading,
+    setUserLoading,
+    cartItems,
+    setCartItems,
+    cartLoading,
+    filterBy,
+    setFilterBy,
+    count,
   };
 };
 

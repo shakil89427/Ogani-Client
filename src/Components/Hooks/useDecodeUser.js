@@ -1,10 +1,10 @@
 import { decodeToken } from "react-jwt";
 
 const useDecodeUser = () => {
-  const decodeUser = (accesstoken, setUser, setLoading) => {
+  const decodeUser = (accesstoken, setUser, setUserLoading) => {
     const decoded = decodeToken(accesstoken);
     setUser(decoded);
-    setLoading(false);
+    setUserLoading(false);
   };
   return { decodeUser };
 };

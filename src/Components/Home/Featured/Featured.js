@@ -69,7 +69,7 @@ const Available = () => {
       </p>
       <Container>
         {products.length === 0 && (
-          <Spinner className="spin" animation="border" variant="success" />
+          <Spinner animation="border" variant="success" />
         )}
         <Row>
           {products.map((product) => (

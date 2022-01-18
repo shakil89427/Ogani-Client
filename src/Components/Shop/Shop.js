@@ -1,27 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Shop.css";
 import useAddToCart from "../Hooks/useAddToCart";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Search from "../Search/Search";
 import useAuth from "../AuthProvider/useAuth";
 
 const Shop = () => {
-  const { filterBy, setFilterBy } = useAuth();
+  const { allProducts, allProductsLoading, filterBy, setFilterBy, count } =
+    useAuth();
   const { addSingleQuantity } = useAddToCart();
-  const [allProducts, setAllProducts] = useState([]);
-  const [count, setCount] = useState(0);
-  const [loading, setLoading] = useState(true);
-
-  /* Get keyword from input */
-  const getKeyword = (e) => {
-    e.preventDefault();
-    const newData = { ...filterBy };
-    newData.page = 0;
-    newData.name = { $regex: e.target[0].value, $options: "i" };
-    setFilterBy(newData);
-  };
 
   /* Remove keyword from field */
   const removeKeyword = () => {
@@ -49,10 +37,13 @@ const Shop = () => {
     const newData = { ...filterBy };
     newData.page = 0;
     newData.price = {};
-    if (e.target[0].value) {
+    if (parseInt(e.target[0].value) === 1) {
+      newData.price.$gt = 1;
+    }
+    if (parseInt(e.target[0].value) > 1) {
       newData.price.$gt = parseInt(e.target[0].value) - 1;
     }
-    if (e.target[1].value) {
+    if (parseInt(e.target[1].value)) {
       newData.price.$lt = parseInt(e.target[1].value) + 1;
     }
     setFilterBy(newData);
@@ -93,25 +84,15 @@ const Shop = () => {
     }
   };
 
-  /* Load Products */
-  useEffect(() => {
-    setLoading(true);
-    axios.post("http://localhost:5000/allproducts", filterBy).then((res) => {
-      setCount(Math.ceil(res.data.count / 8));
-      setAllProducts(res.data.result);
-      setLoading(false);
-    });
-  }, [filterBy]);
-
   return (
     <>
-      {loading && (
+      {allProductsLoading && (
         <div className="w-100 spin my-5 d-flex align-items-center justify-content-center">
           <Spinner className="spin" animation="border" variant="success" />
         </div>
       )}
 
-      <div className={loading ? "blur mb-5" : "mb-5"}>
+      <div className={allProductsLoading ? "blur mb-5" : "mb-5"}>
         <Search />
         <h1 className="shop-h1">Shop</h1>
         <Container>
@@ -122,12 +103,19 @@ const Shop = () => {
               </h5>
               <div className="filter-keyword border-bottom pb-3">
                 <p className="fw-bold">Keyword</p>
-                <form onSubmit={getKeyword}>
-                  <input placeholder="What do you need?" type="text" />
-                  <button type="submit">
-                    <i className="fas fa-search"></i>
-                  </button>
-                  <button onClick={removeKeyword} type="reset">
+                <form>
+                  <input
+                    disabled
+                    className={filterBy?.name?.$regex && "activekeyword"}
+                    value={filterBy?.name?.$regex}
+                    placeholder="No keyword Added"
+                    type="text"
+                  />
+                  <button
+                    className={!filterBy?.name?.$regex && "activekeyword"}
+                    onClick={removeKeyword}
+                    type="reset"
+                  >
                     <i className="fas fa-backspace"></i>
                   </button>
                 </form>
@@ -136,7 +124,7 @@ const Shop = () => {
                 <p className="fw-bold">Catagories</p>
                 <button
                   className={!filterBy?.catagory ? "shopcatactive" : ""}
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getCatagory}
                 >
                   All
@@ -145,7 +133,7 @@ const Shop = () => {
                   className={
                     filterBy?.catagory === "Fruits" ? "shopcatactive" : ""
                   }
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getCatagory}
                 >
                   Fruits
@@ -154,7 +142,7 @@ const Shop = () => {
                   className={
                     filterBy?.catagory === "Dry Fruits" ? "shopcatactive" : ""
                   }
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getCatagory}
                 >
                   Dry Fruits
@@ -163,7 +151,7 @@ const Shop = () => {
                   className={
                     filterBy?.catagory === "Vegetables" ? "shopcatactive" : ""
                   }
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getCatagory}
                 >
                   Vegetables
@@ -172,7 +160,7 @@ const Shop = () => {
                   className={
                     filterBy?.catagory === "Drinks" ? "shopcatactive" : ""
                   }
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getCatagory}
                 >
                   Drinks
@@ -181,7 +169,7 @@ const Shop = () => {
                   className={
                     filterBy?.catagory === "Meats" ? "shopcatactive" : ""
                   }
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getCatagory}
                 >
                   Meats
@@ -191,28 +179,28 @@ const Shop = () => {
                 <p className="fw-bold">Price</p>
                 <form onSubmit={getPrice}>
                   <input
-                    disabled={loading}
-                    required
+                    disabled={filterBy?.price?.$gt || allProductsLoading}
+                    min="1"
                     placeholder="Min"
                     type="number"
                   />
                   <span className="mx-1">To</span>
                   <input
-                    disabled={loading}
-                    required
+                    disabled={filterBy?.price?.$lt || allProductsLoading}
+                    min="1"
                     placeholder="Max"
                     type="number"
                   />
                   <button
                     className={filterBy?.price ? "shopcatactive" : ""}
-                    disabled={loading}
+                    disabled={allProductsLoading}
                     type="submit"
                   >
                     {filterBy?.price ? "Added" : "Add"}
                   </button>
                   <button
                     className={!filterBy?.price ? "shopcatactive" : ""}
-                    disabled={loading || !filterBy?.price}
+                    disabled={allProductsLoading || !filterBy?.price}
                     onClick={resetPrice}
                     type="reset"
                   >
@@ -223,7 +211,7 @@ const Shop = () => {
               <div className="filter-color border-bottom pb-2">
                 <p className="fw-bold">Color</p>
                 <button
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getColor}
                   className={
                     !filterBy?.color ? "active-color rainbow" : "rainbow"
@@ -231,7 +219,7 @@ const Shop = () => {
                   name="rainbow"
                 />
                 <button
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getColor}
                   className={
                     filterBy?.color === "red" ? "active-color red" : "red"
@@ -239,7 +227,7 @@ const Shop = () => {
                   name="red"
                 />
                 <button
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getColor}
                   className={
                     filterBy?.color === "yellow"
@@ -249,7 +237,7 @@ const Shop = () => {
                   name="yellow"
                 />
                 <button
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getColor}
                   className={
                     filterBy?.color === "blue" ? "active-color blue" : "blue"
@@ -257,7 +245,7 @@ const Shop = () => {
                   name="blue"
                 />
                 <button
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getColor}
                   className={
                     filterBy?.color === "green" ? "active-color green" : "green"
@@ -265,7 +253,7 @@ const Shop = () => {
                   name="green"
                 />
                 <button
-                  disabled={loading}
+                  disabled={allProductsLoading}
                   onClick={getColor}
                   className={
                     filterBy?.color === "black" ? "active-color black" : "black"
@@ -275,7 +263,7 @@ const Shop = () => {
               </div>
             </Col>
             <Col sm={12} md={9} lg={9}>
-              {!loading && allProducts.length === 0 && (
+              {!allProductsLoading && allProducts.length === 0 && (
                 <span>
                   <h3 className="text-center mt-3">Sorry No product Found</h3>
                   <p className="text-center">Try changing the filter options</p>
@@ -323,7 +311,7 @@ const Shop = () => {
                 <div className="mt-3">
                   {filterBy?.page !== 0 && (
                     <button
-                      disabled={loading}
+                      disabled={allProductsLoading}
                       onClick={() => changePage(false)}
                       className="allbtn me-1 float-start"
                     >
@@ -332,7 +320,7 @@ const Shop = () => {
                   )}
                   {count !== filterBy?.page + 1 && (
                     <button
-                      disabled={loading}
+                      disabled={allProductsLoading}
                       onClick={() => changePage(true)}
                       className="allbtn ms-1 float-end"
                     >

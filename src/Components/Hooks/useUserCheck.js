@@ -4,18 +4,18 @@ import useDecodeUser from "./useDecodeUser";
 const useUserCheck = () => {
   const { decodeUser } = useDecodeUser();
 
-  const userCheck = (accesstoken, setUser, setLoading) => {
+  const userCheck = (accesstoken, setUser, setUserLoading) => {
     const expiredtoken = isExpired(accesstoken);
     if (!accesstoken) {
       setUser({});
-      return setLoading(false);
+      return setUserLoading(false);
     }
     if (expiredtoken) {
       setUser({});
       localStorage.removeItem("accessToken");
-      return setLoading(false);
+      return setUserLoading(false);
     }
-    decodeUser(accesstoken, setUser, setLoading);
+    decodeUser(accesstoken, setUser, setUserLoading);
   };
   return { userCheck };
 };
