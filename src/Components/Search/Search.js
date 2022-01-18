@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../AuthProvider/useAuth";
 import "./Search.css";
 
 const Search = () => {
-  const { setSearchValue } = useAuth();
-  const [value, setValue] = useState();
+  const { filterBy, setFilterBy } = useAuth();
   const navigate = useNavigate();
 
-  const getValue = (e) => {
-    setValue(e.target.value);
-  };
-
   const submit = (e) => {
-    setSearchValue({ keyword: value });
+    e.preventDefault();
+    const newData = { ...filterBy };
+    newData.page = 0;
+    newData.name = { $regex: e.target[0].value, $options: "i" };
+    setFilterBy(newData);
     navigate("/shop");
   };
 
@@ -24,7 +23,6 @@ const Search = () => {
         className="rounded bg-white mx-auto w-50 my-2 border d-flex justify-content-between align-items-center"
       >
         <input
-          onChange={getValue}
           placeholder="What do you need"
           className="search-input"
           type="text"

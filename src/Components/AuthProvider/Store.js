@@ -7,6 +7,7 @@ const Store = () => {
   const [loading, setLoading] = useState(true);
   const [allProducts, setAllProducts] = useState([]);
   const [searchValue, setSearchValue] = useState({});
+  const [filterBy, setFilterBy] = useState({ page: 0 });
   const [cartItems, setCartItems] = useState({});
   const [user, setUser] = useState({});
   const { userCheck } = useUserCheck();
@@ -38,6 +39,8 @@ const Store = () => {
     setSearchValue,
     cartItems,
     setCartItems,
+    filterBy,
+    setFilterBy,
     user,
     setUser,
     allProducts,
