@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import "./Shop.css";
 import useAddToCart from "../Hooks/useAddToCart";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Shop = () => {
   const { addSingleQuantity } = useAddToCart();
   const [filterBy, setFilterBy] = useState({});
   const [allProducts, setAllProducts] = useState([]);
+  const [count, setCount] = useState(0);
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   /* Get keyword from input */
   const getKeyword = (e) => {
     e.preventDefault();
-    const newData = { ...filterBy };
-    newData.name = `/${e.target[0].value}/`;
-    setFilterBy(newData);
+    setFilterBy({ name: { $regex: e.target[0].value, $options: "i" } });
   };
 
   /* Remove keyword from field */
@@ -39,10 +42,10 @@ const Shop = () => {
     const newData = { ...filterBy };
     newData.price = {};
     if (e.target[0].value) {
-      newData.price.$gt = parseInt(e.target[0].value);
+      newData.price.$gt = parseInt(e.target[0].value) - 1;
     }
     if (e.target[1].value) {
-      newData.price.$lt = parseInt(e.target[1].value);
+      newData.price.$lt = parseInt(e.target[1].value) + 1;
     }
     setFilterBy(newData);
   };
@@ -64,10 +67,26 @@ const Shop = () => {
     setFilterBy(newData);
   };
 
+  const changePage = (value) => {
+    if (value) {
+      return setPage(page + 1);
+    }
+    if (!value) {
+      return setPage(page - 1);
+    }
+  };
+
   /* Load Products */
   useEffect(() => {
-    console.log(filterBy);
-  }, [filterBy]);
+    setLoading(true);
+    axios
+      .post("http://localhost:5000/allproducts", { page, filterBy })
+      .then((res) => {
+        setCount(Math.ceil(res.data.count / 8));
+        setAllProducts(res.data.result);
+        setLoading(false);
+      });
+  }, [filterBy, page]);
 
   return (
     <div className="mb-5">
@@ -102,9 +121,9 @@ const Shop = () => {
             <div className="filter-price border-bottom pb-2">
               <p className="fw-bold">Price</p>
               <form onSubmit={getPrice}>
-                <input placeholder="Min" type="number" />
+                <input required placeholder="Min" type="number" />
                 <span className="mx-1">To</span>
-                <input placeholder="Max" type="number" />
+                <input required placeholder="Max" type="number" />
                 <button type="submit">Apply</button>
                 <button onClick={resetPrice} type="reset">
                   Reset
@@ -121,8 +140,13 @@ const Shop = () => {
               <button onClick={getColor} name="black" />
             </div>
           </Col>
-          {/* <Col sm={12} md={9} lg={9}>
-            {!loading && products.length === 0 && (
+          <Col className="shop-div" sm={12} md={9} lg={9}>
+            {loading && (
+              <div className=" my-5 d-flex align-items-center justify-content-center">
+                <Spinner animation="border" variant="success" />
+              </div>
+            )}
+            {!loading && allProducts.length === 0 && (
               <span>
                 <h3 className="text-center mt-3">Sorry No product Found</h3>
                 <p className="text-center">Try changing the filter options</p>
@@ -134,13 +158,9 @@ const Shop = () => {
                 </p>
               </span>
             )}
-            {loading && (
-              <div className="my-5 d-flex align-items-center justify-content-center">
-                <Spinner animation="border" variant="success" />
-              </div>
-            )}
+
             <Row>
-              {products.map((product) => (
+              {allProducts.map((product) => (
                 <Col
                   key={product._id}
                   className="p-3 text-center p-main"
@@ -151,9 +171,6 @@ const Shop = () => {
                   <div className="p-single">
                     <img className="p-img" src={product.img} alt="" />
                     <span className="p-effect">
-                      <p>
-                        <i className="fas fa-heart"></i>
-                      </p>
                       <Link to={`/details/${product._id}`}>
                         <p>
                           <i className="fas fa-info"></i>
@@ -171,7 +188,27 @@ const Shop = () => {
                 </Col>
               ))}
             </Row>
-          </Col> */}
+            {!loading && allProducts.length > 0 && (
+              <div className="text-center">
+                {page !== 0 && (
+                  <button
+                    onClick={() => changePage(false)}
+                    className="allbtn me-1"
+                  >
+                    <i class="me-1 fas fa-arrow-left"></i>Prev
+                  </button>
+                )}
+                {count !== page + 1 && (
+                  <button
+                    onClick={() => changePage(true)}
+                    className="allbtn ms-1"
+                  >
+                    Next<i class="ms-1 fas fa-arrow-right"></i>
+                  </button>
+                )}
+              </div>
+            )}
+          </Col>
         </Row>
       </Container>
     </div>

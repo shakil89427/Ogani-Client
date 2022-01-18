@@ -83,3 +83,7 @@
   background-color: rgb(45, 184, 45);
   color: white;
 }
+.shop-div {
+  display: grid;
+  place-content: center;
+}
