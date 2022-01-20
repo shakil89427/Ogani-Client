@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useAuth from "../../AuthProvider/useAuth";
@@ -6,73 +6,19 @@ import useAddToCart from "../../Hooks/useAddToCart";
 import "./Featured.css";
 
 const Available = () => {
-  const { allProducts } = useAuth();
-  const [products, setProducts] = useState([]);
-  const [border, setborder] = useState("All");
+  const { featuredProducts, allProductsLoading } = useAuth();
   const { addSingleQuantity } = useAddToCart();
 
-  useEffect(() => {
-    setProducts(allProducts.slice(0, 8));
-  }, [allProducts]);
-
-  const changeCatagory = (e) => {
-    setborder(e.target.innerText);
-    if (e.target.innerText === "All") {
-      return setProducts(allProducts.slice(0, 8));
-    }
-    const filtered = allProducts.filter(
-      (product) => product.catagory === e.target.innerText
-    );
-    setProducts(filtered);
-  };
   return (
     <div className="text-center">
       <h2 className="fw-bolder">Featured Products</h2>
       <hr className="mx-auto bg-success" />
-      <p>
-        <button
-          className={border === "All" ? "active" : "inactive"}
-          onClick={changeCatagory}
-        >
-          All
-        </button>
-        <button
-          className={border === "Fruits" ? "active" : "inactive"}
-          onClick={changeCatagory}
-        >
-          Fruits
-        </button>
-        <button
-          className={border === "Dry Fruits" ? "active" : "inactive"}
-          onClick={changeCatagory}
-        >
-          Dry Fruits
-        </button>
-        <button
-          className={border === "Drinks" ? "active" : "inactive"}
-          onClick={changeCatagory}
-        >
-          Drinks
-        </button>
-        <button
-          className={border === "Vegetables" ? "active" : "inactive"}
-          onClick={changeCatagory}
-        >
-          Vegetables
-        </button>
-        <button
-          className={border === "Meats" ? "active" : "inactive"}
-          onClick={changeCatagory}
-        >
-          Meats
-        </button>
-      </p>
       <Container>
-        {products.length === 0 && (
+        {allProductsLoading && featuredProducts.length === 0 && (
           <Spinner animation="border" variant="success" />
         )}
         <Row>
-          {products.map((product) => (
+          {featuredProducts.map((product) => (
             <Col
               key={product._id}
               className="p-3 text-center p-main"

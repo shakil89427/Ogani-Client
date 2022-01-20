@@ -6,6 +6,7 @@ import useLoadCartProducts from "../Hooks/useLoadCartProducts";
 
 const Store = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
   const [allProductsLoading, setAllProductsLoading] = useState(true);
   const [user, setUser] = useState({});
   const [userLoading, setUserLoading] = useState(true);
@@ -23,7 +24,14 @@ const Store = () => {
 
   /* Load All Products */
   useEffect(() => {
-    loadAllProducts(filterBy, setCount, setAllProducts, setAllProductsLoading);
+    loadAllProducts(
+      filterBy,
+      setCount,
+      setAllProducts,
+      setAllProductsLoading,
+      featuredProducts.length,
+      setFeaturedProducts
+    );
   }, [filterBy]);
 
   /* Check Token Activity */
@@ -45,6 +53,7 @@ const Store = () => {
 
   return {
     allProducts,
+    featuredProducts,
     allProductsLoading,
     user,
     setUser,

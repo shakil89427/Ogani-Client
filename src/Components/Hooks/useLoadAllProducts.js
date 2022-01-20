@@ -5,14 +5,21 @@ const useLoadAllProducts = () => {
     filterBy,
     setCount,
     setAllProducts,
-    setAllProductsLoading
+    setAllProductsLoading,
+    featured,
+    setFeaturedProducts
   ) => {
     setAllProductsLoading(true);
-    axios.post("http://localhost:5000/allproducts", filterBy).then((res) => {
-      setCount(Math.ceil(res.data.count / 8));
-      setAllProducts(res.data.result);
-      setAllProductsLoading(false);
-    });
+    axios
+      .post("http://localhost:5000/allproducts", { filterBy, featured })
+      .then((res) => {
+        setCount(Math.ceil(res.data.count / 8));
+        setAllProducts(res.data.result);
+        if (res.data.result2) {
+          setFeaturedProducts(res.data.result2);
+        }
+        setAllProductsLoading(false);
+      });
   };
   return { loadAllProducts };
 };
