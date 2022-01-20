@@ -7,6 +7,7 @@ import Search from "../Search/Search";
 import useAuth from "../AuthProvider/useAuth";
 
 const Shop = () => {
+  window.scroll(0, 0);
   const { allProducts, allProductsLoading, filterBy, setFilterBy, count } =
     useAuth();
   const { addSingleQuantity } = useAddToCart();
