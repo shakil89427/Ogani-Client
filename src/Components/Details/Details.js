@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Details.css";
 import Search from "../Search/Search";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import useAddToCart from "../Hooks/useAddToCart";
 import axios from "axios";
+import useAuth from "../AuthProvider/useAuth";
 
 const Details = () => {
+  const { setFilterBy } = useAuth();
   const { addSingleQuantity } = useAddToCart();
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -14,6 +16,7 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState("Description");
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,6 +27,11 @@ const Details = () => {
       setLoading(false);
     });
   }, [id]);
+
+  const getCatagory = (e) => {
+    setFilterBy({ page: 0, catagory: e });
+    navigate("/shop");
+  };
 
   const changeinfo = (e) => {
     setInfo(e.target.innerText);
@@ -157,7 +165,12 @@ const Details = () => {
             ))}
           </Row>
           <div className="text-center">
-            <button className="allbtn">More</button>
+            <button
+              onClick={() => getCatagory(product.catagory)}
+              className="allbtn"
+            >
+              More
+            </button>
           </div>
         </Container>
       )}
