@@ -1,8 +1,29 @@
-import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import axios from "axios";
+import React, { useState } from "react";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import "./Contact.css";
 
 const Contact = () => {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const getData = (e) => {
+    const newData = { ...data };
+    const name = e.target.name;
+    const value = e.target.value;
+    newData[name] = value;
+    setData(newData);
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    axios.post("http://localhost:5000/sendemail", data).then((res) => {
+      setLoading(false);
+      e.target.reset();
+    });
+  };
+
   return (
     <div>
       <h1 className="text-center fw-bold contact-h1">Contact Us</h1>
@@ -46,10 +67,11 @@ const Contact = () => {
           </Col>
         </Row>
         <h3 className="fw-bolder text-center">Leave Message</h3>
-        <form className="px-5 pb-5">
+        <form onSubmit={sendEmail} className="px-5 pb-5">
           <Row>
             <Col sm={12} md={6} lg={6}>
               <input
+                onChange={getData}
                 name="name"
                 required
                 placeholder="Name"
@@ -59,6 +81,7 @@ const Contact = () => {
             </Col>
             <Col sm={12} md={6} lg={6}>
               <input
+                onChange={getData}
                 placeholder="Email"
                 className="message-input"
                 type="email"
@@ -68,6 +91,7 @@ const Contact = () => {
             </Col>
             <Col sm={12} md={12} lg={12}>
               <textarea
+                onChange={getData}
                 name="message"
                 required
                 placeholder="Write your message"
@@ -76,7 +100,21 @@ const Contact = () => {
               />
             </Col>
           </Row>
-          <button className="allbtn d-block mx-auto mt-2">SEND MESSAGE</button>
+          {loading ? (
+            <Spinner
+              className="d-block mx-auto mt-2"
+              animation="border"
+              variant="success"
+            />
+          ) : (
+            <button
+              disabled={loading}
+              type="submit"
+              className="allbtn d-block mx-auto mt-2"
+            >
+              SEND MESSAGE
+            </button>
+          )}
         </form>
       </Container>
     </div>
