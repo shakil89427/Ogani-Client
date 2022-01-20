@@ -1,45 +1,32 @@
 import React, { useEffect, useState } from "react";
 import "./Details.css";
 import Search from "../Search/Search";
-import useAuth from "../AuthProvider/useAuth";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import useAddToCart from "../Hooks/useAddToCart";
+import axios from "axios";
 
 const Details = () => {
-  const { allProducts } = useAuth();
   const { addSingleQuantity } = useAddToCart();
   const { id } = useParams();
-  const [captureId, setCaptureId] = useState(id);
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState("Description");
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    if (allProducts.length === 0) return;
-    setProduct(allProducts.find((founded) => founded._id === captureId));
-    setQuantity(1);
-  }, [allProducts, captureId]);
-
-  useEffect(() => {
-    if (!product.name) return;
-    setRelatedProducts(
-      allProducts
-        .filter(
-          (founded) =>
-            founded.catagory === product.catagory && founded._id !== product._id
-        )
-        .slice(0, 4)
-    );
-  }, [product, allProducts]);
+    window.scrollTo(0, 0);
+    setLoading(true);
+    axios.get(`http://localhost:5000/productdetails/${id}`).then((res) => {
+      setProduct(res.data.result);
+      setRelatedProducts(res.data.result2);
+      setLoading(false);
+    });
+  }, [id]);
 
   const changeinfo = (e) => {
     setInfo(e.target.innerText);
-  };
-
-  const changeId = (value) => {
-    setCaptureId(value);
   };
 
   const changeQuantity = (value) => {
@@ -54,14 +41,14 @@ const Details = () => {
 
   return (
     <>
-      <Search id="top" />
-      {!product.name && (
+      <Search />
+      {loading && (
         <Container className="my-5 d-flex align-items-center justify-content-center">
           <Spinner className="spin" animation="border" variant="success" />
         </Container>
       )}
       {product.name && (
-        <Container>
+        <Container className="mb-3">
           {product.name && (
             <Row className="mt-5">
               <Col sm={12} md={6} lg={6}>
@@ -152,11 +139,11 @@ const Details = () => {
                 <div className="p-single">
                   <img className="p-img" src={related.img} alt="" />
                   <span className="p-effect">
-                    <a href="#top">
-                      <p onClick={() => changeId(related._id)}>
+                    <Link to={`/details/${related._id}`}>
+                      <p>
                         <i className="fas fa-info"></i>
                       </p>
-                    </a>
+                    </Link>
                     <p onClick={() => addSingleQuantity(related._id, false)}>
                       <i className="fas fa-cart-plus"></i>
                     </p>
@@ -169,6 +156,9 @@ const Details = () => {
               </Col>
             ))}
           </Row>
+          <div className="text-center">
+            <button className="allbtn">More</button>
+          </div>
         </Container>
       )}
     </>
