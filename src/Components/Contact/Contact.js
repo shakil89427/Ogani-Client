@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Contact.css";
 
 const Contact = () => {
@@ -19,13 +21,27 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     axios.post("http://localhost:5000/sendemail", data).then((res) => {
-      setLoading(false);
-      e.target.reset();
+      if (res.data) {
+        setLoading(false);
+        e.target.reset();
+        toast.success("Message Successfully Sended", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme: "colored",
+          transition: Slide,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     });
   };
 
   return (
     <div>
+      <ToastContainer />
       <h1 className="text-center fw-bold contact-h1">Contact Us</h1>
       <Container>
         <Row className="p-5">
