@@ -3,11 +3,13 @@ import { Spinner } from "react-bootstrap";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import useAuth from "../AuthProvider/useAuth";
 import useLogin from "../Hooks/useLogin";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./LoginSignup.css";
 
 const Login = () => {
   const { user, userLoading } = useAuth();
-  const { login } = useLogin();
+  const { login, logintoast } = useLogin();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const getlocation = useLocation();
@@ -27,12 +29,24 @@ const Login = () => {
 
   const reset = () => {
     if (!email) {
-      return alert("email not found");
+      return toast.warning("Please enter your email", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        theme: "colored",
+        transition: Slide,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     }
     alert(email);
   };
   return (
     <>
+      <ToastContainer />
+      {logintoast && logintoast}
       {user._id && path && <Navigate to={path} />}
       {user._id && !path && <Navigate to="/" />}
       <div className="login-signup-main">

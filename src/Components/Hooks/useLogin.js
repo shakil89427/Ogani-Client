@@ -1,6 +1,8 @@
 import axios from "axios";
 import useAuth from "../AuthProvider/useAuth";
 import useDecodeUser from "./useDecodeUser";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useLogin = () => {
   const { setUser, setUserLoading } = useAuth();
@@ -16,12 +18,21 @@ const useLogin = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
-        alert("Authentication Error");
+        toast.error("Authentication Error", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme: "colored",
+          transition: Slide,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
         setUserLoading(false);
       });
   };
-  return { login };
+  return { login, logintoast: <ToastContainer /> };
 };
 
 export default useLogin;

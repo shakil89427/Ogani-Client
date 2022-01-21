@@ -1,6 +1,8 @@
 import axios from "axios";
 import useDecodeUser from "./useDecodeUser";
 import useAuth from "../AuthProvider/useAuth";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useSignup = () => {
   const { decodeUser } = useDecodeUser();
@@ -16,11 +18,21 @@ const useSignup = () => {
         }
       })
       .catch((error) => {
-        alert("Email Already Exist");
+        toast.warning("Email Already Exist", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme: "colored",
+          transition: Slide,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
         setUserLoading(false);
       });
   };
-  return { signup };
+  return { signup, signuptoast: <ToastContainer /> };
 };
 
 export default useSignup;

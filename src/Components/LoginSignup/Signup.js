@@ -3,11 +3,13 @@ import { Spinner } from "react-bootstrap";
 import { Link, Navigate } from "react-router-dom";
 import useAuth from "../AuthProvider/useAuth";
 import useSignup from "../Hooks/useSignup";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./LoginSignup.css";
 
 const Signup = () => {
   const { userLoading, user } = useAuth();
-  const { signup } = useSignup();
+  const { signup, signuptoast } = useSignup();
   const [data, setData] = useState(null);
 
   const getData = (e) => {
@@ -20,15 +22,37 @@ const Signup = () => {
   const signupuser = (e) => {
     e.preventDefault();
     if (data.password !== data.password2) {
-      return alert("password didnt matched");
+      return toast.warning("Password Didn't Matched", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        theme: "colored",
+        transition: Slide,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     }
     if (data.password.length < 6) {
-      return alert("password must be 6 character");
+      return toast.warning("Minimum password 6 character", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        theme: "colored",
+        transition: Slide,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     }
     signup(data);
   };
   return (
     <div className="login-signup-main">
+      <ToastContainer />
+      {signuptoast && signuptoast}
       {user?._id && <Navigate to="/" />}
       <div className="signup-main shadow">
         {!userLoading && <h2 className="login-h2">Signup</h2>}
