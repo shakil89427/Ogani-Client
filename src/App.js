@@ -16,6 +16,7 @@ import Profile from "./Components/Profile/Profile";
 import NotFound from "./Components/NotFound/NotFound";
 import Checkout from "./Components/Checkout/Checkout";
 import PrivateRoute from "./Components/AuthProvider/PrivateRoute";
+import Reset from "./Components/LoginSignup/Reset";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/reset/:id" element={<Reset />} />
               <Route path="details/:id" element={<Details />} />
               <Route path="shop" element={<Shop />} />
               <Route path="blog" element={<Blog />} />
