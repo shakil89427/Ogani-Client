@@ -6,12 +6,14 @@ import useLogin from "../Hooks/useLogin";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./LoginSignup.css";
+import axios from "axios";
 
 const Login = () => {
   const { user, userLoading } = useAuth();
   const { login, logintoast } = useLogin();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [loading, setLoading] = useState(false);
   const getlocation = useLocation();
   const path = getlocation?.state?.location;
 
@@ -41,7 +43,52 @@ const Login = () => {
         progress: undefined,
       });
     }
-    alert(email);
+    setLoading(true);
+    axios
+      .get(`http://localhost:5000/resetpassword/${email}`)
+      .then((res) => {
+        if (res.data) {
+          setLoading(false);
+          toast.success("Please Check your inbox", {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            theme: "colored",
+            transition: Slide,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          setLoading(false);
+          toast.error("User not found", {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            theme: "colored",
+            transition: Slide,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error("User not found", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme: "colored",
+          transition: Slide,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
   return (
     <>
@@ -53,6 +100,11 @@ const Login = () => {
         <div className="login-main shadow">
           {!userLoading && <h2 className="login-h2">Login</h2>}
           {userLoading && (
+            <h2 className="login-h2">
+              <Spinner animation="border" variant="success" />
+            </h2>
+          )}
+          {loading && (
             <h2 className="login-h2">
               <Spinner animation="border" variant="success" />
             </h2>
