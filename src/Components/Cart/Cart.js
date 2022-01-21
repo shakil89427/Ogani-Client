@@ -14,7 +14,7 @@ const Cart = () => {
     user,
     cartLoading,
   } = useAuth();
-  const { setToLocal } = useSetToLocal();
+  const { setToLocal, toast } = useSetToLocal();
   const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
@@ -72,6 +72,7 @@ const Cart = () => {
 
   return (
     <div>
+      {toast && toast}
       <h1 className="text-center fw-bold cart-h1">Shopping Cart</h1>
       {cartItems?.products?.length === 0 && (
         <div className="p-5 d-flex flex-column align-items-center justify-content-center">

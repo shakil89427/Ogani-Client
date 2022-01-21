@@ -7,10 +7,11 @@ import "./Featured.css";
 
 const Available = () => {
   const { featuredProducts, allProductsLoading } = useAuth();
-  const { addSingleQuantity } = useAddToCart();
+  const { addSingleQuantity, toast } = useAddToCart();
 
   return (
     <div className="text-center">
+      {toast && toast}
       <h2 className="fw-bolder">Featured Products</h2>
       <hr className="mx-auto bg-success" />
       <Container>

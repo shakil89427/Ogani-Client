@@ -10,7 +10,7 @@ const Shop = () => {
   window.scroll(0, 0);
   const { allProducts, allProductsLoading, filterBy, setFilterBy, count } =
     useAuth();
-  const { addSingleQuantity } = useAddToCart();
+  const { addSingleQuantity, toast } = useAddToCart();
 
   /* Remove keyword from field */
   const removeKeyword = () => {
@@ -88,6 +88,7 @@ const Shop = () => {
 
   return (
     <>
+      {toast && toast}
       {allProductsLoading && (
         <div className="w-100 spin my-5 d-flex align-items-center justify-content-center">
           <Spinner className="spin" animation="border" variant="success" />

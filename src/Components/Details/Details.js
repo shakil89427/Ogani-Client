@@ -9,7 +9,7 @@ import useAuth from "../AuthProvider/useAuth";
 
 const Details = () => {
   const { setFilterBy } = useAuth();
-  const { addSingleQuantity } = useAddToCart();
+  const { addSingleQuantity, toast } = useAddToCart();
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -49,6 +49,7 @@ const Details = () => {
 
   return (
     <>
+      {toast && toast}
       <Search />
       {loading && (
         <Container className="my-5 d-flex align-items-center justify-content-center">
