@@ -3,6 +3,8 @@ import "./Shop.css";
 import useAddToCart from "../Hooks/useAddToCart";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Search from "../Search/Search";
 import useAuth from "../AuthProvider/useAuth";
 
@@ -10,7 +12,7 @@ const Shop = () => {
   window.scroll(0, 0);
   const { allProducts, allProductsLoading, filterBy, setFilterBy, count } =
     useAuth();
-  const { addSingleQuantity, toast } = useAddToCart();
+  const { addSingleQuantity } = useAddToCart();
 
   /* Remove keyword from field */
   const removeKeyword = () => {
@@ -86,9 +88,24 @@ const Shop = () => {
     }
   };
 
+  const addtocart = (id, value) => {
+    addSingleQuantity(id, value);
+    toast.success("Successfully Added To Cart", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      theme: "colored",
+      transition: Slide,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <>
-      {toast && toast}
+      <ToastContainer />
       {allProductsLoading && (
         <div className="w-100 spin my-5 d-flex align-items-center justify-content-center">
           <Spinner className="spin" animation="border" variant="success" />
@@ -296,9 +313,7 @@ const Shop = () => {
                             <i className="fas fa-info"></i>
                           </p>
                         </Link>
-                        <p
-                          onClick={() => addSingleQuantity(product._id, false)}
-                        >
+                        <p onClick={() => addtocart(product._id, false)}>
                           <i className="fas fa-cart-plus"></i>
                         </p>
                       </span>

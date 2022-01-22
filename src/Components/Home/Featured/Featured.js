@@ -3,15 +3,32 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useAuth from "../../AuthProvider/useAuth";
 import useAddToCart from "../../Hooks/useAddToCart";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Featured.css";
 
 const Available = () => {
   const { featuredProducts, allProductsLoading } = useAuth();
-  const { addSingleQuantity, toast } = useAddToCart();
+  const { addSingleQuantity } = useAddToCart();
+
+  const addtocart = (id) => {
+    addSingleQuantity(id, false);
+    toast.success("Successfully Added To Cart", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      theme: "colored",
+      transition: Slide,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   return (
     <div className="text-center">
-      {toast && toast}
+      <ToastContainer />
       <h2 className="fw-bolder">Featured Products</h2>
       <hr className="mx-auto bg-success" />
       <Container>
@@ -35,7 +52,7 @@ const Available = () => {
                       <i className="fas fa-info"></i>
                     </p>
                   </Link>
-                  <p onClick={() => addSingleQuantity(product._id, false)}>
+                  <p onClick={() => addtocart(product._id)}>
                     <i className="fas fa-cart-plus"></i>
                   </p>
                 </span>

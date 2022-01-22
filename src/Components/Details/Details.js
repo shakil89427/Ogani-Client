@@ -4,12 +4,14 @@ import Search from "../Search/Search";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import useAddToCart from "../Hooks/useAddToCart";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import useAuth from "../AuthProvider/useAuth";
 
 const Details = () => {
   const { setFilterBy } = useAuth();
-  const { addSingleQuantity, toast } = useAddToCart();
+  const { addSingleQuantity } = useAddToCart();
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -47,9 +49,24 @@ const Details = () => {
     }
   };
 
+  const addtocart = (id, value) => {
+    addSingleQuantity(id, value);
+    toast.success("Successfully Added To Cart", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      theme: "colored",
+      transition: Slide,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <>
-      {toast && toast}
+      <ToastContainer />
       <Search />
       {loading && (
         <Container className="my-5 d-flex align-items-center justify-content-center">
@@ -85,7 +102,7 @@ const Details = () => {
                     <button onClick={() => changeQuantity(true)}>+</button>
                   </span>
                   <button
-                    onClick={() => addSingleQuantity(product._id, quantity)}
+                    onClick={() => addtocart(product._id, quantity)}
                     className="allbtn"
                   >
                     ADD TO CART
@@ -153,7 +170,7 @@ const Details = () => {
                         <i className="fas fa-info"></i>
                       </p>
                     </Link>
-                    <p onClick={() => addSingleQuantity(related._id, false)}>
+                    <p onClick={() => addtocart(related._id, false)}>
                       <i className="fas fa-cart-plus"></i>
                     </p>
                   </span>

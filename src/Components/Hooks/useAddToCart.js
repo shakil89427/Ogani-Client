@@ -3,7 +3,7 @@ import useSetToLocal from "./useSetToLocal";
 
 const useAddToCart = () => {
   const { user, cartItems, setCartItems } = useAuth();
-  const { setToLocal, toast } = useSetToLocal();
+  const { setToLocal } = useSetToLocal();
 
   const addSingleQuantity = (id, value) => {
     const matched = cartItems.products.find((single) => single._id === id);
@@ -33,7 +33,7 @@ const useAddToCart = () => {
       products: result,
     });
   };
-  return { addSingleQuantity, toast };
+  return { addSingleQuantity };
 };
 
 export default useAddToCart;
