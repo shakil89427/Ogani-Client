@@ -50,35 +50,39 @@ const ResetInit = () => {
   return (
     <div className="login-signup-main">
       <ToastContainer />
-      <div className="login-main shadow">
-        {!loading && !success && <h2 className="login-h2">Reset Password</h2>}
-        {loading && (
+      {success ? (
+        <h2 className="login-h2 rounded-pill px-3">Check Inbox/Spam</h2>
+      ) : (
+        <div className="login-main shadow">
           <h2 className="login-h2">
-            <Spinner animation="border" variant="success" />
+            {loading ? (
+              <Spinner animation="border" variant="success" />
+            ) : (
+              "Reset Password"
+            )}
           </h2>
-        )}
-        {success && <h2 className="login-h2">Check Inbox</h2>}
-        <div className="p-3">
-          <form onSubmit={reset}>
-            <div className="input-div">
-              <i className="fas fa-user"></i>
-              <input
+          <div className="p-3">
+            <form onSubmit={reset}>
+              <div className="input-div">
+                <i className="fas fa-user"></i>
+                <input
+                  disabled={success}
+                  required
+                  placeholder="Enter your Email"
+                  type="email"
+                />
+              </div>
+              <button
                 disabled={success}
-                required
-                placeholder="Enter your Email"
-                type="email"
-              />
-            </div>
-            <button
-              disabled={success}
-              type="submit"
-              className="login-signup-btn"
-            >
-              Reset
-            </button>
-          </form>
+                type="submit"
+                className="login-signup-btn"
+              >
+                Reset
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
