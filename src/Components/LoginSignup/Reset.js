@@ -7,6 +7,7 @@ const Reset = () => {
   const [loading, setLoading] = useState(true);
   const [tokenExpired, setTokenExpired] = useState(false);
   const [active, setActive] = useState(false);
+  const [success, setSuccess] = useState(false);
   const token = window.location.href.split("reset/")[1];
 
   useEffect(() => {
@@ -28,16 +29,22 @@ const Reset = () => {
 
   const reset = (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
-      .post("http://localhost:5000/checkresettoken", {
+      .post("http://localhost:5000/confirmreset", {
         token,
         pass: e.target[1].value,
       })
-      .then((res) => console.log(res.data));
+      .then((res) => {
+        setLoading(false);
+        setActive(false);
+        setSuccess(true);
+      });
   };
   return (
     <div className="login-signup-main">
       {tokenExpired && <h5>Sorry link Expired</h5>}
+      {success && <h5>Success please login</h5>}
       {loading && <Spinner animation="border" variant="success" />}
       {active && (
         <div className="login-main shadow">
