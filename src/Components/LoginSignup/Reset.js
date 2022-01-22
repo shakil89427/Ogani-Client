@@ -24,6 +24,10 @@ const Reset = () => {
         if (res.data) {
           setCheckToken(false);
           setActive(true);
+        } else {
+          setTokenExpired(true);
+          setCheckToken(false);
+          return;
         }
       });
   }, [token]);
