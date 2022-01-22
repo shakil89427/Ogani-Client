@@ -25,6 +25,16 @@ const Reset = () => {
         }
       });
   }, [token]);
+
+  const reset = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/checkresettoken", {
+        token,
+        pass: e.target[1].value,
+      })
+      .then((res) => console.log(res.data));
+  };
   return (
     <div className="login-signup-main">
       {tokenExpired && <h5>Sorry link Expired</h5>}
@@ -32,7 +42,7 @@ const Reset = () => {
       {active && (
         <div className="login-main shadow">
           <div className="p-3">
-            <form>
+            <form onSubmit={reset}>
               <div className="input-div">
                 <i className="fas fa-lock"></i>
                 <input
