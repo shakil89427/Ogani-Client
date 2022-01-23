@@ -9,12 +9,12 @@ import useSetToLocal from "../Hooks/useSetToLocal";
 
 const Cart = () => {
   const {
-    cartProducts,
-    setCartProducts,
     cartItems,
     setCartItems,
     user,
-    cartLoading,
+    cartProducts,
+    setCartProducts,
+    cartPdLoading,
   } = useAuth();
   const { setToLocal } = useSetToLocal();
   const [subtotal, setSubtotal] = useState(0);
@@ -79,22 +79,25 @@ const Cart = () => {
     setTotal(temp + tempTax);
   }, [cartProducts]);
 
-  const applyCoupon = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <div>
-      {cartLoading && (
-        <div className="text-center my-5">
-          <Spinner className="spin" animation="border" variant="success" />
-        </div>
-      )}
       <ToastContainer />
       <h1 className="text-center fw-bold cart-h1">Shopping Cart</h1>
-
-      {cartItems?.products?.length > 0 ? (
-        <Container className={cartLoading ? "blur" : ""}>
+      {cartPdLoading && (
+        <div className="text-center my-5">
+          <Spinner animation="border" variant="success" />
+        </div>
+      )}
+      {!cartPdLoading && cartItems?.products?.length === 0 && (
+        <div className="p-5 d-flex flex-column align-items-center justify-content-center">
+          <h5>You didn't added any product to Cart</h5>
+          <Link to="/shop">
+            <button className="allbtn">Continue To Shop</button>
+          </Link>
+        </div>
+      )}
+      {!cartPdLoading && cartItems?.products?.length > 0 && (
+        <Container>
           <Row className="border-bottom py-2">
             <Col xs={4} sm={4} md={6} lg={6}>
               <h5 className="fw-bolder">Products</h5>
@@ -157,8 +160,8 @@ const Cart = () => {
               UPADATE CART
             </button>
           </div>
-          <Row className="my-5 coupon">
-            {!cartLoading && cartItems?.products?.length > 0 && (
+          <Row className="my-5">
+            {cartItems?.products?.length > 0 && (
               <Col className="ms-auto" sm={12} md={6} lg={6}>
                 <div className="cart-total">
                   <h5 className="fw-bolder">Cart Total</h5>
@@ -190,17 +193,6 @@ const Cart = () => {
             )}
           </Row>
         </Container>
-      ) : (
-        <div>
-          {!cartLoading && (
-            <div className="p-5 d-flex flex-column align-items-center justify-content-center">
-              <h5>You didn't added any product to Cart</h5>
-              <Link to="/shop">
-                <button className="allbtn">Continue To Shop</button>
-              </Link>
-            </div>
-          )}
-        </div>
       )}
     </div>
   );

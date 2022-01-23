@@ -12,7 +12,7 @@ const Store = () => {
   const [userLoading, setUserLoading] = useState(true);
   const [cartItems, setCartItems] = useState({});
   const [cartProducts, setCartProducts] = useState([]);
-  const [cartLoading, setCartLoading] = useState();
+  const [cartPdLoading, setCartPdLoading] = useState(true);
   const [filterBy, setFilterBy] = useState({ page: 0 });
   const [count, setCount] = useState(0);
   const { loadAllProducts } = useLoadAllProducts();
@@ -41,14 +41,12 @@ const Store = () => {
 
   /* Check Cart Activity */
   useEffect(() => {
-    loadCart(user, setCartItems, cart, setCartLoading);
+    loadCart(user, setCartItems, cart);
   }, [user]);
 
-  /* load Cart products */
   useEffect(() => {
-    if (!cartItems?.products) return;
-    if (cartItems?.products?.length === 0) return;
-    loadCartProducts(cartItems.products, setCartProducts, setCartLoading);
+    if (!cartItems._id) return;
+    loadCartProducts(cartItems.products, setCartProducts, setCartPdLoading);
   }, [cartItems]);
 
   return {
@@ -61,12 +59,12 @@ const Store = () => {
     setUserLoading,
     cartItems,
     setCartItems,
-    cartLoading,
+    cartProducts,
+    setCartProducts,
+    cartPdLoading,
     filterBy,
     setFilterBy,
     count,
-    cartProducts,
-    setCartProducts,
   };
 };
 
