@@ -54,9 +54,14 @@ const Header = () => {
             )}
 
             {!user._id && (
-              <Link className="user" to="/login">
-                <i className="fas fa-user"></i>
-              </Link>
+              <span>
+                <Link className="user" to="/login">
+                  <button className="ls-btn">Login</button>
+                </Link>
+                <Link className="user" to="/signup">
+                  <button className="ls-btn">Signup</button>
+                </Link>
+              </span>
             )}
           </span>
         </div>
@@ -88,11 +93,14 @@ const Header = () => {
                 </span>
               )}
               {!user._id && (
-                <p className="text-center mt-3">
+                <span className="text-center my-3">
                   <Link className="user" to="/login">
-                    <i className="fas fa-user"></i>
+                    <button className="ls-btn">Login</button>
                   </Link>
-                </p>
+                  <Link className="user" to="/signup">
+                    <button className="ls-btn">Signup</button>
+                  </Link>
+                </span>
               )}
               <Link className="navitem" to="/">
                 Home
@@ -116,9 +124,11 @@ const Header = () => {
               </span>
             </div>
           </Offcanvas.Body>
-          <button onClick={logout} className="w-100 allbtn">
-            Logout<i className="ms-2 fas fa-sign-out-alt"></i>
-          </button>
+          {user._id && (
+            <button onClick={logout} className="w-100 allbtn">
+              Logout<i className="ms-2 fas fa-sign-out-alt"></i>
+            </button>
+          )}
         </Navbar.Offcanvas>
       </Navbar>
     </div>
