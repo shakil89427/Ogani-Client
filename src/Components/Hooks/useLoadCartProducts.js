@@ -1,30 +1,25 @@
 import axios from "axios";
 
 const useLoadCartProducts = () => {
-  const loadCartProducts = async (
-    cartItems,
-    setCartProducts,
-    setCartPdLoading
-  ) => {
+  const loadCartProducts = (cartItems, setCartProducts, setCartPdLoading) => {
     const final = [];
-    const result = await axios.post(
-      "https://oganishop247.herokuapp.com/cartproducts",
-      cartItems
-    );
-    const data = await result.data;
-    if (data) {
-      for (const item of cartItems) {
-        const result = data.find((single) => single._id === item._id);
-        if (result.name) {
-          result.quantity = item.quantity;
-          final.push(result);
+    axios
+      .post("https://oganishop247.herokuapp.com/cartproducts", cartItems)
+      .then((res) => {
+        if (res.data) {
+          for (const item of cartItems) {
+            const result = res.data.find((single) => single._id === item._id);
+            if (result.name) {
+              result.quantity = item.quantity;
+              final.push(result);
+            }
+          }
+          setCartProducts(final);
+          setCartPdLoading(false);
+        } else {
+          setCartPdLoading(false);
         }
-      }
-      setCartProducts(final);
-      setCartPdLoading(false);
-    } else {
-      setCartPdLoading(false);
-    }
+      });
   };
   return { loadCartProducts };
 };
