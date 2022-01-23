@@ -23,11 +23,13 @@ const Details = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoading(true);
-    axios.get(`http://localhost:5000/productdetails/${id}`).then((res) => {
-      setProduct(res.data.result);
-      setRelatedProducts(res.data.result2);
-      setLoading(false);
-    });
+    axios
+      .get(`https://oganishop247.herokuapp.com/productdetails/${id}`)
+      .then((res) => {
+        setProduct(res.data.result);
+        setRelatedProducts(res.data.result2);
+        setLoading(false);
+      });
   }, [id]);
 
   const getCatagory = (e) => {

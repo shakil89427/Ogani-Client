@@ -20,23 +20,25 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     setLoading(true);
-    axios.post("http://localhost:5000/sendemail", data).then((res) => {
-      if (res.data) {
-        setLoading(false);
-        e.target.reset();
-        toast.success("Message Successfully Sended", {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          theme: "colored",
-          transition: Slide,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-    });
+    axios
+      .post("https://oganishop247.herokuapp.com/sendemail", data)
+      .then((res) => {
+        if (res.data) {
+          setLoading(false);
+          e.target.reset();
+          toast.success("Message Successfully Sended", {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            theme: "colored",
+            transition: Slide,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      });
   };
 
   return (

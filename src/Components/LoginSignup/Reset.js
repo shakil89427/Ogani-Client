@@ -21,7 +21,9 @@ const Reset = () => {
       return;
     }
     axios
-      .post("http://localhost:5000/checkresettoken", { token: token })
+      .post("https://oganishop247.herokuapp.com/checkresettoken", {
+        token: token,
+      })
       .then((res) => {
         if (res.data) {
           setCheckToken(false);
@@ -64,7 +66,7 @@ const Reset = () => {
     }
     setLoading(true);
     axios
-      .post("http://localhost:5000/confirmreset", {
+      .post("https://oganishop247.herokuapp.com/confirmreset", {
         token,
         pass: e.target[1].value,
       })

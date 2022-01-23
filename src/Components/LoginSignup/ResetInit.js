@@ -12,7 +12,9 @@ const ResetInit = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .get(`http://localhost:5000/resetpassword/${e.target[0].value}`)
+      .get(
+        `https://oganishop247.herokuapp.com/resetpassword/${e.target[0].value}`
+      )
       .then((res) => {
         if (res.data) {
           setLoading(false);
