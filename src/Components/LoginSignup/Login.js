@@ -76,6 +76,11 @@ const Login = () => {
                 <button className="new">Signup</button>
               </Link>
             </p>
+            <p className="text-center">
+              <Link className="backtohome" to="/">
+                Back To Home
+              </Link>
+            </p>
           </div>
         </div>
       </div>

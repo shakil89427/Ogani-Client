@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { isExpired } from "react-jwt";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -126,6 +127,11 @@ const Reset = () => {
           </div>
         </div>
       )}
+      <p className="text-center">
+        <Link className="backtohome" to="/">
+          Back To Home
+        </Link>
+      </p>
     </div>
   );
 };

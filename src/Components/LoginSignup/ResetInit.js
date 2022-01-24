@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -82,6 +83,11 @@ const ResetInit = () => {
                 Reset
               </button>
             </form>
+            <p className="text-center mt-3 mb-1">
+              <Link className="backtohome" to="/">
+                Back To Home
+              </Link>
+            </p>
           </div>
         </div>
       )}
