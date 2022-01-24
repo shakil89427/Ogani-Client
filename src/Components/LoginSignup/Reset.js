@@ -124,14 +124,21 @@ const Reset = () => {
                 Submit
               </button>
             </form>
+            <p className="text-center mt-3 mb-1">
+              <Link className="backtohome" to="/">
+                Back To Home
+              </Link>
+            </p>
           </div>
         </div>
       )}
-      <p className="text-center">
-        <Link className="backtohome" to="/">
-          Back To Home
-        </Link>
-      </p>
+      {success && (
+        <p className="text-center">
+          <Link className="backtohome" to="/">
+            Back To Home
+          </Link>
+        </p>
+      )}
     </div>
   );
 };
