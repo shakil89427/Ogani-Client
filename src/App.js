@@ -32,13 +32,13 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="/resetinit" element={<ResetInit />} />
               <Route path="/reset/:id" element={<Reset />} />
-              <Route path="details/:id" element={<Details />} />
-              <Route path="shop" element={<Shop />} />
-              <Route path="blog" element={<Blog />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="cart" element={<Cart />} />
+              <Route path="/details/:id" element={<Details />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/cart" element={<Cart />} />
               <Route
-                path="profile"
+                path="/profile"
                 element={
                   <PrivateRoute>
                     <Profile />
@@ -46,7 +46,7 @@ function App() {
                 }
               />
               <Route
-                path="checkout"
+                path="/checkout"
                 element={
                   <PrivateRoute>
                     <Checkout />

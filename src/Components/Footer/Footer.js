@@ -2,8 +2,19 @@ import React from "react";
 import logo from "./../../img/logo.png";
 import { Col, Row } from "react-bootstrap";
 import "./Footer.css";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
+  let value = "";
+  if (location.pathname.startsWith("/reset/")) {
+    value = location.pathname.split("/reset/")[1];
+  }
+
+  if (location.pathname === "/login") return null;
+  if (location.pathname === "/signup") return null;
+  if (location.pathname === "/resetinit") return null;
+  if (location.pathname === `/reset/${value}`) return null;
   return (
     <div className="f-main p-2">
       <div className="container">

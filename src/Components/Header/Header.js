@@ -1,6 +1,6 @@
 import "./Header.css";
 import { Nav, Navbar, Offcanvas } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../img/logo.png";
 import useAuth from "../AuthProvider/useAuth";
 import useLogout from "../Hooks/useLogout";
@@ -8,7 +8,16 @@ import useLogout from "../Hooks/useLogout";
 const Header = () => {
   const { user, cartItems } = useAuth();
   const { logout } = useLogout();
+  const location = useLocation();
+  let value = "";
+  if (location.pathname.startsWith("/reset/")) {
+    value = location.pathname.split("/reset/")[1];
+  }
 
+  if (location.pathname === "/login") return null;
+  if (location.pathname === "/signup") return null;
+  if (location.pathname === "/resetinit") return null;
+  if (location.pathname === `/reset/${value}`) return null;
   return (
     <div className="main-nav">
       <Navbar className="container" expand={false}>
