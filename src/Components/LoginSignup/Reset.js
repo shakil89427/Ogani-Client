@@ -91,6 +91,8 @@ const Reset = () => {
         setLoading(false);
         setSuccess(true);
         setActive(false);
+        setTokenExpired(false);
+        setError(false);
       } else {
         setLoading(false);
         setActive(false);
