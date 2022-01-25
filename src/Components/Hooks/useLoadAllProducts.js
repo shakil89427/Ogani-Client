@@ -11,10 +11,13 @@ const useLoadAllProducts = () => {
   ) => {
     setAllProductsLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/allproducts", {
-        filterBy,
-        featured,
-      });
+      const response = await axios.post(
+        "https://oganishop247.herokuapp.com/allproducts",
+        {
+          filterBy,
+          featured,
+        }
+      );
       if (response?.data) {
         setCount(Math.ceil(response.data.count / 8));
         setAllProducts(response.data.result);
