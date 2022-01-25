@@ -7,17 +7,16 @@ import "react-toastify/dist/ReactToastify.css";
 const useSignup = () => {
   const { decodeUser } = useDecodeUser();
   const { setUserLoading, setUser } = useAuth();
-  const signup = (data) => {
+  const signup = async (data) => {
     setUserLoading(true);
-    axios
-      .post("http://localhost:5000/signup", data)
-      .then((res) => {
-        if (res.data) {
-          localStorage.setItem("accessToken", res.data);
-          decodeUser(res.data, setUser, setUserLoading);
-        }
-      })
-      .catch((error) => {
+    try {
+      const response = await axios.post("http://localhost:5000/signup", data);
+      if (response.data) {
+        localStorage.setItem("accessToken", response.data);
+        decodeUser(response.data, setUser, setUserLoading);
+        setUserLoading(false);
+      } else {
+        setUserLoading(false);
         toast.warning("Email Already Exist", {
           position: "top-center",
           autoClose: 1000,
@@ -29,8 +28,21 @@ const useSignup = () => {
           draggable: true,
           progress: undefined,
         });
-        setUserLoading(false);
+      }
+    } catch (error) {
+      setUserLoading(false);
+      toast.warning("Email Already Exist", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        theme: "colored",
+        transition: Slide,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
       });
+    }
   };
   return { signup, signuptoast: <ToastContainer /> };
 };
