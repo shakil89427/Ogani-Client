@@ -22,12 +22,24 @@ const Details = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setLoading(true);
-    axios.get(`http://localhost:5000/productdetails/${id}`).then((res) => {
-      setProduct(res.data.result);
-      setRelatedProducts(res.data.result2);
-      setLoading(false);
-    });
+    const loadDetails = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/productdetails/${id}`
+        );
+        if (response.data) {
+          setProduct(response.data.result);
+          setRelatedProducts(response.data.result2);
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+    loadDetails();
   }, [id]);
 
   const getCatagory = (e) => {
