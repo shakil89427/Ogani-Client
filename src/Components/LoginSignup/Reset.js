@@ -12,6 +12,7 @@ const Reset = () => {
   const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const token = window.location.href.split("reset/")[1];
 
   useEffect(() => {
@@ -21,12 +22,13 @@ const Reset = () => {
       setCheckToken(false);
       return;
     }
-    axios
-      .post("http://localhost:5000/checkresettoken", {
-        token: token,
-      })
-      .then((res) => {
-        if (res.data) {
+    const checkstatus = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/checkresettoken",
+          { token: token }
+        );
+        if (response.data) {
           setCheckToken(false);
           setActive(true);
         } else {
@@ -34,10 +36,15 @@ const Reset = () => {
           setCheckToken(false);
           return;
         }
-      });
+      } catch (error) {
+        setCheckToken(false);
+        setError(true);
+      }
+    };
+    checkstatus();
   }, [token]);
 
-  const reset = (e) => {
+  const reset = async (e) => {
     e.preventDefault();
     if (e.target[0].value !== e.target[1].value) {
       return toast.warning("Password Didn't Matched", {
@@ -66,16 +73,25 @@ const Reset = () => {
       });
     }
     setLoading(true);
-    axios
-      .post("http://localhost:5000/confirmreset", {
+    try {
+      const response = await axios.post("http://localhost:5000/confirmreset", {
         token,
         pass: e.target[1].value,
-      })
-      .then((res) => {
+      });
+      if (response?.data) {
         setLoading(false);
         setSuccess(true);
         setActive(false);
-      });
+      } else {
+        setLoading(false);
+        setActive(false);
+        setError(true);
+      }
+    } catch (error) {
+      setLoading(false);
+      setActive(false);
+      setError(true);
+    }
   };
   return (
     <div className="login-signup-main">
@@ -86,6 +102,9 @@ const Reset = () => {
       )}
       {success && (
         <h2 className="login-h2 rounded-pill px-3">Success Please Login</h2>
+      )}
+      {error && (
+        <h2 className="login-h2 rounded-pill px-3">Something Went Wrong</h2>
       )}
       {active && (
         <div className="login-main shadow">
@@ -133,6 +152,13 @@ const Reset = () => {
         </div>
       )}
       {success && (
+        <p className="text-center">
+          <Link className="backtohome" to="/">
+            Back To Home
+          </Link>
+        </p>
+      )}
+      {error && (
         <p className="text-center">
           <Link className="backtohome" to="/">
             Back To Home

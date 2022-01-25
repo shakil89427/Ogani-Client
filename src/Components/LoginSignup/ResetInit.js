@@ -9,31 +9,17 @@ const ResetInit = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const reset = (e) => {
+  const reset = async (e) => {
     e.preventDefault();
     setLoading(true);
-    axios
-      .get(`http://localhost:5000/resetpassword/${e.target[0].value}`)
-      .then((res) => {
-        if (res.data) {
-          setLoading(false);
-          setSuccess(true);
-        } else {
-          setLoading(false);
-          toast.error("User not found", {
-            position: "top-center",
-            autoClose: 1000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            theme: "colored",
-            transition: Slide,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-      })
-      .catch((error) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/resetpassword/${e.target[0].value}`
+      );
+      if (response.data) {
+        setLoading(false);
+        setSuccess(true);
+      } else {
         setLoading(false);
         toast.error("User not found", {
           position: "top-center",
@@ -46,7 +32,21 @@ const ResetInit = () => {
           draggable: true,
           progress: undefined,
         });
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error("Something Went Wrong", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        theme: "colored",
+        transition: Slide,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
       });
+    }
   };
   return (
     <div className="login-signup-main">
