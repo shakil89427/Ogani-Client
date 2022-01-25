@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const useLoadAllProducts = () => {
-  const loadAllProducts = (
+  const loadAllProducts = async (
     filterBy,
     setCount,
     setAllProducts,
@@ -10,19 +10,24 @@ const useLoadAllProducts = () => {
     setFeaturedProducts
   ) => {
     setAllProductsLoading(true);
-    axios
-      .post("https://oganishop247.herokuapp.com/allproducts", {
+    try {
+      const response = await axios.post("http://localhost:5000/allproducts", {
         filterBy,
         featured,
-      })
-      .then((res) => {
-        setCount(Math.ceil(res.data.count / 8));
-        setAllProducts(res.data.result);
-        if (res.data.result2) {
-          setFeaturedProducts(res.data.result2);
+      });
+      if (response?.data) {
+        setCount(Math.ceil(response.data.count / 8));
+        setAllProducts(response.data.result);
+        if (response?.data?.result2) {
+          setFeaturedProducts(response.data.result2);
         }
         setAllProductsLoading(false);
-      });
+      } else {
+        setAllProductsLoading(false);
+      }
+    } catch (error) {
+      setAllProductsLoading(false);
+    }
   };
   return { loadAllProducts };
 };

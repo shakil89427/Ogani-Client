@@ -6,25 +6,23 @@ const useLoadCart = () => {
 
   const loadCart = (user, setCartItems, result) => {
     if (user?._id) {
-      axios
-        .get(`https://oganishop247.herokuapp.com/getcart/${user._id}`)
-        .then((res) => {
-          if (res.data) {
-            setCartItems(res.data);
-            return localStorage.removeItem("cart");
-          }
-          if (!res.data && result) {
-            result._id = user._id;
-            setToLocal(user, setCartItems, result);
-            return localStorage.removeItem("cart");
-          }
-          if (!res.data && !result) {
-            setToLocal(user, setCartItems, {
-              _id: user._id,
-              products: [],
-            });
-          }
-        });
+      axios.get(`http://localhost:5000/getcart/${user._id}`).then((res) => {
+        if (res.data) {
+          setCartItems(res.data);
+          return localStorage.removeItem("cart");
+        }
+        if (!res.data && result) {
+          result._id = user._id;
+          setToLocal(user, setCartItems, result);
+          return localStorage.removeItem("cart");
+        }
+        if (!res.data && !result) {
+          setToLocal(user, setCartItems, {
+            _id: user._id,
+            products: [],
+          });
+        }
+      });
     }
     if (!user?._id && !result) {
       return setToLocal(user, setCartItems, { _id: "user", products: [] });
