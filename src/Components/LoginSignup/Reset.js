@@ -24,9 +24,13 @@ const Reset = () => {
     }
     const checkstatus = async () => {
       try {
-        const response = await axios.post(
+        const response = await axios.get(
           "http://localhost:5000/checkresettoken",
-          { token: token }
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
         );
         if (response.data) {
           setCheckToken(false);
@@ -74,10 +78,15 @@ const Reset = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/confirmreset", {
-        token,
-        pass: e.target[1].value,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/confirmreset",
+        { pass: e.target[1].value },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (response?.data) {
         setLoading(false);
         setSuccess(true);
