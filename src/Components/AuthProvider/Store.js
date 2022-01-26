@@ -9,7 +9,7 @@ const Store = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [allProductsLoading, setAllProductsLoading] = useState(true);
   const [user, setUser] = useState({});
-  const [userLoading, setUserLoading] = useState(false);
+  const [userLoading, setUserLoading] = useState(true);
   const [cartItems, setCartItems] = useState({});
   const [cartProducts, setCartProducts] = useState([]);
   const [cartPdLoading, setCartPdLoading] = useState(true);
