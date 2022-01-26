@@ -22,7 +22,7 @@ const Contact = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://oganishop247.herokuapp.com/sendemail",
+        "http://localhost:5000/sendemail",
         data
       );
       if (response.data) {

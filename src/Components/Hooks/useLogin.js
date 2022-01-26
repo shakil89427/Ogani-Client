@@ -1,22 +1,20 @@
 import axios from "axios";
 import useAuth from "../AuthProvider/useAuth";
-import useDecodeUser from "./useDecodeUser";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useUserCheck from "./useUserCheck";
 
 const useLogin = () => {
   const { setUser, setUserLoading } = useAuth();
-  const { decodeUser } = useDecodeUser();
+  const { userCheck } = useUserCheck();
   const login = async (data) => {
     setUserLoading(true);
     try {
-      const response = await axios.post(
-        "https://oganishop247.herokuapp.com/login",
-        data
-      );
+      const response = await axios.post("http://localhost:5000/login", data);
       if (response.data) {
-        localStorage.setItem("accessToken", response.data);
-        decodeUser(response.data, setUser, setUserLoading);
+        localStorage.setItem("accessToken", response.data.token);
+        console.log(response);
+        userCheck(setUser, setUserLoading);
       } else {
         setUserLoading(false);
         toast.error("Authentication Error", {

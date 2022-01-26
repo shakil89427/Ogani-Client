@@ -8,7 +8,7 @@ const useSetToLocal = () => {
     }
     if (user?._id) {
       setCartItems(value);
-      axios.post("https://oganishop247.herokuapp.com/savecart", value);
+      axios.post("http://localhost:5000/savecart", value);
     }
   };
   return { setToLocal };

@@ -26,7 +26,7 @@ const Details = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://oganishop247.herokuapp.com/productdetails/${id}`
+          `http://localhost:5000/productdetails/${id}`
         );
         if (response.data) {
           setProduct(response.data.result);

@@ -9,7 +9,7 @@ const useLoadCartProducts = () => {
     const final = [];
     try {
       const response = await axios.post(
-        "https://oganishop247.herokuapp.com/cartproducts",
+        "http://localhost:5000/cartproducts",
         cartItems
       );
       if (response.data) {

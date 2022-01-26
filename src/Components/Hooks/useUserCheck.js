@@ -1,21 +1,17 @@
-import { isExpired } from "react-jwt";
-import useDecodeUser from "./useDecodeUser";
+import axios from "axios";
 
 const useUserCheck = () => {
-  const { decodeUser } = useDecodeUser();
+  const userCheck = async (setUser, setUserLoading) => {
+    const accesstoken = localStorage.getItem("accessToken");
 
-  const userCheck = (accesstoken, setUser, setUserLoading) => {
-    const expiredtoken = isExpired(accesstoken);
     if (!accesstoken) {
       setUser({});
       return setUserLoading(false);
     }
-    if (expiredtoken) {
-      setUser({});
-      localStorage.removeItem("accessToken");
-      return setUserLoading(false);
-    }
-    decodeUser(accesstoken, setUser, setUserLoading);
+    const response = await axios.get("http://localhost:5000/getuser", {
+      headers: { authorization: `Bearer ${accesstoken}` },
+    });
+    console.log(response);
   };
   return { userCheck };
 };

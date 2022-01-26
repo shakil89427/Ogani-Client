@@ -9,7 +9,7 @@ const Store = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [allProductsLoading, setAllProductsLoading] = useState(true);
   const [user, setUser] = useState({});
-  const [userLoading, setUserLoading] = useState(true);
+  const [userLoading, setUserLoading] = useState(false);
   const [cartItems, setCartItems] = useState({});
   const [cartProducts, setCartProducts] = useState([]);
   const [cartPdLoading, setCartPdLoading] = useState(true);
@@ -19,7 +19,6 @@ const Store = () => {
   const { userCheck } = useUserCheck();
   const { loadCart } = useLoadCart();
   const { loadCartProducts } = useLoadCartProducts();
-  const accesstoken = localStorage.getItem("accessToken");
   const cart = JSON.parse(localStorage.getItem("cart"));
 
   /* Load All Products */
@@ -36,8 +35,8 @@ const Store = () => {
 
   /* Check Token Activity */
   useEffect(() => {
-    userCheck(accesstoken, setUser, setUserLoading);
-  }, [accesstoken]);
+    userCheck(setUser, setUserLoading);
+  }, []);
 
   /* Check Cart Activity */
   useEffect(() => {

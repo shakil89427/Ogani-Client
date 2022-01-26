@@ -25,7 +25,7 @@ const Reset = () => {
     const checkstatus = async () => {
       try {
         const response = await axios.get(
-          "https://oganishop247.herokuapp.com/checkresettoken",
+          "http://localhost:5000/checkresettoken",
           {
             headers: {
               authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ const Reset = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://oganishop247.herokuapp.com/confirmreset",
+        "http://localhost:5000/confirmreset",
         { pass: e.target[1].value },
         {
           headers: {
