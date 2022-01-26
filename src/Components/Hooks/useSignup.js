@@ -12,10 +12,12 @@ const useSignup = () => {
     setUserLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/signup", data);
+      const response = await axios.post(
+        "https://oganishop247.herokuapp.com/signup",
+        data
+      );
       if (response.data) {
         localStorage.setItem("accessToken", response.data.token);
-        console.log(response);
         userCheck(setUser, setUserLoading);
       } else {
         setUserLoading(false);

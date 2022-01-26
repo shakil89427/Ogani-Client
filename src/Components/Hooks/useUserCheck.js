@@ -9,11 +9,15 @@ const useUserCheck = () => {
       return setUserLoading(false);
     }
     try {
-      const response = await axios.get("http://localhost:5000/getuser", {
-        headers: { authorization: `Bearer ${accesstoken}` },
-      });
+      const response = await axios.get(
+        "https://oganishop247.herokuapp.com/getuser",
+        {
+          headers: { authorization: `Bearer ${accesstoken}` },
+        }
+      );
       if (response?.data) {
-        setUser(response?.data);
+        localStorage.setItem("accessToken", response.data.token);
+        setUser(response.data.rest);
         setUserLoading(false);
       } else {
         setUserLoading(false);

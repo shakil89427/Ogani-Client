@@ -14,7 +14,7 @@ const ResetInit = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/resetpassword/${e.target[0].value}`
+        `https://oganishop247.herokuapp.com/resetpassword/${e.target[0].value}`
       );
       if (response.data) {
         setLoading(false);

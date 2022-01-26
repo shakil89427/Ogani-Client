@@ -10,8 +10,12 @@ const useLogin = () => {
 
   const login = async (data) => {
     setUserLoading(true);
+
     try {
-      const response = await axios.post("http://localhost:5000/login", data);
+      const response = await axios.post(
+        "https://oganishop247.herokuapp.com/login",
+        data
+      );
       if (response.data) {
         localStorage.setItem("accessToken", response.data.token);
         userCheck(setUser, setUserLoading);

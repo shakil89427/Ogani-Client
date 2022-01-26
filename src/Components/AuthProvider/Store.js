@@ -45,6 +45,7 @@ const Store = () => {
 
   useEffect(() => {
     if (!cartItems._id) return;
+    if (cartItems?.products?.length === 0) return;
     loadCartProducts(cartItems.products, setCartProducts, setCartPdLoading);
   }, [cartItems]);
 

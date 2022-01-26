@@ -8,7 +8,7 @@ const useLoadCart = () => {
     if (user?._id) {
       try {
         const response = await axios.get(
-          `http://localhost:5000/getcart/${user._id}`
+          `https://oganishop247.herokuapp.com/getcart/${user._id}`
         );
         if (response?.data) {
           setCartItems(response.data);
