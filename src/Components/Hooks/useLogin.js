@@ -7,13 +7,13 @@ import useUserCheck from "./useUserCheck";
 const useLogin = () => {
   const { setUser, setUserLoading } = useAuth();
   const { userCheck } = useUserCheck();
+
   const login = async (data) => {
     setUserLoading(true);
     try {
       const response = await axios.post("http://localhost:5000/login", data);
       if (response.data) {
         localStorage.setItem("accessToken", response.data.token);
-        console.log(response);
         userCheck(setUser, setUserLoading);
       } else {
         setUserLoading(false);

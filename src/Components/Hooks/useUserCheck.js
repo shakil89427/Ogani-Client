@@ -8,10 +8,19 @@ const useUserCheck = () => {
       setUser({});
       return setUserLoading(false);
     }
-    const response = await axios.get("http://localhost:5000/getuser", {
-      headers: { authorization: `Bearer ${accesstoken}` },
-    });
-    console.log(response);
+    try {
+      const response = await axios.get("http://localhost:5000/getuser", {
+        headers: { authorization: `Bearer ${accesstoken}` },
+      });
+      if (response?.data) {
+        setUser(response?.data);
+        setUserLoading(false);
+      } else {
+        setUserLoading(false);
+      }
+    } catch (error) {
+      setUserLoading(false);
+    }
   };
   return { userCheck };
 };
