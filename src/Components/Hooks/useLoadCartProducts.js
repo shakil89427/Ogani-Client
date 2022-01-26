@@ -6,6 +6,9 @@ const useLoadCartProducts = () => {
     setCartProducts,
     setCartPdLoading
   ) => {
+    if (cartItems.length === 0) {
+      return setCartPdLoading(false);
+    }
     const final = [];
     try {
       const response = await axios.post(
