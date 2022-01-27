@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import useAuth from "../AuthProvider/useAuth";
 
 const MainProfile = () => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const [edit, setEdit] = useState(false);
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const getData = (e) => {
     const name = e.target.name;
@@ -18,9 +19,22 @@ const MainProfile = () => {
 
   const update = async (e) => {
     e.preventDefault();
-    data.email = user.email;
-    const response = await axios.post("http://localhost:5000/updateuser", data);
-    console.log(response);
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/updateuser",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.data) {
+        setUser(response.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
   };
   return (
     <div className="p-2">
@@ -32,8 +46,12 @@ const MainProfile = () => {
           </button>
         )}
         {edit && (
-          <button onClick={() => setEdit(false)} className="edit-profile">
-            <i class="far fa-window-close me-1"></i>Cancel
+          <button
+            disabled={loading}
+            onClick={() => setEdit(false)}
+            className="edit-profile"
+          >
+            <i className="far fa-window-close me-1"></i>Cancel
           </button>
         )}
       </div>
@@ -81,6 +99,7 @@ const MainProfile = () => {
                 </p>
                 <input
                   onChange={getData}
+                  disabled={loading}
                   name="firstname"
                   required
                   defaultValue={user.firstname}
@@ -93,6 +112,7 @@ const MainProfile = () => {
                 </p>
                 <input
                   onChange={getData}
+                  disabled={loading}
                   name="lastname"
                   defaultValue={user.lastname}
                   required
@@ -104,6 +124,7 @@ const MainProfile = () => {
                 <p>Phone</p>
                 <input
                   onChange={getData}
+                  disabled={loading}
                   name="phone"
                   defaultValue={user.phone}
                   type="number"
@@ -128,15 +149,20 @@ const MainProfile = () => {
                 </p>
                 <input
                   onChange={getData}
+                  disabled={loading}
                   name="address"
                   defaultValue={user.address}
                   type="text"
                 />
               </Col>
             </Row>
-            <button className="allbtn" type="submit">
-              Update
-            </button>
+            {loading ? (
+              <Spinner className="ms-5" animation="border" variant="success" />
+            ) : (
+              <button className="allbtn" type="submit">
+                Update
+              </button>
+            )}
           </form>
           <h3 className="my-3">Change Password</h3>
           <form onSubmit={update}>
