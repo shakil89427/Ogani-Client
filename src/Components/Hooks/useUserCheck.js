@@ -2,23 +2,13 @@ import axios from "axios";
 
 const useUserCheck = () => {
   const userCheck = async (setUser, setUserLoading) => {
-    const accesstoken = localStorage.getItem("accessToken");
-
-    if (!accesstoken) {
-      setUser({});
-      return setUserLoading(false);
-    }
     try {
-      const response = await axios.get(
-        "https://oganishop247.herokuapp.com/getuser",
-        {
-          headers: { authorization: `Bearer ${accesstoken}` },
-        }
-      );
+      const response = await axios.get("http://localhost:5000/checkuser", {
+        withCredentials: true,
+      });
       if (response?.data) {
-        localStorage.setItem("accessToken", response.data.token);
-        setUser(response.data.rest);
         setUserLoading(false);
+        console.log(response);
       } else {
         setUserLoading(false);
       }

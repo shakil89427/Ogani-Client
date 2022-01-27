@@ -37,48 +37,9 @@ const Checkout = () => {
                 </Col>
                 <Col sm={12} md={12} lg={12}>
                   <p>
-                    Country <sup>*</sup>
-                  </p>
-                  <input required={!alternative} disabled type="text" />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <p>
                     Address <sup>*</sup>
                   </p>
-                  <input
-                    required={!alternative}
-                    disabled
-                    placeholder="Street Address"
-                    type="text"
-                  />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <input
-                    required={!alternative}
-                    disabled
-                    placeholder="Apartment,suite,unite ect (optional)"
-                    type="text"
-                  />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <p>
-                    Town/City <sup>*</sup>
-                  </p>
-                  <input disabled required={!alternative} type="text" />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <p>
-                    Country/State
-                    <sup>*</sup>
-                  </p>
-                  <input disabled required={!alternative} type="text" />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <p>
-                    Postcode / ZIP
-                    <sup>*</sup>
-                  </p>
-                  <input disabled required={!alternative} type="text" />
+                  <input required={!alternative} type="text" />
                 </Col>
                 <Col sm={12} md={12} lg={6}>
                   <p>Phone</p>
@@ -106,54 +67,7 @@ const Checkout = () => {
                 {alternative && (
                   <Col sm={12} md={12} lg={12}>
                     <p>
-                      Country <sup>*</sup>
-                    </p>
-                    <input required={alternative} type="text" />
-                  </Col>
-                )}
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <p>
                       Address <sup>*</sup>
-                    </p>
-                    <input
-                      required={alternative}
-                      placeholder="Street Address"
-                      type="text"
-                    />
-                  </Col>
-                )}
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <input
-                      required={alternative}
-                      placeholder="Apartment,suite,unite ect (optional)"
-                      type="text"
-                    />
-                  </Col>
-                )}
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <p>
-                      Town/City <sup>*</sup>
-                    </p>
-                    <input required={alternative} type="text" />
-                  </Col>
-                )}
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <p>
-                      Country/State
-                      <sup>*</sup>
-                    </p>
-                    <input required={alternative} type="text" />
-                  </Col>
-                )}
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <p>
-                      Postcode / ZIP
-                      <sup>*</sup>
                     </p>
                     <input required={alternative} type="text" />
                   </Col>

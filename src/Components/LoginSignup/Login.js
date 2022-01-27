@@ -19,8 +19,8 @@ const Login = () => {
   return (
     <>
       {logintoast && logintoast}
-      {user._id && path && <Navigate to={path} />}
-      {user._id && !path && <Navigate to="/" />}
+      {user?._id && path && <Navigate to={path} />}
+      {user?._id && !path && <Navigate to="/" />}
       <div className="login-signup-main">
         <div className="login-main shadow">
           {!userLoading && <h2 className="login-h2">Login</h2>}
