@@ -13,8 +13,8 @@ const useLogin = () => {
       const response = await axios.post("http://localhost:5000/login", data, {
         withCredentials: true,
       });
-      if (response.data) {
-        setUser(response.data.rests);
+      if (response?.data) {
+        setUser(response.data);
         setUserLoading(false);
       } else {
         setUserLoading(false);

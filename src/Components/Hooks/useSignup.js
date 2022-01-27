@@ -14,7 +14,7 @@ const useSignup = () => {
         withCredentials: true,
       });
       if (response.data) {
-        setUser(response.data.rests);
+        setUser(response.data);
         setUserLoading(false);
       } else {
         setUserLoading(false);

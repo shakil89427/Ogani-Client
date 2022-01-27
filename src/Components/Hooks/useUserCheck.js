@@ -7,8 +7,8 @@ const useUserCheck = () => {
         withCredentials: true,
       });
       if (response?.data) {
+        setUser(response.data);
         setUserLoading(false);
-        console.log(response);
       } else {
         setUserLoading(false);
       }
