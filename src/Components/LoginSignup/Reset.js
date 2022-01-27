@@ -176,6 +176,13 @@ const Reset = () => {
           </Link>
         </p>
       )}
+      {tokenExpired && (
+        <p className="text-center">
+          <Link className="backtohome" to="/">
+            Back To Home
+          </Link>
+        </p>
+      )}
     </div>
   );
 };

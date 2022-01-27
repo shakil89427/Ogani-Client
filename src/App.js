@@ -12,12 +12,14 @@ import Shop from "./Components/Shop/Shop";
 import Blog from "./Components/Blog/Blog";
 import Contact from "./Components/Contact/Contact";
 import Cart from "./Components/Cart/Cart";
-import Profile from "./Components/Profile/Profile";
+import Dashboard from "./Components/Profile/Dashboard";
 import NotFound from "./Components/NotFound/NotFound";
 import Checkout from "./Components/Checkout/Checkout";
 import PrivateRoute from "./Components/AuthProvider/PrivateRoute";
 import Reset from "./Components/LoginSignup/Reset";
 import ResetInit from "./Components/LoginSignup/ResetInit";
+import PendingOrders from "./Components/Profile/PendingOrders";
+import CompletedOrders from "./Components/Profile/CompletedOrders";
 
 function App() {
   return (
@@ -38,13 +40,16 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/cart" element={<Cart />} />
               <Route
-                path="/profile"
+                path="/dashboard"
                 element={
                   <PrivateRoute>
-                    <Profile />
+                    <Dashboard />
                   </PrivateRoute>
                 }
-              />
+              >
+                <Route path="pending" element={<PendingOrders />} />
+                <Route path="completed" element={<CompletedOrders />} />
+              </Route>
               <Route
                 path="/checkout"
                 element={

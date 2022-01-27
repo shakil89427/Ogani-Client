@@ -301,7 +301,7 @@ const Shop = () => {
                   <Col
                     key={product._id}
                     className="p-3 text-center p-main"
-                    sm={6}
+                    xs={6}
                     md={4}
                     lg={3}
                   >
