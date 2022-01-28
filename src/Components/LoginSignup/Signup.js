@@ -19,6 +19,7 @@ const Signup = () => {
     newData[name] = value;
     setData(newData);
   };
+
   const signupuser = (e) => {
     e.preventDefault();
     if (data.password !== data.password2) {
@@ -47,6 +48,7 @@ const Signup = () => {
         progress: undefined,
       });
     }
+    data.role = "user";
     signup(data);
   };
   return (

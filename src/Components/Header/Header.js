@@ -46,7 +46,7 @@ const Header = () => {
           <span className="d-none d-lg-inline">
             {user._id && (
               <span>
-                <Link to="/profile">
+                <Link to="/dashboard">
                   <img
                     className="profile"
                     src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
@@ -91,7 +91,7 @@ const Header = () => {
             <Nav className="justify-content-end flex-grow-1">
               {user._id && (
                 <span className="text-center px-5">
-                  <Link to="/profile">
+                  <Link to="/dashboard">
                     <img
                       className="profile"
                       src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
