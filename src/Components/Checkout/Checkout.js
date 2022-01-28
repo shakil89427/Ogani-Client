@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import "./Checkout.css";
 import useAuth from "../AuthProvider/useAuth";
+import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Checkout = () => {
-  const { user, cartProducts } = useAuth();
+  const { user, cartProducts, setCartItems } = useAuth();
   const [alternative, setAlternative] = useState(false);
   const [note, setNote] = useState("");
   const [alternateValue, setAlternateValue] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const getalternative = (e) => {
     setAlternateValue(e.target.value);
@@ -24,7 +30,8 @@ const Checkout = () => {
     setAlternative(e.target.checked);
   };
 
-  const placeOrder = (e) => {
+  const placeOrder = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const data = {
       user,
@@ -40,7 +47,43 @@ const Checkout = () => {
     } else {
       data.shipping = user.address;
     }
-    console.log(data);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/placeorder",
+        data
+      );
+      if (response.data) {
+        setCartItems({ _id: user._id, products: [] });
+        setLoading(false);
+        navigate("/orderdone");
+      } else {
+        setLoading(false);
+        toast.warning("Something went wrong", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme: "colored",
+          transition: Slide,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.warning("Something went wrong", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        theme: "colored",
+        transition: Slide,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   useEffect(() => {
@@ -55,6 +98,8 @@ const Checkout = () => {
   }, [cartProducts]);
   return (
     <div>
+      <ToastContainer />
+      {cartProducts.length === 0 && <Navigate to="/" />}
       <h1 className="text-center fw-bold checkout-h1">Checkout</h1>
       <Container className="py-5">
         <h3 className="fw-bolder mt-3 border-bottom pb-2 border-2">
@@ -159,9 +204,17 @@ const Checkout = () => {
                   name="paymentMethod"
                 />
                 <label htmlFor="paymentMethod">Card Payment</label>
-                <button type="submit" className="mt-3 w-100 allbtn space">
-                  PLACE ORDER
-                </button>
+                {loading ? (
+                  <Spinner
+                    className="d-block mx-auto"
+                    animation="border"
+                    variant="success"
+                  />
+                ) : (
+                  <button type="submit" className="mt-3 w-100 allbtn space">
+                    PLACE ORDER
+                  </button>
+                )}
               </div>
             </Col>
           </Row>

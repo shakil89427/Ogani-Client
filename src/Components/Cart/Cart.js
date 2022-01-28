@@ -20,7 +20,6 @@ const Cart = () => {
   const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
-
   /* Change product quantity */
   const changeQuantity = (id, exist) => {
     let temp = [];

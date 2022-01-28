@@ -20,6 +20,7 @@ import Reset from "./Components/LoginSignup/Reset";
 import ResetInit from "./Components/LoginSignup/ResetInit";
 import PendingOrders from "./Components/Profile/PendingOrders";
 import CompletedOrders from "./Components/Profile/CompletedOrders";
+import OrderDone from "./Components/Checkout/OrderDone";
 
 function App() {
   return (
@@ -39,6 +40,14 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/cart" element={<Cart />} />
+              <Route
+                path="/orderdone"
+                element={
+                  <PrivateRoute>
+                    <OrderDone />
+                  </PrivateRoute>
+                }
+              />
               <Route
                 path="/dashboard"
                 element={
