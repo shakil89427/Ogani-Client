@@ -121,24 +121,21 @@ const Shop = () => {
               <h5 className="fw-bold text-center border-2 border-bottom">
                 Filter
               </h5>
-              <div className="filter-keyword border-bottom pb-3">
+              <div className="border-bottom pb-3">
                 <p className="fw-bold">Keyword</p>
-                <form>
-                  <input
-                    disabled
-                    className={filterBy?.name?.$regex && "activekeyword"}
-                    value={filterBy?.name?.$regex}
-                    placeholder="No keyword Added"
-                    type="text"
-                  />
+                <span className="d-flex align-items-center justify-content-between filter">
+                  <p className={filterBy?.name?.$regex && "activekeyword"}>
+                    {filterBy?.name?.$regex
+                      ? filterBy?.name?.$regex
+                      : "No keyword Added"}
+                  </p>
                   <button
                     className={!filterBy?.name?.$regex && "activekeyword"}
                     onClick={removeKeyword}
-                    type="reset"
                   >
                     <i className="fas fa-backspace"></i>
                   </button>
-                </form>
+                </span>
               </div>
               <div className="filter-catagories border-bottom pb-2">
                 <p className="fw-bold">Catagories</p>

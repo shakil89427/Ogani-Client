@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useAuth from "../AuthProvider/useAuth";
+import useAuth from "../../AuthProvider/useAuth";
 
 const MainProfile = () => {
   const { user, setUser } = useAuth();
@@ -26,7 +26,7 @@ const MainProfile = () => {
     data.email = user.email;
     try {
       const response = await axios.post(
-        "http://localhost:5000/updateuser",
+        "https://oganishop247.herokuapp.com/updateuser",
         data
       );
       if (response.data) {
@@ -111,7 +111,7 @@ const MainProfile = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:5000/updatepass",
+        "https://oganishop247.herokuapp.com/updatepass",
         newData
       );
       if (response.data) {

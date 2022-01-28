@@ -49,7 +49,7 @@ const Checkout = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:5000/placeorder",
+        "https://oganishop247.herokuapp.com/placeorder",
         data
       );
       if (response.data) {
