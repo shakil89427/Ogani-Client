@@ -1,9 +1,9 @@
 import React from "react";
 
-const CompletedOrders = () => {
+const CompletedOrders = ({ orders }) => {
   return (
     <div>
-      <h1>completed</h1>
+      <h3 className="fw-bold border-bottom pb-2">Completed Orders</h3>
     </div>
   );
 };

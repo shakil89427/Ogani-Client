@@ -158,7 +158,7 @@ const MainProfile = () => {
     }
   };
   return (
-    <div className="p-2">
+    <div>
       <ToastContainer />
       <div className="d-flex align-items-center justify-content-between pb-2 border-bottom mb-2">
         <h3 className="fw-bold">My profile</h3>

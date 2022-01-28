@@ -1,9 +1,9 @@
 import React from "react";
 
-const PendingOrders = () => {
+const PendingOrders = ({ orders }) => {
   return (
     <div>
-      <h1>pending</h1>
+      <h3 className="fw-bold border-bottom pb-2">Pending Orders</h3>
     </div>
   );
 };
