@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./Checkout.css";
+import useAuth from "../AuthProvider/useAuth";
 
 const Checkout = () => {
+  const { user, cartProducts } = useAuth();
   const [alternative, setAlternative] = useState(false);
+  const [note, setNote] = useState("");
+  const [alternateValue, setAlternateValue] = useState(null);
+  const [subtotal, setSubtotal] = useState(0);
+  const [tax, setTax] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const getalternative = (e) => {
+    setAlternateValue(e.target.value);
+  };
+
+  const getNote = (e) => {
+    setNote(e.target.value);
+  };
 
   const differentAddress = (e) => {
     setAlternative(e.target.checked);
@@ -11,7 +26,33 @@ const Checkout = () => {
 
   const placeOrder = (e) => {
     e.preventDefault();
+    const data = {
+      user,
+      note,
+      status: false,
+      subtotal,
+      tax,
+      total,
+      products: cartProducts,
+    };
+    if (alternative) {
+      data.shipping = alternateValue;
+    } else {
+      data.shipping = user.address;
+    }
+    console.log(data);
   };
+
+  useEffect(() => {
+    let temp = 0;
+    for (const product of cartProducts) {
+      temp = temp + product.price * product.quantity;
+    }
+    const tempTax = temp * 0.2;
+    setSubtotal(parseFloat(temp).toFixed(2));
+    setTax(parseFloat(tempTax).toFixed(2));
+    setTotal(parseFloat(temp + tempTax).toFixed(2));
+  }, [cartProducts]);
   return (
     <div>
       <h1 className="text-center fw-bold checkout-h1">Checkout</h1>
@@ -24,75 +65,28 @@ const Checkout = () => {
             <Col sm={12} md={6} lg={8}>
               <Row className="billing-form">
                 <Col sm={12} md={12} lg={6}>
-                  <p>
-                    First Name <sup>*</sup>
-                  </p>
-                  <input required type="text" />
+                  <p>First Name</p>
+                  <input value={user.firstname} readOnly type="text" />
                 </Col>
                 <Col sm={12} md={12} lg={6}>
-                  <p>
-                    Last Name <sup>*</sup>
-                  </p>
-                  <input required type="text" />
+                  <p>Last Name</p>
+                  <input value={user.lastname} readOnly type="text" />
                 </Col>
                 <Col sm={12} md={12} lg={12}>
-                  <p>
-                    Country <sup>*</sup>
-                  </p>
-                  <input required={!alternative} disabled type="text" />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <p>
-                    Address <sup>*</sup>
-                  </p>
-                  <input
-                    required={!alternative}
-                    disabled
-                    placeholder="Street Address"
-                    type="text"
-                  />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <input
-                    required={!alternative}
-                    disabled
-                    placeholder="Apartment,suite,unite ect (optional)"
-                    type="text"
-                  />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <p>
-                    Town/City <sup>*</sup>
-                  </p>
-                  <input disabled required={!alternative} type="text" />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <p>
-                    Country/State
-                    <sup>*</sup>
-                  </p>
-                  <input disabled required={!alternative} type="text" />
-                </Col>
-                <Col sm={12} md={12} lg={12}>
-                  <p>
-                    Postcode / ZIP
-                    <sup>*</sup>
-                  </p>
-                  <input disabled required={!alternative} type="text" />
+                  <p>Address</p>
+                  <input value={user.address} readOnly type="text" />
                 </Col>
                 <Col sm={12} md={12} lg={6}>
                   <p>Phone</p>
-                  <input type="number" />
+                  <input value={user.phone} readOnly type="number" />
                 </Col>
                 <Col sm={12} md={12} lg={6}>
-                  <p>
-                    Email <sup>*</sup>
-                  </p>
-                  <input required type="email" />
+                  <p>Email</p>
+                  <input value={user.email} readOnly required type="email" />
                 </Col>
                 <Col sm={12} md={12} lg={12}>
                   <p>Order Notes</p>
-                  <input type="text" />
+                  <input onChange={getNote} type="text" />
                 </Col>
                 <Col sm={12} md={12} lg={12}>
                   <input
@@ -103,14 +97,7 @@ const Checkout = () => {
                   />
                   <label htmlFor="checkbox">Ship to a different address?</label>
                 </Col>
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <p>
-                      Country <sup>*</sup>
-                    </p>
-                    <input required={alternative} type="text" />
-                  </Col>
-                )}
+
                 {alternative && (
                   <Col sm={12} md={12} lg={12}>
                     <p>
@@ -118,44 +105,10 @@ const Checkout = () => {
                     </p>
                     <input
                       required={alternative}
+                      onChange={getalternative}
                       placeholder="Street Address"
                       type="text"
                     />
-                  </Col>
-                )}
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <input
-                      required={alternative}
-                      placeholder="Apartment,suite,unite ect (optional)"
-                      type="text"
-                    />
-                  </Col>
-                )}
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <p>
-                      Town/City <sup>*</sup>
-                    </p>
-                    <input required={alternative} type="text" />
-                  </Col>
-                )}
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <p>
-                      Country/State
-                      <sup>*</sup>
-                    </p>
-                    <input required={alternative} type="text" />
-                  </Col>
-                )}
-                {alternative && (
-                  <Col sm={12} md={12} lg={12}>
-                    <p>
-                      Postcode / ZIP
-                      <sup>*</sup>
-                    </p>
-                    <input required={alternative} type="text" />
                   </Col>
                 )}
               </Row>
@@ -170,34 +123,35 @@ const Checkout = () => {
                     <h5 className="fw-bold">Products</h5>
                     <h5 className="fw-bold">Total</h5>
                   </div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p>asedfwqadfe</p>
-                    <p>$500</p>
-                  </div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p>asedfwqadfe</p>
-                    <p>$500</p>
-                  </div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p>asedfwqadfe</p>
-                    <p>$500</p>
-                  </div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p>asedfwqadfe</p>
-                    <p>$500</p>
-                  </div>
+
+                  {cartProducts.map((product) => (
+                    <div
+                      key={product._id}
+                      className="d-flex align-items-center justify-content-between"
+                    >
+                      <p>
+                        {product.name}*({product.quantity})
+                      </p>
+                      <p>
+                        $
+                        {parseFloat(product.price * product.quantity).toFixed(
+                          2
+                        )}
+                      </p>
+                    </div>
+                  ))}
                 </div>
                 <div className="mt-2 d-flex align-items-center justify-content-between border-bottom">
                   <h5 className="fw-bold">Subtotal</h5>
-                  <h5 className="fw-bold">$500</h5>
+                  <h5 className="fw-bold">${subtotal}</h5>
                 </div>
                 <div className="mt-2 d-flex align-items-center justify-content-between border-bottom">
                   <h5 className="fw-bold">Tax</h5>
-                  <h5 className="fw-bold">$500</h5>
+                  <h5 className="fw-bold">${tax}</h5>
                 </div>
                 <div className="mt-2 d-flex align-items-center justify-content-between border-bottom">
                   <h5 className="fw-bold">Total</h5>
-                  <h5 className="fw-bold">$500</h5>
+                  <h5 className="fw-bold">${total}</h5>
                 </div>
                 <input
                   className="me-2 mt-3"

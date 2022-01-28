@@ -74,9 +74,9 @@ const Cart = () => {
       temp = temp + product.price * product.quantity;
     }
     const tempTax = temp * 0.2;
-    setSubtotal(temp);
-    setTax(tempTax);
-    setTotal(temp + tempTax);
+    setSubtotal(parseFloat(temp).toFixed(2));
+    setTax(parseFloat(tempTax).toFixed(2));
+    setTotal(parseFloat(temp + tempTax).toFixed(2));
   }, [cartProducts]);
 
   return (
@@ -167,21 +167,15 @@ const Cart = () => {
                   <h5 className="fw-bolder">Cart Total</h5>
                   <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
                     <h6 className="fw-bloder">Subtotal</h6>
-                    <h6 className="fw-bloder text-danger">
-                      {parseFloat(subtotal).toFixed(2)}$
-                    </h6>
+                    <h6 className="fw-bloder text-danger">{subtotal}$</h6>
                   </div>
                   <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
                     <h6 className="fw-bloder">Tax</h6>
-                    <h6 className="fw-bloder text-danger">
-                      {parseFloat(tax).toFixed(2)}$
-                    </h6>
+                    <h6 className="fw-bloder text-danger">{tax}$</h6>
                   </div>
                   <div className="d-flex align-items-center justify-content-between py-3">
                     <h6 className="fw-bloder">Total</h6>
-                    <h6 className="fw-bloder text-danger">
-                      {parseFloat(total).toFixed(2)}$
-                    </h6>
+                    <h6 className="fw-bloder text-danger">{total}$</h6>
                   </div>
                   <Link to="/checkout">
                     <button className="allbtn w-100 space">

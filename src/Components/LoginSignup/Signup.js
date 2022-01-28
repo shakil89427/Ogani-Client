@@ -92,6 +92,22 @@ const Signup = () => {
             <input
               onChange={getData}
               disabled={userLoading}
+              name="phone"
+              required
+              placeholder="Phone"
+              type="number"
+            />
+            <input
+              onChange={getData}
+              disabled={userLoading}
+              name="address"
+              required
+              placeholder="Address"
+              type="text"
+            />
+            <input
+              onChange={getData}
+              disabled={userLoading}
               name="password"
               required
               placeholder="Password"
