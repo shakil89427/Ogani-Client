@@ -2,20 +2,23 @@ import axios from "axios";
 import useAuth from "../AuthProvider/useAuth";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useUserCheck from "./useUserCheck";
 
 const useSignup = () => {
   const { setUserLoading, setUser } = useAuth();
+  const { userCheck } = useUserCheck();
 
   const signup = async (data) => {
     setUserLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/signup", data, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        "https://oganishop247.herokuapp.com/signup",
+        data
+      );
       if (response.data) {
-        setUser(response.data);
-        setUserLoading(false);
+        localStorage.setItem("accessToken", response.data.token);
+        userCheck(setUser, setUserLoading);
       } else {
         setUserLoading(false);
         toast.warning("Email Already Exist", {

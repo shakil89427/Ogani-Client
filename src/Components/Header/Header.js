@@ -44,9 +44,9 @@ const Header = () => {
             <sup>{cartItems?.products?.length}</sup>
           </Link>
           <span className="d-none d-lg-inline">
-            {user?._id && (
+            {user._id && (
               <span>
-                <Link to="/dashboard">
+                <Link to="/profile">
                   <img
                     className="profile"
                     src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
@@ -62,7 +62,7 @@ const Header = () => {
               </span>
             )}
 
-            {!user?._id && (
+            {!user._id && (
               <span>
                 <Link className="user" to="/login">
                   <button className="ls-btn">Login</button>
@@ -89,16 +89,16 @@ const Header = () => {
           </Offcanvas.Header>
           <Offcanvas.Body className="canvas-body p-0">
             <Nav className="justify-content-end flex-grow-1">
-              {user?._id && (
+              {user._id && (
                 <span className="text-center px-5">
-                  <Link to="/dashboard">
+                  <Link to="/profile">
                     <img
                       className="profile"
                       src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
                       alt=""
                     />
                   </Link>
-                  <p>{user?.firstname}</p>
+                  <p>{user.firstname}</p>
                 </span>
               )}
               {!user._id && (
@@ -133,7 +133,7 @@ const Header = () => {
               </span>
             </div>
           </Offcanvas.Body>
-          {user?._id && (
+          {user._id && (
             <button onClick={logout} className="w-100 allbtn">
               Logout<i className="ms-2 fas fa-sign-out-alt"></i>
             </button>

@@ -7,25 +7,6 @@
 }
 .buttons button {
   width: 95%;
-  text-align: left;
   display: block;
   margin: 5px auto;
-  border: none;
-  background-color: rgb(48, 204, 48);
-  padding: 4px 0;
-  border-radius: 5px;
-  color: white;
-  font-weight: 600;
-}
-.buttons i {
-  margin: 0 5px;
-}
-.edit-profile {
-  border: none;
-  background-color: white;
-  color: rgb(35, 197, 35);
-  font-weight: 600;
-}
-.my-p-details span {
-  font-weight: 600;
 }
