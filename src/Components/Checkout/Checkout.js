@@ -36,7 +36,7 @@ const Checkout = () => {
     const data = {
       user,
       note,
-      status: false,
+      status: "pending",
       subtotal,
       tax,
       total,

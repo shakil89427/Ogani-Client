@@ -29,3 +29,9 @@
 .my-p-details span {
   font-weight: 600;
 }
+.success h1 {
+  font-size: 80px;
+}
+.success {
+  color: rgb(45, 185, 45);
+}

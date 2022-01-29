@@ -2,10 +2,11 @@ import React from "react";
 
 const OrderDone = () => {
   return (
-    <div>
+    <div className="success text-center my-5">
       <h1>
         <i class="far fa-check-circle"></i>
       </h1>
+      <h2>Order placed Succesfully</h2>
     </div>
   );
 };
