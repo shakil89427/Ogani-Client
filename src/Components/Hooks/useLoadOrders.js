@@ -14,7 +14,7 @@ const useLoadOrders = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:5000/loadorders/${param}`
+        `https://oganishop247.herokuapp.com/loadorders/${param}`
       );
       allOrders = response.data;
     } catch (error) {}

@@ -13,7 +13,6 @@ const Store = () => {
   const [cartItems, setCartItems] = useState({});
   const [cartProducts, setCartProducts] = useState([]);
   const [cartPdLoading, setCartPdLoading] = useState(true);
-  const [allOrders, setAllOrders] = useState([]);
   const [filterBy, setFilterBy] = useState({ page: 0 });
   const [count, setCount] = useState(0);
   const { loadAllProducts } = useLoadAllProducts();
@@ -57,8 +56,6 @@ const Store = () => {
     setUser,
     userLoading,
     setUserLoading,
-    allOrders,
-    setAllOrders,
     cartItems,
     setCartItems,
     cartProducts,

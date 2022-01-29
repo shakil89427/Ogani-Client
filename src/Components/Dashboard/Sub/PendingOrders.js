@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
+import useAuth from "../../AuthProvider/useAuth";
 import useLoadOrders from "../../Hooks/useLoadOrders";
 
 const PendingOrders = () => {
+  const { user } = useAuth();
   const [orders, setOrders] = useState([]);
   const { loadOrders } = useLoadOrders();
   const [loading, setLoading] = useState(false);
@@ -26,7 +28,23 @@ const PendingOrders = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/cancelorder/${id}`
+        `https://oganishop247.herokuapp.com/cancelorder/${id}`
+      );
+      if (response.data) {
+        setLoading(false);
+        getall();
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+  const completeOrder = async (id) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `https://oganishop247.herokuapp.com/completeorder/${id}`
       );
       if (response.data) {
         setLoading(false);
@@ -78,12 +96,22 @@ const PendingOrders = () => {
                       variant="success"
                     />
                   ) : (
-                    <button
-                      onClick={() => cancelOrder(order._id)}
-                      className="allbtn"
-                    >
-                      Cancel
-                    </button>
+                    <span>
+                      <button
+                        onClick={() => cancelOrder(order._id)}
+                        className="allbtn"
+                      >
+                        Cancel
+                      </button>
+                      {user.role === "admin" && (
+                        <button
+                          onClick={() => completeOrder(order._id)}
+                          className="ms-3 allbtn"
+                        >
+                          Complete
+                        </button>
+                      )}
+                    </span>
                   )}
                 </span>
                 <span className="w-50 ms-2 text-end">
