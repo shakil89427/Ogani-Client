@@ -35,3 +35,20 @@
 .success {
   color: rgb(45, 185, 45);
 }
+.dashboard-color button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  margin: 2px;
+}
+.dashboard-catagory button {
+  border: none;
+  margin: 2px;
+}
+.actived {
+  border-radius: 50%;
+}
+.cactived {
+  background-color: rgb(51, 204, 51);
+  color: white;
+}

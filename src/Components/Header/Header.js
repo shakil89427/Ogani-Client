@@ -49,7 +49,11 @@ const Header = () => {
                 <Link to="/dashboard">
                   <img
                     className="profile"
-                    src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
+                    src={
+                      user.img
+                        ? user.img
+                        : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                    }
                     alt=""
                   />
                 </Link>
@@ -94,7 +98,11 @@ const Header = () => {
                   <Link to="/dashboard">
                     <img
                       className="profile"
-                      src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
+                      src={
+                        user.img
+                          ? user.img
+                          : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                      }
                       alt=""
                     />
                   </Link>

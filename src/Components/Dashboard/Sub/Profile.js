@@ -264,7 +264,7 @@ const MainProfile = () => {
                 <input
                   onChange={getData}
                   name="email"
-                  disabled
+                  readOnly
                   defaultValue={user.email}
                   required
                   type="email"
@@ -280,6 +280,16 @@ const MainProfile = () => {
                   name="address"
                   defaultValue={user.address}
                   type="text"
+                />
+              </Col>
+              <Col sm={12} md={12} lg={12}>
+                <p>Profile Photo Link</p>
+                <input
+                  onChange={getData}
+                  disabled={loading}
+                  placeholder="https://"
+                  name="img"
+                  type="url"
                 />
               </Col>
             </Row>

@@ -5,8 +5,11 @@ import Profile from "./Sub/Profile";
 import PendingOrders from "./Sub/PendingOrders";
 import CompleteOrders from "./Sub/CompletedOrders";
 import CancelledOrders from "./Sub/CancelledOrders";
+import useAuth from "../AuthProvider/useAuth";
+import AllProducts from "./Sub/AllProducts";
 
 const Dashboard = () => {
+  const { user } = useAuth();
   const [component, setComponent] = useState("profile");
 
   return (
@@ -16,7 +19,11 @@ const Dashboard = () => {
           <div className="shadow rounded-3 p-2">
             <img
               className="profile-pic"
-              src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png"
+              src={
+                user.img
+                  ? user.img
+                  : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+              }
               alt=""
             />
             <span className="buttons">
@@ -32,6 +39,9 @@ const Dashboard = () => {
               <button onClick={() => setComponent("cancelled")}>
                 <i className="far fa-window-close"></i>Cancelled Orders
               </button>
+              <button onClick={() => setComponent("allproducts")}>
+                <i class="fas fa-border-all"></i>All Products
+              </button>
             </span>
           </div>
         </Col>
@@ -41,6 +51,7 @@ const Dashboard = () => {
             {component === "pending" && <PendingOrders />}
             {component === "completed" && <CompleteOrders />}
             {component === "cancelled" && <CancelledOrders />}
+            {component === "allproducts" && <AllProducts />}
           </div>
         </Col>
       </Row>
