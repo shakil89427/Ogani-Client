@@ -39,9 +39,11 @@ const Dashboard = () => {
               <button onClick={() => setComponent("cancelled")}>
                 <i className="far fa-window-close"></i>Cancelled Orders
               </button>
-              <button onClick={() => setComponent("allproducts")}>
-                <i class="fas fa-border-all"></i>All Products
-              </button>
+              {user.role === "admin" && (
+                <button onClick={() => setComponent("allproducts")}>
+                  <i className="fas fa-border-all"></i>All Products
+                </button>
+              )}
             </span>
           </div>
         </Col>

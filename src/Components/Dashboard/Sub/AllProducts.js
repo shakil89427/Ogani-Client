@@ -14,7 +14,7 @@ const AllProducts = () => {
     setData(newData);
   };
 
-  const addProduct = (e) => {
+  const addProduct = async (e) => {
     e.preventDefault();
     if (!color || !catagory) {
       return alert("please complete all value");

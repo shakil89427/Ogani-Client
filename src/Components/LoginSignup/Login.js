@@ -62,14 +62,6 @@ const Login = () => {
                 Login
               </button>
             </form>
-            <p className="my-2 text-center text-secondary">
-              -----------OR-----------
-            </p>
-            <div className="my-2 text-center alternate-sign">
-              <button disabled={userLoading}>
-                <i className="me-2 fab fa-google"></i>Login With Google
-              </button>
-            </div>
             <p className="mt-5 text-center text-white">
               New Member?
               <Link to={!userLoading ? "/signup" : "#"}>
